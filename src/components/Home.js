@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import '../App.css';
+import '../tailwind.output.css';
 
 class Home extends Component {
   constructor(props) {
