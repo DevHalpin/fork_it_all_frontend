@@ -4,13 +4,14 @@ import Home from './components/Home';
 import Error from './components/Error';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-function App() {
+export default function App() {
+  return(
   <Router>
     <Switch>
       <Route path='/' component={Home} exact />
       <Route component={Error} />
     </Switch>
-  </Router>;
+  </Router>
+  );
 }
 
-export default App;
