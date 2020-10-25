@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+#background-image {
+  background-image: url(https://images.unsplash.com/photo-1543191879-742cb35a3a4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
 .img-responsive {
     width: auto;
     height: 10em;

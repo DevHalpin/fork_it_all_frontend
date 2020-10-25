@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 function Nav() {
   return (
-    <nav class="flex justify-between items-center bg-blue-900">
+    <nav class="flex justify-between items-center bg-black">
       <div class="flex-shrink-0 ml-10 cursor-pointer">
         <Link to="/">
           <img src={Logo} alt="logo" className="img-responsive" />
