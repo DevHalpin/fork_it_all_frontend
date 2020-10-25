@@ -25,9 +25,9 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="text-center">
         <h1>{this.state.message}</h1>
-        <button onClick={this.fetchData} >
+        <button onClick={this.fetchData} className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" >
           Fetch Data
         </button>
       </div>
