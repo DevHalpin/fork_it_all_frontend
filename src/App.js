@@ -1,5 +1,6 @@
 import React from 'react';
-import './tailwind.output.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import './App.scss';
 import Nav from './components/Nav';
 import Home from './components/Home';
 import Error from './components/Error';
@@ -18,4 +19,3 @@ export default function App() {
     </Router>
   );
 }
-

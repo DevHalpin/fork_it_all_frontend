@@ -1,5 +1,6 @@
 import React from 'react';
-import '../tailwind.output.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import '../App.scss';
 
 function Error() {
   return (

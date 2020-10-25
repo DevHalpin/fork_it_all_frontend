@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import '../tailwind.output.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import '../App.scss';
 
 class Home extends Component {
   constructor(props) {
@@ -25,9 +26,9 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="text-center">
+      <div>
         <h1>{this.state.message}</h1>
-        <button onClick={this.fetchData} className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" >
+        <button onClick={this.fetchData} >
           Fetch Data
         </button>
       </div>
