@@ -5,12 +5,12 @@ import {Link} from "react-router-dom";
 
 function Nav() {
   return (
-    <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6">
-      <ul>
+    <nav class="flex justify-between items-center bg-blue-900">
+      <div class="flex-shrink-0 ml-10 cursor-pointer">
         <Link to="/">
-          <img src={Logo} alt="logo" />
+          <img src={Logo} alt="logo" className="img-responsive" />
         </Link>
-      </ul>
+      </div>
     </nav>
   );
 }
