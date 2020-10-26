@@ -5,7 +5,7 @@ import '../App.scss';
 const My_Twists = () => {
   return (
     <Container>
-      <CardGroup>
+      <CardGroup className="mt-3">
         <Card>
           <Card.Body>
             <Card.Text>
@@ -27,7 +27,7 @@ const My_Twists = () => {
           <Card.Img variant="bottom" src="holder.js/100px180" />
         </Card>
       </CardGroup>
-      <CardGroup>
+      <CardGroup className="mt-3">
         <Card>
           <Card.Body>
             <Card.Text>

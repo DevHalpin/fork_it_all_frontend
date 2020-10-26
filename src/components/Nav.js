@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.scss";
 import {Link} from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
-import {Nav, Navbar, Form, FormControl, Button, NavDropdown, Container, Row, Col} from "react-bootstrap";
+import {Nav, Navbar, Form, FormControl, Button, NavDropdown, Container, Row} from "react-bootstrap";
 
 function NavbarNav() {
   return (
