@@ -1,5 +1,5 @@
 import React from "react";
-import {Container, Row, Col, Card, CardGroup} from 'react-bootstrap';
+import {Container, Card, CardGroup} from 'react-bootstrap';
 import '../App.scss';
 
 const My_Twists = () => {
