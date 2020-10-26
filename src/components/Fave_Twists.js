@@ -5,7 +5,7 @@ import '../App.scss';
 const Fave_Twists = () => {
   return (
     <Container>
-      <CardGroup>
+      <CardGroup className="mt-3">
         <Card>
           <Card.Body>
             <Card.Text>
@@ -15,8 +15,6 @@ const Fave_Twists = () => {
           </Card.Body>
           <Card.Img variant="bottom" src="holder.js/100px180" />
         </Card>
-        {/* </Col>
-          <Col> */}
         <Card>
           <Card.Body>
             <Card.Text>
@@ -27,7 +25,7 @@ const Fave_Twists = () => {
           <Card.Img variant="bottom" src="holder.js/100px180" />
         </Card>
       </CardGroup>
-      <CardGroup>
+      <CardGroup className="mt-3">
         <Card>
           <Card.Body>
             <Card.Text>

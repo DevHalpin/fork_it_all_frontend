@@ -15,8 +15,6 @@ const My_Twists = () => {
           </Card.Body>
           <Card.Img variant="bottom" src="holder.js/100px180" />
         </Card>
-        {/* </Col>
-          <Col> */}
         <Card>
           <Card.Body>
             <Card.Text>
