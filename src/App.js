@@ -5,6 +5,7 @@ import NavbarNav from "./components/Nav";
 import Home from "./components/Home";
 import Error from "./components/Error";
 import Login from "./components/Login";
+import Users from "./components/Users";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export default function App() {
