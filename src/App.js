@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import Error from "./components/Error";
 import Login from "./components/Login";
 import User_Profile from "./components/User_Profile";
+import Recipes from "./components/Recipes";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/" component={Home} exact />
         <Route path="/login" component={Login} />
         <Route path="/users" component={User_Profile} />
+        <Route path="/recipes" component={Recipes} />
         <Route component={Error} />
       </Switch>
     </Router>
