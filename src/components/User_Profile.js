@@ -1,15 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Profile.scss";
+import axios from "axios";
 
 function User_Profile() {
+  const fakeUser = {
+    id: 100,
+    email: "long.collier@russel-hyatt.com",
+    profile_picture: "https://www.fillmurray.com/200/300",
+    handle: "selena_mcclure",
+    created_at: "2020-10-26T18:06:22.301Z",
+  };
+
+  const [message, setMessage] = useState(fakeUser);
+  // Make a request for a user with a given ID
+  const fetchData = () => {
+    axios
+      .get("/api/users")
+      .then(function (response) {
+        console.log(response.data.message);
+        let parsedResponse = JSON.parse(response.data.message);
+        console.log(parsedResponse[0]);
+        setMessage(parsedResponse[0]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="container emp-profile">
       <form method="post">
         <div className="row">
           <div className="col-md-4">
             <div className="profile-img flex-row">
-              <img src="http://www.fillmurray.com/g/200/300" alt="" />
+              <img src={`${message.profile_picture}`} alt="" />
             </div>
             <div className="file btn btn-lg btn-primary">
               Change Photo
@@ -18,8 +43,7 @@ function User_Profile() {
           </div>
           <div className="col-md-6">
             <div className="profile-head">
-              <h5>Fill Murray</h5>
-              <h6>Handle</h6>
+              <h6>{message.handle}</h6>
               <p className="proile-rating">
                 Follows : <span>2471</span>
               </p>
