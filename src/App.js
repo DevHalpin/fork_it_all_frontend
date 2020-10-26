@@ -7,7 +7,8 @@ import Error from "./components/Error";
 import Login from "./components/Login";
 import User_Profile from "./components/User_Profile";
 import Recipes from "./components/Recipes";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import My_Twists from "./components/My_Twists";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/login" component={Login} />
         <Route path="/users" component={User_Profile} />
         <Route path="/recipes" component={Recipes} />
+        <Route path="/my_twists" component={My_Twists} />
         <Route component={Error} />
       </Switch>
     </Router>

@@ -1,20 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.scss";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import {Nav, Navbar, Form, FormControl, Button, NavDropdown, Container, Row, Col} from "react-bootstrap";
 
 function NavbarNav() {
   return (
-    <Navbar bg="dark" expand="xs" fixed="top">
+    <Navbar bg="dark" expand="xs" static="top">
       <Container fluid>
         <Link to="/">
           <img
@@ -57,11 +50,6 @@ function NavbarNav() {
           <Link to="/login">
             <Button variant="primary" className="mr-sm-2">
               Log in
-            </Button>
-          </Link>
-          <Link to="#">
-            <Button variant="primary" className="mr-sm-2">
-              Register
             </Button>
           </Link>
         </Row>
