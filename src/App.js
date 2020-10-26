@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
 import NavbarNav from "./components/Nav";
+import Footer from "./components/Footer"
 import Home from "./components/Home";
 import Error from "./components/Error";
 import Login from "./components/Login";
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/fave_users" component={Fave_Users} />
         <Route component={Error} />
       </Switch>
+      <Footer />
     </Router>
   );
 }
