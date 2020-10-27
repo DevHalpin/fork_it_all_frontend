@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/App.scss";
-import { Container, Carousel, Row, Col, Image } from "react-bootstrap";
+import { Container, Carousel, Row, Col, Card} from "react-bootstrap";
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
@@ -55,33 +55,31 @@ function ControlledCarousel() {
 
 export default function Home() {
   // const [message, setMessage] = useState("Click to fetch data!")
-  // a value has to be put in as an inisial state or the app breaks!!
-  const [data, setData] = useState(0);
+  // a value has to be put in as an inisial state or the app breaks!
   const [recipe, setRecipe] = useState(0);
-
-  //this gets a twist
-  useEffect(() => {
-    axios
-      .get("/api/twists/1")
-      .then((result) => {
-        console.log(result.data);
-        setData(result.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
+  const [twist, setTwist] = useState(0);
+  const [random, setRandom] = useState(0);
 
   //gets a recipe and sets recipe
   useEffect(() => {
-    const fetchTwists = async () => {
+    const fetchLiked = async () => {
       //this variable needs to be hard coded to the search bar?
-      const result = await axios.get("/api/data?search=Three Fish");
-      const body = JSON.parse(result.data.message);
-      console.log(body);
-      setRecipe(body);
+      const result = await axios.get("/api/recipes/1");
+      const recipe = (result.data.recipe);
+      const twist = (result.data.random)
+      setRecipe(recipe);
+      setTwist(twist);
     };
-    fetchTwists();
+    const fetchRandom = async () => {
+      //this variable needs to be hard coded to the search bar?
+      const result = await axios.get("/api/recipes?random=1");
+      const recipe = (result.data.recipe);
+      
+      setRandom(recipe);
+    };
+    fetchRandom();
+    fetchLiked();
+
   }, []);
 
   return (
@@ -91,16 +89,23 @@ export default function Home() {
         <Row>
           <Col sm="6">
             <p>Fork It Favorites</p>
-            <h3>Name: {recipe.name}</h3>
-            <Image width="50%" src={recipe.meal_image} responsive />
+          <Card style={{ width: '18rem' }}>
+            <Card.Img variant="top" src={recipe.meal_image} />
+            <Card.Body>
+              <Card.Title>{recipe.name}</Card.Title>
+              <Card.Link href={`/recipes/${recipe.id}`} variant="primary">View this recipe</Card.Link>
+            </Card.Body>
+          </Card>
           </Col>
           <Col sm="6">
             <p>Random Twists</p>
-            <Image
-              height="75%"
-              src="http://www.fillmurray.com/500/500"
-              alt=""
-            />
+            <Card style={{ width: '18rem' }}>
+            <Card.Img variant="top" src={random.meal_image} />
+            <Card.Body>
+              <Card.Title>{twist.name}</Card.Title>
+              <Card.Link href={`/recipes/${random.id}`} variant="primary">{random.name}</Card.Link>
+            </Card.Body>
+          </Card>
           </Col>
         </Row>
       </Container>
