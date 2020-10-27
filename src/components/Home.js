@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/App.scss";
-import { Container, Carousel, Row, Col, Card} from "react-bootstrap";
+import { Container, Carousel, Row, Col, Card } from "react-bootstrap";
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
@@ -53,7 +53,7 @@ function ControlledCarousel() {
   );
 }
 
-export default function Home() {
+export default function Home(props) {
   // const [message, setMessage] = useState("Click to fetch data!")
   // a value has to be put in as an inisial state or the app breaks!
   const [recipe, setRecipe] = useState(0);
@@ -65,21 +65,20 @@ export default function Home() {
     const fetchLiked = async () => {
       //this variable needs to be hard coded to the search bar?
       const result = await axios.get("/api/recipes/1");
-      const recipe = (result.data.recipe);
-      const twist = (result.data.random)
+      const recipe = result.data.recipe;
+      const twist = result.data.random;
       setRecipe(recipe);
       setTwist(twist);
     };
     const fetchRandom = async () => {
       //this variable needs to be hard coded to the search bar?
       const result = await axios.get("/api/recipes?random=1");
-      const recipe = (result.data.recipe);
-      
+      const recipe = result.data.recipe;
+
       setRandom(recipe);
     };
     fetchRandom();
     fetchLiked();
-
   }, []);
 
   return (
@@ -89,23 +88,27 @@ export default function Home() {
         <Row>
           <Col sm="6">
             <p>Fork It Favorites</p>
-          <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={recipe.meal_image} />
-            <Card.Body>
-              <Card.Title>{recipe.name}</Card.Title>
-              <Card.Link href={`/recipes/${recipe.id}`} variant="primary">View this recipe</Card.Link>
-            </Card.Body>
-          </Card>
+            <Card style={{ width: "18rem" }}>
+              <Card.Img variant="top" src={recipe.meal_image} />
+              <Card.Body>
+                <Card.Title>{recipe.name}</Card.Title>
+                <Card.Link href={`/recipes/${recipe.id}`} variant="primary">
+                  View this recipe
+                </Card.Link>
+              </Card.Body>
+            </Card>
           </Col>
           <Col sm="6">
             <p>Random Twists</p>
-            <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={random.meal_image} />
-            <Card.Body>
-              <Card.Title>{twist.name}</Card.Title>
-              <Card.Link href={`/recipes/${random.id}`} variant="primary">{random.name}</Card.Link>
-            </Card.Body>
-          </Card>
+            <Card style={{ width: "18rem" }}>
+              <Card.Img variant="top" src={random.meal_image} />
+              <Card.Body>
+                <Card.Title>{twist.name}</Card.Title>
+                <Card.Link href={`/recipes/${random.id}`} variant="primary">
+                  {random.name}
+                </Card.Link>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </Container>
