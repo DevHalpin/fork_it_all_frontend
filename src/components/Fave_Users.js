@@ -1,6 +1,6 @@
 import React from "react";
 import {Container, Card, CardDeck, Row} from 'react-bootstrap';
-import '../App.scss';
+import '../styles/App.scss';
 
 const Fave_Users = () => {
   return (

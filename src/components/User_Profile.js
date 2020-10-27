@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../Profile.scss";
+import "../styles/Profile.scss";
 import axios from "axios";
 
 function User_Profile() {
@@ -37,7 +37,7 @@ function User_Profile() {
         // console.log(parsedResponse);
         setMessage(response.data);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
   }, []);

@@ -1,8 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.scss";
+import "./styles/App.scss";
 import NavbarNav from "./components/Nav";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Error from "./components/Error";
 import Login from "./components/Login";
@@ -12,7 +12,7 @@ import My_Twists from "./components/My_Twists";
 import Fave_Twists from "./components/Fave_Twists";
 import Fave_Users from "./components/Fave_Users";
 import User_Dashboard from "./components/User_Dashboard";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 export default function App() {
   return (

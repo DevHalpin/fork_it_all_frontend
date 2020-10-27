@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../Login.scss";
+import "../styles/Login.scss";
 
 function Login() {
   return (
@@ -29,7 +29,7 @@ function Login() {
               <input type="submit" className="btnSubmit" value="Login" />
             </div>
             <div className="form-group">
-              <a href="#" className="ForgetPwd">
+              <a href="#www.example.com" className="ForgetPwd">
                 Forget Password?
               </a>
             </div>
@@ -58,7 +58,7 @@ function Login() {
               <input type="submit" className="btnSubmit" value="Login" />
             </div>
             <div className="form-group">
-              <a href="#" className="ForgetPwd" value="Login"></a>
+              <a href="#www.example.com" className="ForgetPwd" value="Login"></a>
             </div>
           </form>
         </div>

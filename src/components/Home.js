@@ -1,71 +1,100 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "../App.scss";
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import '../App.scss';
+import {Container, Carousel, Row, Col, Image} from 'react-bootstrap';
 
-export default function Home() {
-  // const [message, setMessage] = useState("Click to fetch data!")
-  const [data, setData] = useState();
+function ControlledCarousel() {
+  const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    axios
-      .get("/api/twists/1")
-      .then((result) => {
-        setData(result.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
-
-  // const fetchData = () => {
-  //   axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
-  //     .then((response) => {
-  //       // handle success
-  //       console.log(response.data); // The entire response from the Rails API
-
-  //       console.log(response.data.message); // Just the message
-  //       setMessage(
-  //         response.data.message
-  //       );
-  //     });
-  // };
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
 
   return (
-    <div className="container mw-100">
-      {/* <div>
-          <h1>{message}</h1>
-          <button onClick={fetchData} >
-            Fetch Data
-          </button>
-        </div> */}
-      <div className="row">
-        <div className="col-sm-6 text-center">
-          <img src="http://www.fillmurray.com/500/500" alt=""></img>
-        </div>
-        <div className="col-sm-6">
-          <h2>Heading</h2>
+    <Carousel activeIndex={index} onSelect={handleSelect}>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="http://www.fillmurray.com/300/100"
+          alt="First slide"
+        />
+        <Carousel.Caption>
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="http://www.fillmurray.com/300/100"
+          alt="Second slide"
+        />
+
+        <Carousel.Caption>
+          <h3>Second slide label</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="http://www.fillmurray.com/300/100"
+          alt="Third slide"
+        />
+
+        <Carousel.Caption>
+          <h3>Third slide label</h3>
           <p>
-            This is a bunch of text that is repeated a lot.This is a bunch of
-            text that is repeated a lot.This is a bunch of text that is repeated
-            a lot.This is a bunch of text that is repeated a lot.This is a bunch
-            of text that is repeated a lot.This is a bunch of text that is
-            repeated a lot.This is a bunch of text that is repeated a lot.This
-            is a bunch of text that is repeated a lot.
-          </p>
-        </div>
-      </div>
-      <div className="row">
-        <div className="bg-success col-sm-6 text-center">
-          <p>Fork It Favorites</p>
-          <div>{JSON.stringify(data)}</div>
-          <ul></ul>
-          <img src="http://www.fillmurray.com/500/500" alt=""></img>
-        </div>
-        <div className="bg-info col-sm-6 text-center">
-          <p>Random Twists</p>
-          <img src="http://www.fillmurray.com/500/500" alt=""></img>
-        </div>
-      </div>
-    </div>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
   );
 }
+
+
+<<<<<<< HEAD
+useEffect(() => {
+  axios
+    .get("/api/twists/1")
+    .then((result) => {
+      setData(result.data);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+}, []);
+=======
+  export default function Home() {
+    const [data, setData] = useState({id:1000});
+>>>>>>> 6f81b2e8921c620df570221a9f806ab2d3a44d81
+
+useEffect(() => {
+  const fetchTwists = async () => {
+    const result = await axios.get('/api/data?search=Three Fish');
+    const body = JSON.parse(result.data.message);
+    setData(body);
+  };
+  fetchTwists();
+}, []);
+
+return (
+  <>
+    <ControlledCarousel />
+    <Container mw="100">
+      <Row>
+        <Col sm="6" >
+          <p>Fork It Favorites</p>
+          <h3>Name: {data.name}</h3>
+          <Image width="50%" src={data.meal_image} responsive />
+        </Col >
+        <Col sm="6" >
+          <p>Random Twists</p>
+          <Image height="75%" src="http://www.fillmurray.com/500/500" alt="" />
+        </Col>
+      </Row>
+    </Container>
+  </>
+);
+  }
