@@ -58,7 +58,7 @@ function Login() {
               <input type="submit" className="btnSubmit" value="Login" />
             </div>
             <div className="form-group">
-              <a href="#www.example.com" className="ForgetPwd" value="Login"></a>
+              <button type="button" class="mr-sm-2 btn btn-primary">Forgot password?</button>
             </div>
           </form>
         </div>

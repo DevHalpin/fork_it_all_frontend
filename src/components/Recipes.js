@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, {useState, useEffect} from "react";
 import {
   Dropdown,
   DropdownButton,
@@ -13,7 +12,8 @@ import {
 import axios from "axios";
 
 const Recipes = (props) => {
-  const id = props.match.params.recipe;
+  const recipeId = props.match.params.recipe;
+  const twistId = props.match.params.twist;
   console.log(props.match.params.recipe);
   const fakeRecipe = {
     id: 2,
@@ -58,33 +58,33 @@ const Recipes = (props) => {
   // Make a request for a user with a given ID
   useEffect(() => {
     axios
-      .get(`/api/recipes/${id}`)
+      .get(`/api/recipes/${recipeId}`)
       .then((response) => {
         console.log(response.data);
         // let parsedResponse = JSON.parse(response.data.message);
         // console.log(parsedResponse);
         setRecipe(response.data);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
-  }, []);
+  }, [recipeId]);
 
   const [twist, setTwist] = useState(fakeTwist);
   // Make a request for a user with a given ID
   useEffect(() => {
     axios
-      .get("/api/twists/18")
+      .get(`/api/twists/${twistId}`)
       .then((response) => {
         console.log(response.data);
         // let parsedResponse = JSON.parse(response.data.message);
         // console.log(parsedResponse);
         setTwist(response.data);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
-  }, []);
+  }, [twistId]);
 
   const [user, setUser] = useState(fakeUser);
   // Make a request for a user with a given ID
@@ -97,7 +97,7 @@ const Recipes = (props) => {
         // console.log(parsedResponse);
         setUser(response.data);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
   }, []);
