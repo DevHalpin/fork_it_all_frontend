@@ -18,19 +18,19 @@ function User_Profile() {
 
   const [message, setMessage] = useState(fakeUser);
   // Make a request for a user with a given ID
-  const fetchData = () => {
+  useEffect(() => {
     axios
-      .get("/api/users/:55")
-      .then(function (response) {
-        console.log(response.data.message);
+      .get("/api/users/15")
+      .then((response) => {
+        console.log(response.data);
         // let parsedResponse = JSON.parse(response.data.message);
         // console.log(parsedResponse);
-        setMessage(response);
+        setMessage(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-  };
+  }, []);
 
   return (
     <div className="container emp-profile">
