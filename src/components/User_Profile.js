@@ -20,8 +20,8 @@ function User_Profile() {
     email: "louistheroux@openworld.com",
     profile_picture:
       "https://static.boredpanda.com/blog/wp-content/uploads/2019/02/fake-news-photos-viral-photoshop-1-5c6fe612590ec__700.jpg",
-    handle: "evia.pouros",
-    name: "Everett Predovic",
+    handle: "andrewsawfulthing",
+    name: "EXPLOSIONS!!!!!!!!!!!!!!!!111!",
     bio:
       "Labore et excepturi vero expedita aut reiciendis laboriosam inventore fugiat voluptatum a ipsum itaque sapiente accusamus amet doloribus aliquid necessitatibus laborum quasi fakeyfake fake fakington erum dignissimos sit molestiae ducimus iusto harum molestias nihil debitis corrupti quia sed nulla?",
   };
