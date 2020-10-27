@@ -17,7 +17,7 @@ function handleSubmit(e) {
 
 function NavbarNav() {
   return (
-    <Navbar bg="dark" expand="xxl" sticky="top">
+    <Navbar bg="dark" expand="xxl" sticky="top" className="nav">
       <Container fluid>
         <Row>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
