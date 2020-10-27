@@ -1,6 +1,6 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import '../App.scss';
+import '../styles/App.scss';
 import {Navbar} from 'react-bootstrap';
 
 export default function Footer() {

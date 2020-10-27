@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
-import "../App.scss";
+import "../styles/App.scss";
 
 export default function Home() {
   // const [message, setMessage] = useState("Click to fetch data!")
@@ -12,7 +12,7 @@ export default function Home() {
       .then((result) => {
         setData(result.data);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
   }, []);

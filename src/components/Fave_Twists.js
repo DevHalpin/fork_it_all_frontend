@@ -1,6 +1,6 @@
 import React from "react";
 import {Container, Card, CardGroup} from 'react-bootstrap';
-import '../App.scss';
+import '../styles/App.scss';
 
 const Fave_Twists = () => {
   return (
