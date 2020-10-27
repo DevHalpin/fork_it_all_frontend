@@ -25,6 +25,7 @@ export default function App() {
         <Route exact path="/recipes/:recipe/twists/:twist" component={Recipes} />
         <Route exact path="/recipes/:recipe" component={Recipes} />
         <Route exact path="/my_twists/:recipe/twists/:twist" component={My_Twists} />
+        <Route exact path="/fave_twists/:recipe/twists/:twist" component={Fave_Twists} />
         <Route path="/recipes" component={Recipes} />
         <Route path="/my_twists" component={My_Twists} />
         <Route path="/fave_twists" component={Fave_Twists} />
