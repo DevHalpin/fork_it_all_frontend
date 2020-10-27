@@ -1,15 +1,15 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/App.scss";
+import "../styles/Nav.scss";
 import {Link} from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
 import {Nav, Navbar, Form, FormControl, Button, Container, Row} from "react-bootstrap";
 
 function handleSubmit(e) {
-  e.preventDefault()
+  e.preventDefault();
   const formData = new FormData(e.target),
-        formDataObj = Object.fromEntries(formData.entries()).search
-  console.log(formDataObj)
+    formDataObj = Object.fromEntries(formData.entries()).search;
+  console.log(formDataObj);
   fetch(`/api/data?search=${formDataObj}`, {
     method: 'GET',
   });
@@ -17,7 +17,7 @@ function handleSubmit(e) {
 
 function NavbarNav() {
   return (
-    <Navbar bg="dark" expand="xxl" sticky="top">
+    <Navbar bg="dark" expand="xxl" sticky="top" className="nav">
       <Container fluid>
         <Row>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -57,7 +57,7 @@ function NavbarNav() {
         </Form>
         <Row>
           <Link to="/login">
-            <Button variant="primary"  className="mr-sm-2">
+            <Button variant="primary" className="mr-sm-2">
               Log in
             </Button>
           </Link>
