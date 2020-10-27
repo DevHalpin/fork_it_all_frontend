@@ -2,10 +2,23 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Login.scss";
 import axios from "axios";
+import {Form, FormControl, Button, Container, Col, Row} from "react-bootstrap"
 
 function Login() {
+  const [username, setUsername] = useState("");
+
   function handleChange(event) {
     setUsername(event.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target),
+      formDataObj = Object.fromEntries(formData.entries()).search;
+    console.log(formData.entries());
+    // fetch(`/api/data?search=${formDataObj}`, {
+    //   method: 'GET',
+    // });
   }
 
   function loginEvent(event) {
@@ -24,42 +37,40 @@ function Login() {
       });
   }
 
-  const [username, setUsername] = useState("");
   return (
-    <div className="container login-container">
-      <div className="row">
-        <div className="col-md-6 login-form-1">
+    <>
+    <Container className="login-container">
+      <Row>
+        <Col md="6" className="login-form-1">
           <h3>Login</h3>
-          <form className="form-control" onSubmit={loginEvent}>
-            <div className="form-group">
-              <input
+          <Form onSubmit={handleSubmit}>
+            {/* <Form.Group> */}
+              <FormControl
                 type="text"
-                className="form-control"
                 placeholder="Username*"
-                value={username}
-                onChange={handleChange}
+                name="username"
               />
-            </div>
-            <div className="form-group">
-              <input
+            {/* </div>
+            <div className="form-group"> */}
+              <FormControl
                 type="password"
-                className="form-control"
                 placeholder="Your Password *"
-                onChange={handleChange}
-                value=""
+                name="password"
               />
-            </div>
-            <div className="form-group">
-              <input type="submit" className="btnSubmit" value="Login" />
-            </div>
-            <div className="form-group">
+            {/* </div> */}
+            {/* <div className="form-group"> */}
+            <Button variant="success" type="submit" className="mr-sm-2">
+            Login
+          </Button>
+            {/* </div> */}
+            {/* <div className="form-group">
               <a href="#www.example.com" className="ForgetPwd">
                 Forget Password?
               </a>
-            </div>
-          </form>
-        </div>
-        <div className="col-md-6 login-form-2">
+            </div> */}
+          </Form>
+        </Col>
+        {/* <div className="col-md-6 login-form-2">
           <h3>Register</h3>
           <form>
             <div className="form-group">
@@ -87,9 +98,10 @@ function Login() {
               </button>
             </div>
           </form>
-        </div>
-      </div>
-    </div>
+        </div> */}
+      </Row>
+    </Container>
+    </>
   );
 }
 
