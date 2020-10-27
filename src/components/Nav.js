@@ -5,9 +5,19 @@ import {Link} from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
 import {Nav, Navbar, Form, FormControl, Button, Container, Row} from "react-bootstrap";
 
+function handleSubmit(e) {
+  e.preventDefault()
+  const formData = new FormData(e.target),
+        formDataObj = Object.fromEntries(formData.entries()).search
+  console.log(formDataObj)
+  fetch(`/api/data?search=${formDataObj}`, {
+    method: 'GET',
+  });
+}
+
 function NavbarNav() {
   return (
-    <Navbar bg="dark" expand="xxl" static="top">
+    <Navbar bg="dark" expand="xxl" sticky="top">
       <Container fluid>
         <Row>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -39,15 +49,15 @@ function NavbarNav() {
             className="img-responsive rounded mx-auto d-block"
           />
         </Link>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="success" className="mr-sm-2">
+        <Form inline onSubmit={handleSubmit}>
+          <FormControl type="text" name="search" placeholder="Search" className="mr-sm-2" />
+          <Button variant="success" type="submit" className="mr-sm-2">
             Search
           </Button>
         </Form>
         <Row>
           <Link to="/login">
-            <Button variant="primary" className="mr-sm-2">
+            <Button variant="primary"  className="mr-sm-2">
               Log in
             </Button>
           </Link>
