@@ -6,56 +6,10 @@
   background-attachment: fixed;
 }
 
-.img-responsive {
-  width: auto;
-  height: 10em;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-top: -45px;
-  margin-bottom: -45px;
-}
-
-.burger-menu {
-  flex-grow: 0
-}
-
 .footer {
   justify-content: center;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-}
-
-.recipe-card {
-  margin-top: 1em;
-  min-height: 100%
-}
-
-.recipe-dropdown {
-  margin-top: 0.5em
-}
-
-.twist-card {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 1em;
-  padding-left: 0.1em;
-  padding-right: 0.1em;
-  height: 50%
-}
-
-.recipe-text {
-  overflow-y: scroll;
-  display: block;
-  overflow-x: hidden;
-  height: 70%
-}
-
-.recipe-columns {
-  height: 100%
-}
-
-.recipe-body {
-  height: 50%
 }

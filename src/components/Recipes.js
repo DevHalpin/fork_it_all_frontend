@@ -10,6 +10,7 @@ import {
   Form,
 } from "react-bootstrap";
 import axios from "axios";
+import "../styles/Recipes.scss";
 
 const Recipes = (props) => {
   const recipeId = props.match.params.recipe;
