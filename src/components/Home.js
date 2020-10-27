@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import '../App.scss';
+import '../styles/App.scss';
 import {Container, Carousel, Row, Col, Image} from 'react-bootstrap';
 
 function ControlledCarousel() {
@@ -54,47 +54,34 @@ function ControlledCarousel() {
 }
 
 
-<<<<<<< HEAD
-useEffect(() => {
-  axios
-    .get("/api/twists/1")
-    .then((result) => {
-      setData(result.data);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-}, []);
-=======
-  export default function Home() {
-    const [data, setData] = useState({id:1000});
->>>>>>> 6f81b2e8921c620df570221a9f806ab2d3a44d81
+export default function Home() {
+  const [data, setData] = useState({id: 1000});
 
-useEffect(() => {
-  const fetchTwists = async () => {
-    const result = await axios.get('/api/data?search=Three Fish');
-    const body = JSON.parse(result.data.message);
-    setData(body);
-  };
-  fetchTwists();
-}, []);
+  useEffect(() => {
+    const fetchTwists = async () => {
+      const result = await axios.get('/api/data?search=Three Fish');
+      const body = JSON.parse(result.data.message);
+      setData(body);
+    };
+    fetchTwists();
+  }, []);
 
-return (
-  <>
-    <ControlledCarousel />
-    <Container mw="100">
-      <Row>
-        <Col sm="6" >
-          <p>Fork It Favorites</p>
-          <h3>Name: {data.name}</h3>
-          <Image width="50%" src={data.meal_image} responsive />
-        </Col >
-        <Col sm="6" >
-          <p>Random Twists</p>
-          <Image height="75%" src="http://www.fillmurray.com/500/500" alt="" />
-        </Col>
-      </Row>
-    </Container>
-  </>
-);
-  }
+  return (
+    <>
+      <ControlledCarousel />
+      <Container mw="100">
+        <Row>
+          <Col sm="6" >
+            <p>Fork It Favorites</p>
+            <h3>Name: {data.name}</h3>
+            <Image width="50%" src={data.meal_image} responsive />
+          </Col >
+          <Col sm="6" >
+            <p>Random Twists</p>
+            <Image height="75%" src="http://www.fillmurray.com/500/500" alt="" />
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+}
