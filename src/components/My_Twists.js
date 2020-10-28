@@ -5,87 +5,91 @@ import axios from 'axios';
 
 const My_Twists = (props) => {
   const id = props.match.params.user;
-  console.log(props.match.params.user);
+  console.log(id)
 
   const [user, setUser] = useState("");
-  const [otherUser, setOtherUser] = useState("");
-  const [thirdUser, setThirdUser] = useState("");
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
+    console.log('Triggered!')
     axios
       .get(`/api/users/${id}`)
       .then((response) => {
         console.log(response.data);
         // let parsedResponse = JSON.parse(response.data.message);
         // console.log(parsedResponse);
-        setUser(response.data[0]);
-        setOtherUser(response.data[1]);
-        setThirdUser(response.data[2]);
+        setUser(response.data);
       })
       .catch(function(error) {
         console.log(error);
       });
   }, [id]);
 
+  
+  if (user) {
+    return (
+      <Container>
+        <CardGroup className="mt-3">
+          <Card>
+            <Card.Img src={`${user[0].meal_image}`} variant="top" alt="Card image" />
+            <Card.Body>
+              <Card.Title>{`${user[0].tags}`}</Card.Title>
+              <Card.Text>
+                {`${user[0].content}`}
+              </Card.Text>
+              <Card.Link href={`/recipes/${user[0].recipe_id}`} variant="primary">View this recipe</Card.Link>
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Img src={`${user[1].meal_image}`} variant="top" alt="Card image" />
+            <Card.Body>
+              <Card.Title>{`${user[1].tags}`}</Card.Title>
+              <Card.Text>
+                {`${user[1].content}`}
+              </Card.Text>
+              <Card.Link href={`/recipes/${user[1].recipe_id}`} variant="primary">View this recipe</Card.Link>
+            </Card.Body>
+          </Card>
+        </CardGroup>
+        <CardGroup className="mt-3">
+          <Card>
+            <Card.Img src={`${user[2].meal_image}`} variant="top" alt="Card image" />
+            <Card.Body>
+              <Card.Title>{`${user[2].tags}`}</Card.Title>
+              <Card.Text>
+                {`${user[2].content}`}
+              </Card.Text>
+              <Card.Link href={`/recipes/${user[2].recipe_id}`} variant="primary">View this recipe</Card.Link>
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Img src={`${user[0].meal_image}`} variant="top" alt="Card image" />
+            <Card.Body>
+              <Card.Title>{`${user[0].tags}`}</Card.Title>
+              <Card.Text>
+                {`${user[0].content}`}
+              </Card.Text>
+              <Card.Link href={`/recipes/${user[0].recipe_id}`} variant="primary">View this recipe</Card.Link>
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Img src={`${user[1].meal_image}`} variant="top" alt="Card image" />
+            <Card.Body>
+              <Card.Title>{`${user[1].tags}`}</Card.Title>
+              <Card.Text>
+                {`${user[1].content}`}
+              </Card.Text>
+              <Card.Link href={`/recipes/${user[1].recipe_id}`} variant="primary">View this recipe</Card.Link>
+            </Card.Body>
+          </Card>
+        </CardGroup>
+        
+      </Container>
+    );
+  }
   return (
-    <Container>
-      <CardGroup className="mt-3">
-        <Card>
-          <Card.Img src={`${user.meal_image}`} variant="top" alt="Card image" />
-          <Card.Body>
-            <Card.Title>{`${user.tags}`}</Card.Title>
-            <Card.Text>
-              {`${user.content}`}
-            </Card.Text>
-            <Card.Link href={`/recipes/${user.recipe_id}`} variant="primary">View this recipe</Card.Link>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Img src={`${otherUser.meal_image}`} variant="top" alt="Card image" />
-          <Card.Body>
-            <Card.Title>{`${otherUser.tags}`}</Card.Title>
-            <Card.Text>
-              {`${otherUser.content}`}
-            </Card.Text>
-            <Card.Link href={`/recipes/${otherUser.recipe_id}`} variant="primary">View this recipe</Card.Link>
-          </Card.Body>
-        </Card>
-      </CardGroup>
-      <CardGroup className="mt-3">
-        <Card>
-          <Card.Img src={`${thirdUser.meal_image}`} variant="top" alt="Card image" />
-          <Card.Body>
-            <Card.Title>{`${thirdUser.tags}`}</Card.Title>
-            <Card.Text>
-              {`${thirdUser.content}`}
-            </Card.Text>
-            <Card.Link href={`/recipes/${thirdUser.recipe_id}`} variant="primary">View this recipe</Card.Link>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Img src={`${user.meal_image}`} variant="top" alt="Card image" />
-          <Card.Body>
-            <Card.Title>{`${user.tags}`}</Card.Title>
-            <Card.Text>
-              {`${user.content}`}
-            </Card.Text>
-            <Card.Link href={`/recipes/${user.recipe_id}`} variant="primary">View this recipe</Card.Link>
-          </Card.Body>
-        </Card>
-        <Card>
-          <Card.Img src={`${otherUser.meal_image}`} variant="top" alt="Card image" />
-          <Card.Body>
-            <Card.Title>{`${otherUser.tags}`}</Card.Title>
-            <Card.Text>
-              {`${otherUser.content}`}
-            </Card.Text>
-            <Card.Link href={`/recipes/${otherUser.recipe_id}`} variant="primary">View this recipe</Card.Link>
-          </Card.Body>
-        </Card>
-      </CardGroup>
-    </Container>
-  );
+    <div>Loading</div>
+  )
 };
 
 export default My_Twists;
