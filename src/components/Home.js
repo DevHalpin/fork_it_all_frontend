@@ -4,7 +4,9 @@ import "../styles/App.scss";
 import "../styles/Home.scss";
 import {Container, Carousel, CardDeck, Col, Card, Jumbotron} from "react-bootstrap";
 
-export default function Home() {
+export default function Home (props) {
+
+  
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -14,7 +16,6 @@ export default function Home() {
   // const [message, setMessage] = useState("Click to fetch data!")
   // a value has to be put in as an inisial state or the app breaks!
   const [recipe, setRecipe] = useState(0);
-  const [twist, setTwist] = useState(0);
   const [random, setRandom] = useState(0);
 
   //gets a recipe and sets recipe
@@ -23,9 +24,7 @@ export default function Home() {
       //this variable needs to be hard coded to the search bar?
       const result = await axios.get("/api/recipes/1");
       const recipe = (result.data.recipe);
-      const twist = (result.data.random);
       setRecipe(recipe);
-      setTwist(twist);
     };
     const fetchRandom = async () => {
       //this variable needs to be hard coded to the search bar?
@@ -43,7 +42,9 @@ export default function Home() {
     <>
       {/* Recipe carousel */}
       <Container fluid >
-        <Carousel fluid activeIndex={index} onSelect={handleSelect} className="home-carousel">
+        <h1>Status: {props.loggedInStatus}</h1>
+        
+        <Carousel activeIndex={index} onSelect={handleSelect} className="home-carousel">
           <Carousel.Item>
             <img style={{height: "25em"}} className="d-block w-100" src={recipe.meal_image} alt="Recipe" />
             <Carousel.Caption>
