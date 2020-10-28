@@ -8,9 +8,11 @@ import {
   Col,
   Button,
   Form,
+  Modal
 } from "react-bootstrap";
 import axios from "axios";
 import "../styles/Recipes.scss";
+import "../styles/App.scss";
 
 const Recipes = (props) => {
   let id = props.match.params.recipe;
@@ -59,6 +61,33 @@ const Recipes = (props) => {
             <Dropdown.Item href="#/action-1">Share</Dropdown.Item>
             <Dropdown.Item href="#/action-2">Rate</Dropdown.Item>
             <Dropdown.Item href="#/action-3">Create Twist</Dropdown.Item>
+            {/* Create twist modal */}
+            <Modal.Dialog>
+              <Modal.Header closeButton>
+                <Modal.Title>Create a New Twist</Modal.Title>
+              </Modal.Header>
+              <Form>
+                <Form.Group>
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control type="email" placeholder="Enter email" />
+                  <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                  </Form.Text>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
+              </Form>
+              <Modal.Body>
+                <p>Modal body text goes here.</p>
+              </Modal.Body>
+
+              <Modal.Footer>
+                <Button variant="secondary">Close</Button>
+                <Button variant="primary">Save changes</Button>
+              </Modal.Footer>
+            </Modal.Dialog>
+
             <Dropdown.Item href="#/action-3">Add to Favorites</Dropdown.Item>
           </DropdownButton>
         </Col>
