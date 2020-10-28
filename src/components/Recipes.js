@@ -17,7 +17,7 @@ const Recipes = (props) => {
   console.log(props.match.params.recipe);
 
   const [recipe, setRecipe] = useState("");
-  const [twist, setTwist] = useState("");
+  const [twist, setTwist] = useState([]);
   const [user, setUser] = useState("");
 
   // Make a request for a recipe, random twist, and user given a recipe id
@@ -36,10 +36,15 @@ const Recipes = (props) => {
       });
   }, [id]);
 
+  const randomTwist = () => {
+    const randomizer = Math.floor(Math.random() * twist.length);
+    setTwist(randomizer);
+  };
+
   return (
     // Recipe options menu
     <>
-      <Container>
+      <Container fluid>
         <Col>
           <DropdownButton
             title="Recipe Options"
@@ -74,7 +79,7 @@ const Recipes = (props) => {
                 {user.handle} suggests including the following twist:
               </Card.Title>
               <Card.Text>{twist.content}</Card.Text>
-              <Button onClick={setTwist} variant="primary">Find a random Twist</Button>
+              <Button onClick={() => randomTwist} variant="primary">Find a random Twist</Button>
             </Card.Body>
             <Form>
               <Form.Group as={Col}>

@@ -5,13 +5,13 @@ import axios from 'axios';
 
 const My_Twists = (props) => {
   const id = props.match.params.user;
-  console.log(id)
+  console.log(id);
 
   const [user, setUser] = useState("");
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
-    console.log('Triggered!')
+    console.log('Triggered!');
     axios
       .get(`/api/users/${id}`)
       .then((response) => {
@@ -25,7 +25,6 @@ const My_Twists = (props) => {
       });
   }, [id]);
 
-  
   if (user) {
     return (
       <Container>
@@ -83,13 +82,13 @@ const My_Twists = (props) => {
             </Card.Body>
           </Card>
         </CardGroup>
-        
+
       </Container>
     );
   }
   return (
     <div>Loading</div>
-  )
+  );
 };
 
 export default My_Twists;
