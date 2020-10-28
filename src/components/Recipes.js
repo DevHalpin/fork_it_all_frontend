@@ -13,8 +13,7 @@ import axios from "axios";
 import "../styles/Recipes.scss";
 
 const Recipes = (props) => {
-  const id = props.match.params.recipe;
-  console.log(props.match.params.recipe);
+  let id = props.match.params.recipe;
 
   const [recipe, setRecipe] = useState("");
   const [twist, setTwist] = useState("");
@@ -23,23 +22,34 @@ const Recipes = (props) => {
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     const promiseRecipes = axios.get(`/api/recipes/${id}`);
-    const promiseUsers = axios.get("/api/users/95");
+    const promiseUsers = axios.get("/api/users/73");
     const promises = [promiseRecipes, promiseUsers];
 
     Promise.all(promises).then((responseArr) => {
       setRecipe(responseArr[0].data.recipe);
       setTwist(responseArr[0].data.random);
-      setUser(responseArr[1].data);
+      setUser(responseArr[1].data.user);
     })
       .catch(function(error) {
         console.log(error);
       });
   }, [id]);
 
+  // Find a random twist
+  const randomTwist = () => {
+    const randomizer = Math.floor(Math.random() * 100);
+
+    axios.get(`/api/recipes/${randomizer}`)
+      .then((response) => {
+        setTwist(response.data.random);
+      }
+      );
+  };
+
   return (
     // Recipe options menu
     <>
-      <Container>
+      <Container fluid>
         <Col>
           <DropdownButton
             title="Recipe Options"
@@ -74,7 +84,7 @@ const Recipes = (props) => {
                 {user.handle} suggests including the following twist:
               </Card.Title>
               <Card.Text>{twist.content}</Card.Text>
-              <Button onClick={setTwist} variant="primary">Find a random Twist</Button>
+              <Button onClick={() => randomTwist()} variant="primary">Find a random Twist</Button>
             </Card.Body>
             <Form>
               <Form.Group as={Col}>
