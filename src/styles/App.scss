@@ -1,3 +1,12 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin: 0 0 3.5em;
+}
+
 #background-image {
   background-image: url(../components/images/Background.png);
   background-repeat: no-repeat;
@@ -7,9 +16,11 @@
 }
 
 .footer {
-  justify-content: center;
   position: fixed;
+  margin-top: auto;
   left: 0;
   bottom: 0;
+  height: 3em;
   width: 100%;
+  justify-content: center;
 }
