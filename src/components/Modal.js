@@ -7,13 +7,13 @@ import axios from "axios";
 
 
 // Create twist modal
-const TwistModal = ({show, onClose}) => {
+const TwistModal = ({show, onHide}) => {
 
   return (
     <>
-      <Modal show={show}>
+      <Modal show={show} onHide={onHide} >
         <Modal.Dialog>
-          <Modal.Header onClick={onClose} closeButton>
+          <Modal.Header onClick={onHide} closeButton>
             <Modal.Title>Create a New Twist</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -36,7 +36,7 @@ const TwistModal = ({show, onClose}) => {
 // Login Modal
 const LoginModal = (props) => {
   const history = useHistory();
-  const {show, onClose, handleLogin} = props;
+  const {show, onHide, handleLogin} = props;
 
   const [state, setState] = useState({
     email: "",
@@ -75,7 +75,7 @@ const LoginModal = (props) => {
     <>
       <Modal show={show} id="login-modal">
         <Modal.Dialog>
-          <Modal.Header onClick={onClose} closeButton>
+          <Modal.Header onClick={onHide} closeButton>
             <Modal.Title>Login</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -91,7 +91,7 @@ const LoginModal = (props) => {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" name="password" placeholder="Password" value={state.password} onChange={handleChange} required />
               </Form.Group>
-              <Button onClick={onClose} variant="primary" type="submit">
+              <Button onClick={onHide} variant="primary" type="submit">
                 Login
               </Button>
             </Form>
@@ -105,7 +105,7 @@ const LoginModal = (props) => {
 // Register Modal
 const RegisterModal = (props) => {
   const history = useHistory();
-  const {show, onClose, handleLogin} = props;
+  const {show, onHide, handleLogin} = props;
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -147,9 +147,9 @@ const RegisterModal = (props) => {
 
   return (
     <>
-      <Modal show={show} id="register-modal">
+      <Modal show={show} onHide={onHide} id="register-modal">
         <Modal.Dialog>
-          <Modal.Header onClick={onClose} closeButton>
+          <Modal.Header onClick={onHide} closeButton>
             <Modal.Title>Register</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -178,7 +178,7 @@ const RegisterModal = (props) => {
                 <Form.Label>Password Confirmation</Form.Label>
                 <Form.Control type="password" name="password_confirmation" placeholder="Password Confirmation" value={state.password_confirmation} onChange={handleChange} required />
               </Form.Group>
-              <Button onClick={onClose} variant="primary" type="submit">Register</Button>
+              <Button onClick={onHide} variant="primary" type="submit">Register</Button>
             </Form>
           </Modal.Body>
         </Modal.Dialog>

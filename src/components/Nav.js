@@ -51,8 +51,8 @@ function NavbarNav(props) {
   return (
     <Navbar bg="dark" expand="xxl" sticky="top" className="nav">
       <Container fluid>
-        <LoginModal handleLogin={props.handleLogin} id="login-modal" show={isLoginModalOpen} onClose={toggleLoginModal} toggleRegisterModal />
-        <RegisterModal handleLogin={props.handleLogin} id="register-modal" show={isRegisterModalOpen} onClose={toggleRegisterModal} toggleLoginModal />
+        <LoginModal handleLogin={props.handleLogin} id="login-modal" show={isLoginModalOpen} onHide={toggleLoginModal} toggleRegisterModal />
+        <RegisterModal handleLogin={props.handleLogin} id="register-modal" show={isRegisterModalOpen} onHide={toggleRegisterModal} toggleLoginModal />
         <Row>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

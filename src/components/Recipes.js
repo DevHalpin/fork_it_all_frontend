@@ -13,6 +13,7 @@ import {TwistModal} from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
+import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
 const Recipes = (props) => {
   let id = props.match.params.recipe;
@@ -88,12 +89,16 @@ const Recipes = (props) => {
     setModalOpen(!isModalOpen);
   };
 
+  const handleFavorite = () => {
+    axios.put(`/api/twists/${twist.id}/favorite?type=favorite`, { twist_id: `${twist.id}`})
+  }
+
   // if (user) {
   return (
     // Recipe options menu
     <>
       <Container fluid>
-        <TwistModal show={isModalOpen} onClose={toggleModal} />
+        <TwistModal show={isModalOpen} onHide={() => toggleModal()} />
         <Col>
           <DropdownButton
             title="Recipe Options"
@@ -105,9 +110,9 @@ const Recipes = (props) => {
             <Link to="#/action-2">Rate</Link>
             <br />
             {/* Create twist using modal */}
-            <Link onClick={toggleModal}>Create Twist</Link>
+            <DropdownItem onClick={toggleModal}>Create Twist</DropdownItem>
             <br />
-            <Link to="#/action-3">Add to Favorites</Link>
+            <DropdownItem onClick={handleFavorite}>Add to Favorites</DropdownItem>
             <br />
           </DropdownButton>
         </Col>
