@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import {
-  DropdownButton,
   Card,
   CardDeck,
   Container,
@@ -9,7 +8,6 @@ import {
   Form,
   Dropdown
 } from "react-bootstrap";
-import {Link} from "react-router-dom";
 import {TwistCreateModal, TwistEditModal} from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
@@ -23,8 +21,11 @@ const Recipes = (props) => {
   const [user, setUser] = useState("");
   const [temp, setTemp] = useState("");
   const [handle, setHandle] = useState("");
+
   // Modal state
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
+
   // Twist display state
   const [showTwists, setShowTwists] = useState(true);
 
@@ -75,7 +76,7 @@ const Recipes = (props) => {
   const randomTwist = () => {
     const randomizer = Math.floor(Math.random() * 100);
     const promiseRecipes = axios.get(`/api/recipes/${id}`);
-    const promiseUsers = axios.get(`/api/users/${randomizer}`);
+    const promiseUsers = axios.get(`/api/users/${randomizer}?recipes=${id}`);
     const promises = [promiseRecipes, promiseUsers];
 
     Promise.all(promises).then((responseArr) => {
@@ -89,10 +90,14 @@ const Recipes = (props) => {
 
   // Toggle for modals
   const toggleCreateModal = () => {
-    setModalOpen(!isModalOpen);
+    setCreateModalOpen(!isCreateModalOpen);
   };
   const toggleEditModal = () => {
-    setModalOpen(!isModalOpen);
+    setEditModalOpen(!isEditModalOpen);
+  };
+
+  const handleFavorite = () => {
+    axios.put(`/api/twists/${twist.id}/favorite?type=favorite`, {twist_id: `${twist.id}`});
   };
 
   // if (user) {
@@ -100,28 +105,12 @@ const Recipes = (props) => {
     // Recipe options menu
     <>
       <Container fluid>
-        <TwistCreateModal show={isModalOpen} onClose={toggleCreateModal} />
-        <TwistEditModal show={isModalOpen} onClose={toggleEditModal} />
-        <Col>
-          {showTwists === false ? (<Button onClick={setShowTwists}>Enable Twists</Button>) : null}
-          <DropdownButton
-            title="Recipe Options"
-            align="right"
-            className="recipe-dropdown"
-          >
-            <Link to="#/action-1">Share</Link>
-            <br />
-            <Link to="#/action-2">Rate</Link>
-            <br />
-            {/* Create twist using modal */}
-            <Dropdown.Item onClick={toggleCreateModal}>Create Twist</Dropdown.Item>
-            <br />
-            <Link to="#/action-3">Add to Favorites</Link>
-            <br />
+        {/* Twist modals */}
+        <TwistCreateModal show={isCreateModalOpen} onHide={toggleCreateModal} />
+        <TwistEditModal show={isEditModalOpen} onHide={toggleEditModal} />
 
-          </DropdownButton>
-        </Col>
-
+        {/* Show twists when disabled */}
+        {showTwists === false ? (<Button align="right" onClick={setShowTwists}>Enable Twists</Button>) : null}
         {/* // Recipe display */}
         <CardDeck className="recipe-columns">
           <Card className="recipe-card">
@@ -152,6 +141,7 @@ const Recipes = (props) => {
                 Find a random Twist
               </Button>
               <Button className="twist-button-edit" onClick={toggleEditModal} variant="primary">Edit Twist</Button>
+              <Button className="twist-button-edit" onClick={toggleCreateModal} variant="primary">Create Twist</Button>
             </Card.Body>
             <Form>
               <Form.Group as={Col}>
