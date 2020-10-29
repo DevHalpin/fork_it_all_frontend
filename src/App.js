@@ -2,13 +2,10 @@ import React, {useState, useEffect} from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import "./styles/App.scss";
 import axios from "axios";
-
 import NavbarNav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Error from "./components/Error";
-import Login from "./components/auth/Login";
-import Registration from "./components/auth/Registration";
 import UserProfile from "./components/User_Profile";
 import Recipes from "./components/Recipes";
 import My_Twists from "./components/My_Twists";
@@ -61,18 +58,11 @@ export default function App() {
     });
   };
 
-
   return (
     <Router>
-      <NavbarNav user={state.user} handleLogout={handleLogout} loggedInStatus={state.loggedInStatus} />
+      <NavbarNav user={state.user} handleLogin={handleLogin} handleLogout={handleLogout} loggedInStatus={state.loggedInStatus} />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/login" render={props => (
-          <Login {...props} handleLogin={handleLogin} loggedInStatus={state.loggedInStatus} />
-        )} />
-        <Route path="/register" render={props => (
-          <Registration {...props} handleLogin={handleLogin} loggedInStatus={state.loggedInStatus} />
-        )} />
         <Route path="/user_profile" render={props => (
           <UserProfile {...props} user={state.user} loggedInStatus={state.loggedInStatus} />)}
         />

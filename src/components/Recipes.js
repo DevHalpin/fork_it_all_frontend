@@ -9,7 +9,7 @@ import {
   Form,
 } from "react-bootstrap";
 import {Link} from "react-router-dom";
-import TwistModal from "./Modal";
+import {TwistModal} from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -62,6 +62,7 @@ const Recipes = (props) => {
     });
   };
 
+  // Toggle for modals
   const toggleModal = () => {
     setModalOpen(!isModalOpen);
   };

@@ -1,12 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Nav.scss";
-import {Link, useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
 import {Nav, Navbar, Form, FormControl, Button, Container, Row} from "react-bootstrap";
-import axios from "axios"
+import axios from "axios";
+import {LoginModal, RegisterModal} from "./Modal";
 
-function NavbarNav( props ) {
+function NavbarNav(props) {
   const history = useHistory();
   function handleSubmit(e) {
     e.preventDefault();
@@ -15,31 +16,43 @@ function NavbarNav( props ) {
     fetch(`/api/recipes?search=${formDataObj}`, {
       method: 'GET',
     })
-    .then((response) => {
-      return response.json()
-    })
-    .then((res) => {
-      const id = res.recipe.id
-      history.push(`/recipes/${id}`)
-      console.log(res)
-    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
+        const id = res.recipe.id;
+        history.push(`/recipes/${id}`);
+        console.log(res);
+      });
   }
 
-
-  
   const handleLogOutClick = () => {
-    axios.delete("/api/logout", { withCredentials: true })
-    .then(() => {
-      props.handleLogout();
-    })
-    .catch(error => {
-      console.log("Logout Error ", error)
-    });
-  }
-  
+    axios.delete("/api/logout", {withCredentials: true})
+      .then(() => {
+        props.handleLogout();
+      })
+      .catch(error => {
+        console.log("Logout Error ", error);
+      });
+  };
+
+  // Set modal state to false (closed)
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
+
+  // Toggle for modals
+  const toggleLoginModal = () => {
+    setLoginModalOpen(!isLoginModalOpen);
+  };
+  const toggleRegisterModal = () => {
+    setRegisterModalOpen(!isRegisterModalOpen);
+  };
+
   return (
     <Navbar bg="dark" expand="xxl" sticky="top" className="nav">
       <Container fluid>
+        <LoginModal handleLogin={props.handleLogin} id="login-modal" show={isLoginModalOpen} onClose={toggleLoginModal} toggleRegisterModal />
+        <RegisterModal handleLogin={props.handleLogin} id="register-modal" show={isRegisterModalOpen} onClose={toggleRegisterModal} toggleLoginModal />
         <Row>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -77,18 +90,20 @@ function NavbarNav( props ) {
           </Button>
         </Form>
         <Row>
-          { props.loggedInStatus === "NOT_LOGGED_IN" ?
-          <Link to="/login">
-            <Button variant="primary" className="mr-sm-2">
-              Log in
+          {props.loggedInStatus === "NOT_LOGGED_IN" ?
+            (<>
+              <Button id="login-modal" onClick={toggleLoginModal} variant="primary" className="mr-sm-2">
+                Login
+            </Button>  <Button id="register-modal" onClick={toggleRegisterModal} variant="primary" className="mr-sm-2">
+                Register
             </Button>
-          </Link> 
-          :<>
-          <p>User: {props.user.handle} </p>
-          <Button onClick={handleLogOutClick} variant="danger" className="mr-sm-2">
-            Log out
+            </>)
+            : <>
+              <p>User: {props.user.handle} </p>
+              <Button onClick={handleLogOutClick} variant="danger" className="mr-sm-2">
+                Log out
           </Button>
-          </>
+            </>
           }
         </Row>
       </Container>
