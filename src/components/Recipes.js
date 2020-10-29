@@ -6,7 +6,6 @@ import {
   Col,
   Button,
   Form,
-  Dropdown
 } from "react-bootstrap";
 import {TwistCreateModal, TwistEditModal} from "./Modal";
 import axios from "axios";
@@ -111,6 +110,7 @@ const Recipes = (props) => {
 
         {/* Show twists when disabled */}
         {showTwists === false ? (<Button align="right" onClick={setShowTwists}>Enable Twists</Button>) : null}
+
         {/* // Recipe display */}
         <CardDeck className="recipe-columns">
           <Card className="recipe-card">
@@ -138,10 +138,13 @@ const Recipes = (props) => {
                 {twist !== undefined ? twist.content : null}
               </Card.Text>
               <Button className="twist-button-random" onClick={() => randomTwist()} variant="primary">
-                Find a random Twist
-              </Button>
-              <Button className="twist-button-edit" onClick={toggleEditModal} variant="primary">Edit Twist</Button>
-              <Button className="twist-button-edit" onClick={toggleCreateModal} variant="primary">Create Twist</Button>
+                Randomize
+              </Button><br />
+              <Button className="twist-buttons" onClick={toggleEditModal} variant="primary">Share</Button>
+              <Button className="twist-buttons" onClick={toggleEditModal} variant="primary">Rate</Button>
+              <Button className="twist-buttons" onClick={toggleEditModal} variant="primary">Favorite</Button>
+              <Button className="twist-buttons" onClick={toggleEditModal} variant="primary">Edit</Button>
+              <Button className="twist-buttons" onClick={toggleCreateModal} variant="primary">Create</Button>
             </Card.Body>
             <Form>
               <Form.Group as={Col}>
