@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   Dropdown,
   DropdownButton,
@@ -8,8 +8,10 @@ import {
   Col,
   Button,
   Form,
-  Modal
+  Modal,
 } from "react-bootstrap";
+// import {Link} from "react-router-dom";
+import TwistModal from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -21,23 +23,27 @@ const Recipes = (props) => {
   const [twist, setTwist] = useState("");
   const [user, setUser] = useState("");
 
+
+
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     const randomizer = Math.floor(Math.random() * 100);
     const promiseRecipes = axios.get(`/api/recipes/${id}`);
-    const promiseUsers = axios.get(`/api/users/${randomizer}`);
+    const promiseUsers = axios.get(
+      `/api/users/${randomizer}?twists/${id}&&recipes${id}`
+    );
     const promises = [promiseRecipes, promiseUsers];
     // const promises = [promiseRecipes];
 
     Promise.all(promises)
       .then((responseArr) => {
         console.log(responseArr[0]);
-        // console.log(responseArr[1].data.user);
+        console.log(responseArr[1]);
         setRecipe(responseArr[0].data.recipe);
         setTwist(responseArr[0].data.random);
         setUser(responseArr[1].data.user);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
   }, [id]);
@@ -68,37 +74,11 @@ const Recipes = (props) => {
             align="right"
             className="recipe-dropdown"
           >
-            <Dropdown.Item href="#/action-1">Share</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Rate</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Create Twist</Dropdown.Item>
-            {/* Create twist modal */}
-            <Modal.Dialog>
-              <Modal.Header closeButton>
-                <Modal.Title>Create a New Twist</Modal.Title>
-              </Modal.Header>
-              <Form>
-                <Form.Group>
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                  Submit
-                </Button>
-              </Form>
-              <Modal.Body>
-                <p>Modal body text goes here.</p>
-              </Modal.Body>
-
-              <Modal.Footer>
-                <Button variant="secondary">Close</Button>
-                <Button variant="primary">Save changes</Button>
-              </Modal.Footer>
-            </Modal.Dialog>
-
-            <Dropdown.Item href="#/action-3">Add to Favorites</Dropdown.Item>
+            <Card.Link to="#/action-1">Share</Card.Link><br />
+            <Card.Link to="#/action-2">Rate</Card.Link><br />
+            {/* Create twist using modal */}
+            <Button data-toggle="modal" data-target="twistModal" onClick={() => TwistModal()}>Create Twist</Button><br />
+            <Card.Link to="#/action-3">Add to Favorites</Card.Link><br />
           </DropdownButton>
         </Col>
 
