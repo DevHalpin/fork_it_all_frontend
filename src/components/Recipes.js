@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   Dropdown,
   DropdownButton,
@@ -8,12 +8,9 @@ import {
   Col,
   Button,
   Form,
-<<<<<<< HEAD
-=======
   Modal,
->>>>>>> da09b61ba4f12ec6c0301b9d845b72694ab99c29
 } from "react-bootstrap";
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 import TwistModal from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
@@ -26,11 +23,7 @@ const Recipes = (props) => {
   const [twist, setTwist] = useState("");
   const [user, setUser] = useState("");
 
-  // Modal state
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
@@ -48,7 +41,7 @@ const Recipes = (props) => {
         setTwist(responseArr[0].data.random);
         setUser(responseArr[1].data.user);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
   }, [id]);
@@ -79,11 +72,11 @@ const Recipes = (props) => {
             align="right"
             className="recipe-dropdown"
           >
-            <Link to="#/action-1">Share</Link><br />
-            <Link to="#/action-2">Rate</Link><br />
+            <Card.Link to="#/action-1">Share</Card.Link><br />
+            <Card.Link to="#/action-2">Rate</Card.Link><br />
             {/* Create twist using modal */}
-            <Button onClick={handleShow} show={show} onHide={handleClose}>Create Twist</Button><br />
-            <Link to="#/action-3">Add to Favorites</Link><br />
+            <Button data-toggle="modal" data-target="twistModal" onClick={() => TwistModal()}>Create Twist</Button><br />
+            <Card.Link to="#/action-3">Add to Favorites</Card.Link><br />
           </DropdownButton>
         </Col>
 
