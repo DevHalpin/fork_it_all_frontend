@@ -7,7 +7,7 @@ import axios from "axios";
 
 
 // Create twist modal
-const TwistModal = ({show, onClose}) => {
+const TwistCreateModal = ({show, onClose}) => {
 
   return (
     <>
@@ -21,6 +21,33 @@ const TwistModal = ({show, onClose}) => {
               <Form.Group>
                 <Form.Label>Do you have an idea to make this recipe better? Enter your personal twist here to share it!</Form.Label>
                 <Form.Control type="text" placeholder="Enter twist" />
+              </Form.Group>
+              <Button variant="primary" type="submit">
+                Submit Twist
+                </Button>
+            </Form>
+          </Modal.Body>
+        </Modal.Dialog>
+      </Modal>
+    </>
+  );
+};
+
+// Edit twist modal
+const TwistEditModal = ({show, onClose}) => {
+
+  return (
+    <>
+      <Modal show={show}>
+        <Modal.Dialog>
+          <Modal.Header onClick={onClose} closeButton>
+            <Modal.Title>Edit your Twist</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group>
+                <Form.Label>Found a better change for this recipe? Enter it here!</Form.Label>
+                <Form.Control type="text" placeholder="Enter new twist" />
               </Form.Group>
               <Button variant="primary" type="submit">
                 Submit Twist
@@ -187,4 +214,4 @@ const RegisterModal = (props) => {
   );
 };
 
-export {TwistModal, LoginModal, RegisterModal};
+export {TwistCreateModal, TwistEditModal, LoginModal, RegisterModal};
