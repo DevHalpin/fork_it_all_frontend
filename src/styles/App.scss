@@ -2,7 +2,8 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0;
-    min-height: 100%
+    min-height: 100%;
+    padding-bottom: 4.5em
 }
 
 // Site background
@@ -19,7 +20,7 @@ body {
   margin-top: auto;
   left: 0;
   bottom: 0;
-  height: 3em;
+  height: 4.5em;
   width: 100%;
   justify-content: center;
   background-color: #162955;
@@ -29,4 +30,9 @@ body {
 // Footer "Fork It All"
 #footer-text {
   color: white
+}
+
+#dino-chef-mascot {
+  height: 3em;
+  padding-right: 0.5em
 }

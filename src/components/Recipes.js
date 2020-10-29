@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Dropdown,
   DropdownButton,
   Card,
   CardDeck,
@@ -8,9 +7,8 @@ import {
   Col,
   Button,
   Form,
-  Modal,
 } from "react-bootstrap";
-// import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import TwistModal from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
@@ -96,14 +94,14 @@ const Recipes = (props) => {
             align="right"
             className="recipe-dropdown"
           >
-            <Card.Link to="#/action-1">Share</Card.Link>
+            <Link to="#/action-1">Share</Link>
             <br />
-            <Card.Link to="#/action-2">Rate</Card.Link>
+            <Link to="#/action-2">Rate</Link>
             <br />
             {/* Create twist using modal */}
-            <Button onClick={toggleModal}>Create Twist</Button>
+            <Link onClick={toggleModal}>Create Twist</Link>
             <br />
-            <Card.Link to="#/action-3">Add to Favorites</Card.Link>
+            <Link to="#/action-3">Add to Favorites</Link>
             <br />
           </DropdownButton>
         </Col>
