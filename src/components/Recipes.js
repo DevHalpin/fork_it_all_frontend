@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   DropdownButton,
   Card,
@@ -8,8 +8,8 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
-import {Link} from "react-router-dom";
-import {TwistModal} from "./Modal";
+import { Link } from "react-router-dom";
+import { TwistModal } from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -52,7 +52,7 @@ const Recipes = (props) => {
       //     setHandle(response.data.user);
       //   });
       // })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }, [id]);
@@ -71,7 +71,7 @@ const Recipes = (props) => {
   const randomTwist = () => {
     const randomizer = Math.floor(Math.random() * 100);
     const promiseRecipes = axios.get(`/api/recipes/${id}`);
-    const promiseUsers = axios.get(`/api/users/${randomizer}`);
+    const promiseUsers = axios.get(`/api/users/${randomizer}?recipes=${id}`);
     const promises = [promiseRecipes, promiseUsers];
 
     Promise.all(promises).then((responseArr) => {

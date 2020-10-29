@@ -12,13 +12,11 @@ import My_Twists from "./components/My_Twists";
 import Fave_Twists from "./components/Fave_Twists";
 import Fave_Users from "./components/Fave_Users";
 import UserDashboard from "./components/User_Dashboard";
-
 export default function App() {
   const [state, setState] = useState({
     loggedInStatus: "NOT_LOGGED_IN",
     user: {},
   });
-
   const checkLoginStatus = () => {
     axios
       .get("/api/logged_in", { withCredentials: true })
@@ -45,58 +43,39 @@ export default function App() {
         console.log("Explosions! ", error);
       });
   };
-
   useEffect(() => {
     checkLoginStatus();
   });
-
   const handleLogin = (data) => {
     setState({
       loggedInStatus: "LOGGED_IN",
       user: data.user,
     });
   };
-
   const handleLogout = () => {
     setState({
       loggedInStatus: "NOT_LOGGED_IN",
       user: {},
     });
   };
-
   return (
     <Router>
       <NavbarNav
         user={state.user}
+        handleLogin={handleLogin}
         handleLogout={handleLogout}
         loggedInStatus={state.loggedInStatus}
       />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route
-          path="/login"
-          render={(props) => (
-            <Login
-              {...props}
-              handleLogin={handleLogin}
-              loggedInStatus={state.loggedInStatus}
-            />
-          )}
-        />
-        <Route
-          path="/register"
-          render={(props) => (
-            <Registration
-              {...props}
-              handleLogin={handleLogin}
-              loggedInStatus={state.loggedInStatus}
-            />
-          )}
-        />
-        <Route
           path="/user_profile"
           render={(props) => (
-            <UserProfile {...props} loggedInStatus={state.loggedInStatus} />
+            <UserProfile
+              {...props}
+              user={state.user}
+              loggedInStatus={state.loggedInStatus}
+            />
           )}
         />
         <Route exact path="/recipes/:recipe" component={Recipes} />
