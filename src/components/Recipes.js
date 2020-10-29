@@ -27,17 +27,21 @@ const Recipes = (props) => {
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     const randomizer = Math.floor(Math.random() * 100);
+    const promiseRecipes = axios.get(`/api/recipes/${id}`);
     const promiseUsers = axios.get(`/api/users/${randomizer}?recipes=${id}`);
-    const promises = [promiseUsers];
+    const promises = [promiseUsers, promiseRecipes];
 
     Promise.all(promises)
       .then((responseArr) => {
+        console.log(responseArr[0]);
+        console.log(responseArr[1]);
         //this is the correct user id
-        setTemp(responseArr[0].data.twists[0].user_id);
+        // setTemp(responseArr[0].data.twists[0].user_id);
         // console.log(twist);
-        setRecipe(responseArr[0].data.recipe);
-        setTwist(responseArr[0].data.twists[0]);
+        setRecipe(responseArr[1].data.recipe);
+        // setTwist(responseArr[0].data.twists[0]);
         setUser(responseArr[0].data.user);
+        console.log(user);
         // setTemp(responseArr[0].data.twists[0].user_id);
       })
       // .then(() => {
@@ -124,7 +128,9 @@ const Recipes = (props) => {
             <Card.Header as="h5">User Twists!</Card.Header>
             <Card.Body>
               <Card.Title>
-                {user.handle} suggests including the following twist:
+                {user
+                  ? `${user.handle} suggests including the following twist:`
+                  : "no user"}
               </Card.Title>
               <Card.Text>{twist.content}</Card.Text>
               <Button onClick={() => randomTwist()} variant="primary">
