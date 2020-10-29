@@ -1,21 +1,20 @@
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 body {
-    margin: 0 0 3.5em;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100%
 }
 
+// Site background
 #background-image {
-  background-image: url(../components/images/Background.png);
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSe7Unww2dyh_Uw7AL0EnI6gWORe4TO1q8PWg&usqp=CAU);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
 }
 
-.footer {
+#footer {
   position: fixed;
   margin-top: auto;
   left: 0;
@@ -23,4 +22,11 @@ body {
   height: 3em;
   width: 100%;
   justify-content: center;
+  background-color: #162955;
+  background-image: url(https://xtemos.com/wp-content/uploads/2017/07/new-main-slider-bg-2.jpg);
+}
+
+// Footer "Fork It All"
+#footer-text {
+  color: white
 }

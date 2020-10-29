@@ -5,8 +5,8 @@ import {Navbar} from 'react-bootstrap';
 
 export default function Footer() {
   return (
-    <Navbar bg="light" expand="lg" className="footer">
-      <Navbar.Brand>Fork It All</Navbar.Brand>
+    <Navbar id="footer">
+      <Navbar.Brand id="footer-text">Fork It All</Navbar.Brand>
     </Navbar>
   );
 }
