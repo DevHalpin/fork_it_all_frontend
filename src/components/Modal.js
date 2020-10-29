@@ -1,20 +1,16 @@
-import React, {useState} from "react";
+import React from "react";
 import {Modal, Button, Form} from "react-bootstrap";
 import "../styles/Modal.scss";
 
-// Create twist modal
-const TwistModal = () => {
-  // const [show, setShow] = useState(false);
 
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+// Create twist modal
+const TwistModal = ({show, onClose}) => {
 
   return (
     <>
-      {/* <button onClick={handleShow}>Display Modal</button> */}
-      <Modal>
+      <Modal show={show}>
         <Modal.Dialog>
-          <Modal.Header closeButton>
+          <Modal.Header onClick={onClose} closeButton>
             <Modal.Title>Create a New Twist</Modal.Title>
           </Modal.Header>
           <Modal.Body>

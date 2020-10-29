@@ -76,6 +76,7 @@ export default function App() {
       />
       <Switch>
         <Route exact path="/" component={Home} />
+<<<<<<< HEAD
         <Route
           path="/login"
           render={(props) => (
@@ -101,6 +102,16 @@ export default function App() {
           render={(props) => (
             <UserProfile {...props} loggedInStatus={state.loggedInStatus} />
           )}
+=======
+        <Route path="/login" render={props => (
+          <Login {...props} handleLogin={handleLogin} loggedInStatus={state.loggedInStatus} />
+        )} />
+        <Route path="/register" render={props => (
+          <Registration {...props} handleLogin={handleLogin} loggedInStatus={state.loggedInStatus} />
+        )} />
+        <Route path="/user_profile" render={props => (
+          <UserProfile {...props} user={state.user} loggedInStatus={state.loggedInStatus} />)}
+>>>>>>> main
         />
         <Route exact path="/recipes/:recipe" component={Recipes} />
         <Route exact path="/my_twists/:user" component={My_Twists} />

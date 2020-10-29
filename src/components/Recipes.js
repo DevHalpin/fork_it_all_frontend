@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Dropdown,
   DropdownButton,
   Card,
   CardDeck,
@@ -8,7 +7,6 @@ import {
   Col,
   Button,
   Form,
-  Modal,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import TwistModal from "./Modal";
@@ -22,35 +20,47 @@ const Recipes = (props) => {
   const [recipe, setRecipe] = useState("");
   const [twist, setTwist] = useState("");
   const [user, setUser] = useState("");
-
-  // Modal state
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [temp, setTemp] = useState("");
+  const [handle, setHandle] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     const randomizer = Math.floor(Math.random() * 100);
-    const promiseRecipes = axios.get(`/api/recipes/${id}`);
-    const promiseUsers = axios.get(
-      `/api/users/${randomizer}?twists/${id}&&recipes${id}`
-    );
-    const promises = [promiseRecipes, promiseUsers];
-    // const promises = [promiseRecipes];
+    const promiseUsers = axios.get(`/api/users/${randomizer}?recipes=${id}`);
+    const promises = [promiseUsers];
 
     Promise.all(promises)
       .then((responseArr) => {
-        console.log(responseArr[0]);
-        console.log(responseArr[1]);
+        //this is the correct user id
+        setTemp(responseArr[0].data.twists[0].user_id);
+        // console.log(twist);
         setRecipe(responseArr[0].data.recipe);
-        setTwist(responseArr[0].data.random);
-        setUser(responseArr[1].data.user);
+        setTwist(responseArr[0].data.twists[0]);
+        setUser(responseArr[0].data.user);
+        // setTemp(responseArr[0].data.twists[0].user_id);
       })
+      // .then(() => {
+      //   console.log(temp);
+      //   axios.get(`/api/users/${temp}?recipes=${id}`).then((response) => {
+      //     console.log(response.data.user);
+      //     setHandle(response.data.user);
+      //   });
+      // })
       .catch(function (error) {
         console.log(error);
       });
   }, [id]);
+
+  //theres nothing for it we have to make another axios call - if random doesnt have an associated twist
+  //if twist.user_id != user.id?
+  const getUserifRandomFails = () => {
+    console.log(temp);
+    axios.get(`/api/users/${temp}?recipes=${id}`).then((response) => {
+      console.log(response.data.user);
+      setUser(response.data.user);
+    });
+  };
 
   // Find a random twist
   const randomTwist = () => {
@@ -68,10 +78,16 @@ const Recipes = (props) => {
     });
   };
 
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen);
+  };
+
+  // if (user) {
   return (
     // Recipe options menu
     <>
       <Container fluid>
+        <TwistModal show={isModalOpen} onClose={toggleModal} />
         <Col>
           <DropdownButton
             title="Recipe Options"
@@ -83,9 +99,7 @@ const Recipes = (props) => {
             <Link to="#/action-2">Rate</Link>
             <br />
             {/* Create twist using modal */}
-            <Button onClick={handleShow} show={show} onHide={handleClose}>
-              Create Twist
-            </Button>
+            <Link onClick={toggleModal}>Create Twist</Link>
             <br />
             <Link to="#/action-3">Add to Favorites</Link>
             <br />
@@ -148,6 +162,8 @@ const Recipes = (props) => {
       </Container>
     </>
   );
+  // }
+  // return <h3>Loading</h3>;
 };
 
 export default Recipes;
