@@ -8,13 +8,8 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
-<<<<<<< HEAD
-import {Link} from "react-router-dom";
-import {TwistCreateModal, TwistEditModal} from "./Modal";
-=======
 import { Link } from "react-router-dom";
 import { TwistModal } from "./Modal";
->>>>>>> andrew
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -98,8 +93,10 @@ const Recipes = (props) => {
   };
 
   const handleFavorite = () => {
-    axios.put(`/api/twists/${twist.id}/favorite?type=favorite`, { twist_id: `${twist.id}`})
-  }
+    axios.put(`/api/twists/${twist.id}/favorite?type=favorite`, {
+      twist_id: `${twist.id}`,
+    });
+  };
 
   // if (user) {
   return (
@@ -119,9 +116,13 @@ const Recipes = (props) => {
             <Link to="#/action-2">Rate</Link>
             <br />
             {/* Create twist using modal */}
-            <DropdownItem onClick={toggleCreateModal}>Create Twist</DropdownItem>
+            <DropdownItem onClick={toggleCreateModal}>
+              Create Twist
+            </DropdownItem>
             <br />
-            <DropdownItem onClick={handleFavorite}>Add to Favorites</DropdownItem>
+            <DropdownItem onClick={handleFavorite}>
+              Add to Favorites
+            </DropdownItem>
             <br />
           </DropdownButton>
         </Col>
@@ -152,10 +153,20 @@ const Recipes = (props) => {
               <Card.Text>
                 {twist !== undefined ? twist.content : null}
               </Card.Text>
-              <Button className="twist-button-random" onClick={() => randomTwist()} variant="primary">
+              <Button
+                className="twist-button-random"
+                onClick={() => randomTwist()}
+                variant="primary"
+              >
                 Find a random Twist
               </Button>
-              <Button className="twist-button-edit" onClick={toggleEditModal} variant="primary">Edit Twist</Button>
+              <Button
+                className="twist-button-edit"
+                onClick={toggleEditModal}
+                variant="primary"
+              >
+                Edit Twist
+              </Button>
             </Card.Body>
             <Form>
               <Form.Group as={Col}>

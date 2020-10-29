@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./styles/App.scss";
 import axios from "axios";
 import NavbarNav from "./components/Nav";
@@ -19,7 +19,7 @@ export default function App() {
   });
   const checkLoginStatus = () => {
     axios
-      .get("/api/logged_in", {withCredentials: true})
+      .get("/api/logged_in", { withCredentials: true })
       .then((response) => {
         if (
           response.data.logged_in &&
@@ -60,13 +60,6 @@ export default function App() {
   };
   return (
     <Router>
-<<<<<<< HEAD
-      <NavbarNav user={state.user} handleLogin={handleLogin} handleLogout={handleLogout} loggedInStatus={state.loggedInStatus} />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/user_profile" render={props => (
-          <UserProfile {...props} user={state.user} loggedInStatus={state.loggedInStatus} />)}
-=======
       <NavbarNav
         user={state.user}
         handleLogin={handleLogin}
@@ -84,7 +77,6 @@ export default function App() {
               loggedInStatus={state.loggedInStatus}
             />
           )}
->>>>>>> andrew
         />
         <Route exact path="/recipes/:recipe" component={Recipes} />
         <Route exact path="/my_twists/:user" component={My_Twists} />
