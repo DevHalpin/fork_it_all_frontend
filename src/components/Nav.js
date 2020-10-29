@@ -1,22 +1,31 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Nav.scss";
-import {Link} from "react-router-dom";
+import {Link, useHistory } from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
 import {Nav, Navbar, Form, FormControl, Button, Container, Row} from "react-bootstrap";
 import axios from "axios"
 
-function handleSubmit(e) {
-  e.preventDefault();
-  const formData = new FormData(e.target),
-    formDataObj = Object.fromEntries(formData.entries()).search;
-  fetch(`/api/data?search=${formDataObj}`, {
-    method: 'GET',
-  });
-}
-
-
 function NavbarNav( props ) {
+  const history = useHistory();
+  function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target),
+      formDataObj = Object.fromEntries(formData.entries()).search;
+    fetch(`/api/recipes?search=${formDataObj}`, {
+      method: 'GET',
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((res) => {
+      const id = res.recipe.id
+      history.push(`/recipes/${id}`)
+      console.log(res)
+    })
+  }
+
+
   
   const handleLogOutClick = () => {
     axios.delete("/api/logout", { withCredentials: true })
