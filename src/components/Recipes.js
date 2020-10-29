@@ -7,6 +7,7 @@ import {
   Col,
   Button,
   Form,
+  Dropdown
 } from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {TwistCreateModal, TwistEditModal} from "./Modal";
@@ -22,7 +23,10 @@ const Recipes = (props) => {
   const [user, setUser] = useState("");
   const [temp, setTemp] = useState("");
   const [handle, setHandle] = useState("");
+  // Modal state
   const [isModalOpen, setModalOpen] = useState(false);
+  // Twist display state
+  const [showTwists, setShowTwists] = useState(true);
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
@@ -99,6 +103,7 @@ const Recipes = (props) => {
         <TwistCreateModal show={isModalOpen} onClose={toggleCreateModal} />
         <TwistEditModal show={isModalOpen} onClose={toggleEditModal} />
         <Col>
+          {showTwists === false ? (<Button onClick={setShowTwists}>Enable Twists</Button>) : null}
           <DropdownButton
             title="Recipe Options"
             align="right"
@@ -109,10 +114,11 @@ const Recipes = (props) => {
             <Link to="#/action-2">Rate</Link>
             <br />
             {/* Create twist using modal */}
-            <Link onClick={toggleCreateModal}>Create Twist</Link>
+            <Dropdown.Item onClick={toggleCreateModal}>Create Twist</Dropdown.Item>
             <br />
             <Link to="#/action-3">Add to Favorites</Link>
             <br />
+
           </DropdownButton>
         </Col>
 
@@ -131,7 +137,7 @@ const Recipes = (props) => {
           </Card>
 
           {/* Twist display */}
-          <Card className="text-center twist-card">
+          <Card className={showTwists ? "text-center twist-card" : "twist-card-hide"}>
             <Card.Header as="h5">User Twists!</Card.Header>
             <Card.Body>
               <Card.Title>
@@ -170,7 +176,7 @@ const Recipes = (props) => {
               </Form.Group>
 
               <Form.Group controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Disable Twists" />
+                <Form.Check onClick={() => setShowTwists(false)} type="checkbox" label="Disable Twists" />
               </Form.Group>
             </Form>
           </Card>
