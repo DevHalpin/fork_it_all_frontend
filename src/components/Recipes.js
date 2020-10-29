@@ -8,8 +8,9 @@ import {
   Col,
   Button,
   Form,
-  Modal
 } from "react-bootstrap";
+import {Link} from "react-router-dom";
+import TwistModal from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -20,6 +21,12 @@ const Recipes = (props) => {
   const [recipe, setRecipe] = useState("");
   const [twist, setTwist] = useState("");
   const [user, setUser] = useState("");
+
+  // Modal state
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
@@ -58,37 +65,11 @@ const Recipes = (props) => {
             align="right"
             className="recipe-dropdown"
           >
-            <Dropdown.Item href="#/action-1">Share</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Rate</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Create Twist</Dropdown.Item>
-            {/* Create twist modal */}
-            <Modal.Dialog>
-              <Modal.Header closeButton>
-                <Modal.Title>Create a New Twist</Modal.Title>
-              </Modal.Header>
-              <Form>
-                <Form.Group>
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                  Submit
-                </Button>
-              </Form>
-              <Modal.Body>
-                <p>Modal body text goes here.</p>
-              </Modal.Body>
-
-              <Modal.Footer>
-                <Button variant="secondary">Close</Button>
-                <Button variant="primary">Save changes</Button>
-              </Modal.Footer>
-            </Modal.Dialog>
-
-            <Dropdown.Item href="#/action-3">Add to Favorites</Dropdown.Item>
+            <Link to="#/action-1">Share</Link><br />
+            <Link to="#/action-2">Rate</Link><br />
+            {/* Create twist using modal */}
+            <Button onClick={handleShow} show={show} onHide={handleClose}>Create Twist</Button><br />
+            <Link to="#/action-3">Add to Favorites</Link><br />
           </DropdownButton>
         </Col>
 
