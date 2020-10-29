@@ -74,7 +74,7 @@ export default function App() {
           <Registration {...props} handleLogin={handleLogin} loggedInStatus={state.loggedInStatus} />
         )} />
         <Route path="/user_profile" render={props => (
-          <UserProfile {...props} loggedInStatus={state.loggedInStatus} />)}
+          <UserProfile {...props} user={state.user} loggedInStatus={state.loggedInStatus} />)}
         />
         <Route exact path="/recipes/:recipe" component={Recipes} />
         <Route exact path="/my_twists/:user" component={My_Twists} />
