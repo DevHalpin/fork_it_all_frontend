@@ -99,7 +99,7 @@ function NavbarNav(props) {
             </Button>
             </>)
             : <>
-              <p>User: {props.user.handle} </p>
+              <p className="user-handle">User: {props.user.handle} </p>
               <Button onClick={handleLogOutClick} variant="danger" className="mr-sm-2">
                 Log out
           </Button>
