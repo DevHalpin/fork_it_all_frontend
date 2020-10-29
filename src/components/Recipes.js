@@ -8,7 +8,7 @@ import {
   Col,
   Button,
   Form,
-  Modal
+  Modal,
 } from "react-bootstrap";
 import axios from "axios";
 import "../styles/Recipes.scss";
@@ -25,14 +25,14 @@ const Recipes = (props) => {
   useEffect(() => {
     const randomizer = Math.floor(Math.random() * 100);
     const promiseRecipes = axios.get(`/api/recipes/${id}`);
-    const promiseUsers = axios.get(`/api/users/${randomizer}`);
+    const promiseUsers = axios.get(`/api/users/${randomizer}?twists/${id}`);
     const promises = [promiseRecipes, promiseUsers];
     // const promises = [promiseRecipes];
 
     Promise.all(promises)
       .then((responseArr) => {
         console.log(responseArr[0]);
-        // console.log(responseArr[1].data.user);
+        console.log(responseArr[1]);
         setRecipe(responseArr[0].data.recipe);
         setTwist(responseArr[0].data.random);
         setUser(responseArr[1].data.user);
