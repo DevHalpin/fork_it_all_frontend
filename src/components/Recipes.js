@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  DropdownButton,
   Card,
   CardDeck,
   Container,
@@ -8,17 +7,10 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
-<<<<<<< HEAD
-import {Link} from "react-router-dom";
 import {TwistCreateModal, TwistEditModal} from "./Modal";
-=======
-import { Link } from "react-router-dom";
-import { TwistModal } from "./Modal";
->>>>>>> andrew
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
-import DropdownItem from "react-bootstrap/esm/DropdownItem";
 
 const Recipes = (props) => {
   let id = props.match.params.recipe;
@@ -28,7 +20,8 @@ const Recipes = (props) => {
   const [user, setUser] = useState("");
   const [temp, setTemp] = useState("");
   const [handle, setHandle] = useState("");
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
@@ -91,10 +84,10 @@ const Recipes = (props) => {
 
   // Toggle for modals
   const toggleCreateModal = () => {
-    setModalOpen(!isModalOpen);
+    setCreateModalOpen(!isCreateModalOpen);
   };
   const toggleEditModal = () => {
-    setModalOpen(!isModalOpen);
+    setEditModalOpen(!isEditModalOpen);
   };
 
   const handleFavorite = () => {
@@ -106,25 +99,9 @@ const Recipes = (props) => {
     // Recipe options menu
     <>
       <Container fluid>
-        <TwistCreateModal show={isModalOpen} onHide={toggleCreateModal} />
-        <TwistEditModal show={isModalOpen} onHide={toggleEditModal} />
-        <Col>
-          <DropdownButton
-            title="Recipe Options"
-            align="right"
-            className="recipe-dropdown"
-          >
-            <Link to="#/action-1">Share</Link>
-            <br />
-            <Link to="#/action-2">Rate</Link>
-            <br />
-            {/* Create twist using modal */}
-            <DropdownItem onClick={toggleCreateModal}>Create Twist</DropdownItem>
-            <br />
-            <DropdownItem onClick={handleFavorite}>Add to Favorites</DropdownItem>
-            <br />
-          </DropdownButton>
-        </Col>
+        <TwistCreateModal show={isCreateModalOpen} onHide={toggleCreateModal} />
+        <TwistEditModal show={isEditModalOpen} onHide={toggleEditModal} />
+        
 
         {/* // Recipe display */}
         <CardDeck className="recipe-columns">
@@ -156,6 +133,7 @@ const Recipes = (props) => {
                 Find a random Twist
               </Button>
               <Button className="twist-button-edit" onClick={toggleEditModal} variant="primary">Edit Twist</Button>
+              <Button className="twist-button-edit" onClick={toggleCreateModal} variant="primary">Create Twist</Button>
             </Card.Body>
             <Form>
               <Form.Group as={Col}>

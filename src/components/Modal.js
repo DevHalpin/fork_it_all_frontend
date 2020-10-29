@@ -5,7 +5,7 @@ import "../styles/Modal.scss";
 import axios from "axios";
 
 // Create twist modal
-const TwistModal = ({ show, onClose }) => {
+const TwistCreateModal = ({ show, onHide }) => {
   const [state, setState] = useState({ content: "" });
 
   const handleChange = (event) => {
@@ -71,12 +71,13 @@ const TwistModal = ({ show, onClose }) => {
 };
 
 // Edit twist modal
-const TwistEditModal = ({ show, onClose }) => {
+const TwistEditModal = ({show, onHide}) => {
+
   return (
     <>
-      <Modal show={show}>
+      <Modal show={show} onHide={onHide}>
         <Modal.Dialog>
-          <Modal.Header onClick={onClose} closeButton>
+          <Modal.Header onClick={onHide} closeButton>
             <Modal.Title>Edit your Twist</Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -101,7 +102,7 @@ const TwistEditModal = ({ show, onClose }) => {
 // Login Modal
 const LoginModal = (props) => {
   const history = useHistory();
-  const { show, onClose, handleLogin } = props;
+  const { show, onHide, handleLogin } = props;
 
   const [state, setState] = useState({
     email: "",
@@ -142,7 +143,7 @@ const LoginModal = (props) => {
 
   return (
     <>
-      <Modal show={show} id="login-modal">
+      <Modal show={show} onHide={onHide} id="login-modal">
         <Modal.Dialog>
           <Modal.Header onClick={onHide} closeButton>
             <Modal.Title>Login</Modal.Title>
@@ -188,7 +189,7 @@ const LoginModal = (props) => {
 // Register Modal
 const RegisterModal = (props) => {
   const history = useHistory();
-  const { show, onClose, handleLogin } = props;
+  const { show, onHide, handleLogin } = props;
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -301,7 +302,7 @@ const RegisterModal = (props) => {
                   required
                 />
               </Form.Group>
-              <Button onClick={onClose} variant="primary" type="submit">
+              <Button onClick={onHide} variant="primary" type="submit">
                 Register
               </Button>
             </Form>
@@ -312,4 +313,4 @@ const RegisterModal = (props) => {
   );
 };
 
-export { TwistModal, LoginModal, RegisterModal };
+export { TwistCreateModal, TwistEditModal, LoginModal, RegisterModal };
