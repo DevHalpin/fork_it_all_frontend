@@ -4,18 +4,30 @@ import "../styles/Nav.scss";
 import {Link} from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
 import {Nav, Navbar, Form, FormControl, Button, Container, Row} from "react-bootstrap";
+import axios from "axios"
 
 function handleSubmit(e) {
   e.preventDefault();
   const formData = new FormData(e.target),
     formDataObj = Object.fromEntries(formData.entries()).search;
-  console.log(formDataObj);
   fetch(`/api/data?search=${formDataObj}`, {
     method: 'GET',
   });
 }
 
-function NavbarNav() {
+
+function NavbarNav( props ) {
+  
+  const handleLogOutClick = () => {
+    axios.delete("/api/logout", { withCredentials: true })
+    .then(() => {
+      props.handleLogout();
+    })
+    .catch(error => {
+      console.log("Logout Error ", error)
+    });
+  }
+  
   return (
     <Navbar bg="dark" expand="xxl" sticky="top" className="nav">
       <Container fluid>
@@ -56,11 +68,19 @@ function NavbarNav() {
           </Button>
         </Form>
         <Row>
+          { props.loggedInStatus === "NOT_LOGGED_IN" ?
           <Link to="/login">
             <Button variant="primary" className="mr-sm-2">
               Log in
             </Button>
-          </Link>
+          </Link> 
+          :<>
+          <p>User: {props.user.handle} </p>
+          <Button onClick={handleLogOutClick} variant="danger" className="mr-sm-2">
+            Log out
+          </Button>
+          </>
+          }
         </Row>
       </Container>
     </Navbar >

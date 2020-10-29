@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dropdown,
   DropdownButton,
@@ -8,6 +8,10 @@ import {
   Col,
   Button,
   Form,
+<<<<<<< HEAD
+=======
+  Modal,
+>>>>>>> da09b61ba4f12ec6c0301b9d845b72694ab99c29
 } from "react-bootstrap";
 import {Link} from "react-router-dom";
 import TwistModal from "./Modal";
@@ -30,16 +34,21 @@ const Recipes = (props) => {
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
+    const randomizer = Math.floor(Math.random() * 100);
     const promiseRecipes = axios.get(`/api/recipes/${id}`);
-    const promiseUsers = axios.get("/api/users/73");
+    const promiseUsers = axios.get(`/api/users/${randomizer}?twists/${id}`);
     const promises = [promiseRecipes, promiseUsers];
+    // const promises = [promiseRecipes];
 
-    Promise.all(promises).then((responseArr) => {
-      setRecipe(responseArr[0].data.recipe);
-      setTwist(responseArr[0].data.random);
-      setUser(responseArr[1].data.user);
-    })
-      .catch(function(error) {
+    Promise.all(promises)
+      .then((responseArr) => {
+        console.log(responseArr[0]);
+        console.log(responseArr[1]);
+        setRecipe(responseArr[0].data.recipe);
+        setTwist(responseArr[0].data.random);
+        setUser(responseArr[1].data.user);
+      })
+      .catch(function (error) {
         console.log(error);
       });
   }, [id]);
@@ -47,12 +56,17 @@ const Recipes = (props) => {
   // Find a random twist
   const randomTwist = () => {
     const randomizer = Math.floor(Math.random() * 100);
+    const promiseRecipes = axios.get(`/api/recipes/${id}`);
+    const promiseUsers = axios.get(`/api/users/${randomizer}`);
+    const promises = [promiseRecipes, promiseUsers];
 
-    axios.get(`/api/recipes/${randomizer}`)
-      .then((response) => {
-        setTwist(response.data.random);
-      }
-      );
+    Promise.all(promises).then((responseArr) => {
+      // console.log(responseArr[0].data, "responseArr[0] is:");
+      console.log(responseArr[1].data);
+      // setTwist(responseArr[1].data.twist);
+      //this allows us to pick a user and change the handle of said user
+      setUser(responseArr[1].data.user);
+    });
   };
 
   return (
@@ -94,7 +108,9 @@ const Recipes = (props) => {
                 {user.handle} suggests including the following twist:
               </Card.Title>
               <Card.Text>{twist.content}</Card.Text>
-              <Button onClick={() => randomTwist()} variant="primary">Find a random Twist</Button>
+              <Button onClick={() => randomTwist()} variant="primary">
+                Find a random Twist
+              </Button>
             </Card.Body>
             <Form>
               <Form.Group as={Col}>

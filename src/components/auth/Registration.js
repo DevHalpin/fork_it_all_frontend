@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import {Form, FormControl, Button, Container, Col, Row} from "react-bootstrap"
 import axios from "axios"
 
-export default function Registration() {
+export default function Registration(props) {
   const [state, setState] = useState({
 		email: "",
     password: "",
@@ -10,24 +10,41 @@ export default function Registration() {
     handle: "",
     name: "",
     registrationErrors: "",
-	});
+  });
+  
+  const handleSuccessfulAuth = (data) => {
+    props.handleLogin(data);
+    props.history.push("/")
+  }
   
   const handleSubmit = (event) => {
-    // axios.postt("https://localhost:3001/registrations")
-    console.log("Form Submitted")
-    console.log(state)
+    axios.post("http://localhost:3001/api/registrations", {
+      email: state.email,
+      password: state.password,
+      password_confirmation: state.password_confirmation,
+      handle: state.handle,
+      name: state.name,
+    }, 
+    { withCredentials: true }
+    ).then(response => {
+      if (response.data.status === 'created') {
+        handleSuccessfulAuth(response.data);
+      }
+    }).catch(error => {
+      console.log("Error: ", error)
+    })
     event.preventDefault();
   }
 
   const handleChange = (event) => {
     const eventValue = event.target.value
     setState({ ...state, [event.target.name]: eventValue});
-    console.log(state)
   }
 
   return (
     <Container className="login-container">
       <Row>
+        <h2>Status: {props.loggedInStatus}</h2>
         <Col md="6" className="login-form-1">
           <h3>Register</h3>
           <Form onSubmit={handleSubmit}>
