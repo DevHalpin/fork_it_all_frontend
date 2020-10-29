@@ -66,13 +66,6 @@ export default function App() {
 
   return (
     <Router>
-<<<<<<< HEAD
-      <NavbarNav user={state.user} handleLogin={handleLogin} handleLogout={handleLogout} loggedInStatus={state.loggedInStatus} />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/user_profile" render={props => (
-          <UserProfile {...props} user={state.user} loggedInStatus={state.loggedInStatus} />)}
-=======
       <NavbarNav
         user={state.user}
         handleLogout={handleLogout}
@@ -105,7 +98,6 @@ export default function App() {
           render={(props) => (
             <UserProfile {...props} loggedInStatus={state.loggedInStatus} />
           )}
->>>>>>> 3d86545dca5f5b409dd96945c38dee9023913d69
         />
         <Route exact path="/recipes/:recipe" component={Recipes} />
         <Route exact path="/my_twists/:user" component={My_Twists} />
