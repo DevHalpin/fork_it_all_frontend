@@ -39,9 +39,10 @@ const Recipes = (props) => {
         // setTemp(responseArr[0].data.twists[0].user_id);
         // console.log(twist);
         setRecipe(responseArr[1].data.recipe);
-        // setTwist(responseArr[0].data.twists[0]);
+        setTwist(responseArr[0].data.twists[0]);
         setUser(responseArr[0].data.user);
         console.log(user);
+        console.log("twists", twist === undefined);
         // setTemp(responseArr[0].data.twists[0].user_id);
       })
       // .then(() => {
@@ -128,11 +129,13 @@ const Recipes = (props) => {
             <Card.Header as="h5">User Twists!</Card.Header>
             <Card.Body>
               <Card.Title>
-                {user
+                {twist !== undefined
                   ? `${user.handle} suggests including the following twist:`
-                  : "no user"}
+                  : "No twists exist for this recipe"}
               </Card.Title>
-              <Card.Text>{twist.content}</Card.Text>
+              <Card.Text>
+                {twist !== undefined ? twist.content : null}
+              </Card.Text>
               <Button onClick={() => randomTwist()} variant="primary">
                 Find a random Twist
               </Button>
