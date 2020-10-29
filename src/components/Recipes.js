@@ -36,7 +36,9 @@ const Recipes = (props) => {
   useEffect(() => {
     const randomizer = Math.floor(Math.random() * 100);
     const promiseRecipes = axios.get(`/api/recipes/${id}`);
-    const promiseUsers = axios.get(`/api/users/${randomizer}?twists/${id}`);
+    const promiseUsers = axios.get(
+      `/api/users/${randomizer}?twists/${id}&&recipes${id}`
+    );
     const promises = [promiseRecipes, promiseUsers];
     // const promises = [promiseRecipes];
 
