@@ -9,12 +9,12 @@ import Home from "./components/Home";
 import Error from "./components/Error";
 import Login from "./components/auth/Login";
 import Registration from "./components/auth/Registration"
-import User_Profile from "./components/User_Profile";
+import UserProfile from "./components/User_Profile";
 import Recipes from "./components/Recipes";
 import My_Twists from "./components/My_Twists";
 import Fave_Twists from "./components/Fave_Twists";
 import Fave_Users from "./components/Fave_Users";
-import User_Dashboard from "./components/User_Dashboard";
+import UserDashboard from "./components/User_Dashboard";
 
 export default function App() {
   const [state, setState] = useState({
@@ -27,14 +27,14 @@ export default function App() {
     .then(response => {
       if (response.data.logged_in && state.loggedInStatus === "NOT_LOGGED_IN") {
         setState({
-        loggedInStatus: "LOGGED_IN",
-        user: response.data.user
+          loggedInStatus: "LOGGED_IN",
+          user: response.data.user
         })
       }
       else if (!response.data.logged_in && state.loggedInStatus === "LOGGED_IN") {
         setState({
-        loggedInStatus: "NOT_LOGGED_IN",
-        user: {}
+          loggedInStatus: "NOT_LOGGED_IN",
+          user: {}
         })
       }
     })
@@ -42,39 +42,48 @@ export default function App() {
       console.log("Explosions! ", error)
     });
   }
-
+  
   useEffect(() => {
     checkLoginStatus();
   })
-
+  
   const handleLogin = (data) => {
     setState({
       loggedInStatus: "LOGGED_IN",
-      user: data
-  })
+      user: data.user
+    })
+  }
+  
+  const handleLogout = () => {
+    setState({
+      loggedInStatus: "NOT_LOGGED_IN",
+      user: {}
+    })
   }
 
 
   return (
     <Router>
-      <NavbarNav />
+      <NavbarNav user={state.user} handleLogout={handleLogout} loggedInStatus={state.loggedInStatus} />
       <Switch>
-        <Route exact path="/" render={props => (
-          <Home { ...props } loggedInStatus={state.loggedInStatus} />
-        )}  />
+        <Route exact path="/" component={Home} />
         <Route path="/login" render={props => (
-          <Login { ...props } loggedInStatus={state.loggedInStatus} />
+          <Login { ...props } handleLogin={handleLogin} loggedInStatus={state.loggedInStatus} />
         )}  />
         <Route path="/register" render={props => (
           <Registration { ...props } handleLogin={handleLogin} loggedInStatus={state.loggedInStatus} />
         )}  />
-        <Route path="/user_profile" component={User_Profile} />
+        <Route path="/user_profile" render={props => (
+          <UserProfile { ...props } loggedInStatus={state.loggedInStatus}/> )}
+          />
         <Route exact path="/recipes/:recipe" component={Recipes} />
         <Route exact path="/my_twists/:user" component={My_Twists} />
         <Route exact path="/fave_twists/:recipe/twists/:twist" component={Fave_Twists} />
         <Route path="/my_twists" component={My_Twists} />
         <Route path="/fave_twists" component={Fave_Twists} />
-        <Route path="/user_dashboard" component={User_Dashboard} />
+        <Route path="/user_dashboard" render={props => (
+          <UserDashboard { ...props } loggedInStatus={state.loggedInStatus}/> )}
+        />
         <Route path="/fave_users" component={Fave_Users} />
         <Route component={Error} />
       </Switch>

@@ -42,8 +42,6 @@ export default function Home (props) {
     <>
       {/* Recipe carousel */}
       <Container fluid >
-        <h1>Status: {props.loggedInStatus}</h1>
-        
         <Carousel activeIndex={index} onSelect={handleSelect} className="home-carousel">
           <Carousel.Item>
             <img style={{height: "25em"}} className="d-block w-100" src={recipe.meal_image} alt="Recipe" />
