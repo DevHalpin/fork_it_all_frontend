@@ -22,7 +22,7 @@ const Recipes = (props) => {
   const [recipe, setRecipe] = useState("");
   const [twist, setTwist] = useState("");
   const [user, setUser] = useState("");
-
+  const [isModalOpen, setModalOpen] = useState(false);
 
 
   // Make a request for a recipe, random twist, and user given a recipe id
@@ -64,10 +64,15 @@ const Recipes = (props) => {
     });
   };
 
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen);
+  };
+
   return (
     // Recipe options menu
     <>
       <Container fluid>
+        <TwistModal show={isModalOpen} onClose={toggleModal} />
         <Col>
           <DropdownButton
             title="Recipe Options"
@@ -77,7 +82,7 @@ const Recipes = (props) => {
             <Card.Link to="#/action-1">Share</Card.Link><br />
             <Card.Link to="#/action-2">Rate</Card.Link><br />
             {/* Create twist using modal */}
-            <Button data-toggle="modal" data-target="twistModal" onClick={() => TwistModal()}>Create Twist</Button><br />
+            <Button onClick={toggleModal}>Create Twist</Button><br />
             <Card.Link to="#/action-3">Add to Favorites</Card.Link><br />
           </DropdownButton>
         </Col>
