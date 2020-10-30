@@ -100,7 +100,12 @@ const Recipes = (props) => {
     <>
       <Container fluid>
         {/* Twist modals */}
-        <TwistCreateModal show={isCreateModalOpen} onHide={toggleCreateModal} />
+        <TwistCreateModal
+          show={isCreateModalOpen}
+          onHide={toggleCreateModal}
+          user={props.user}
+          recipe={props.match.params.recipe}
+        />
         <TwistEditModal show={isEditModalOpen} onHide={toggleEditModal} />
 
         {/* Show twists when disabled */}

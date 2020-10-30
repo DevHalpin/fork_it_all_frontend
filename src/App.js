@@ -78,7 +78,11 @@ export default function App() {
             />
           )}
         />
-        <Route exact path="/recipes/:recipe" component={Recipes} />
+        <Route
+          exact
+          path="/recipes/:recipe"
+          render={(props) => <Recipes {...props} user={state.user} />}
+        />
         <Route exact path="/my_twists/:user" component={My_Twists} />
         <Route
           exact
