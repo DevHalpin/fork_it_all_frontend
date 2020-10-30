@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import "./styles/App.scss";
 import axios from "axios";
 import NavbarNav from "./components/Nav";
@@ -18,7 +18,7 @@ export default function App() {
   });
   const checkLoginStatus = () => {
     axios
-      .get("/api/logged_in", { withCredentials: true })
+      .get("/api/logged_in", {withCredentials: true})
       .then((response) => {
         if (
           response.data.logged_in &&
@@ -78,11 +78,10 @@ export default function App() {
           )}
         />
         <Route
-          exact
           path="/recipes/:recipe"
           render={(props) => <Recipes {...props} user={state.user} />}
         />
-        <Route exact path="/my_twists/:user" component={My_Twists} />
+        <Route path="/my_twists/:user" component={My_Twists} />
         <Route path="/fave_twists/:user" component={Fave_Twists} />
         <Route path="/fave_users/:user" component={Fave_Users} />
         <Route component={Error} />
