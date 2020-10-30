@@ -178,12 +178,12 @@ const Recipes = (props) => {
                   Share
                 </Button>
               ) : null}
-              {twist !== null && userHandle !== twist.handle ? (
+              {userHandle && twist !== null && userHandle !== twist.handle ? (
                 <Button className="twist-buttons" variant="primary">
                   Rate
                 </Button>
               ) : null}
-              {twist !== null ? (
+              {userHandle && twist !== null && userHandle !== twist.handle ? (
                 <Button
                   className="twist-buttons"
                   variant="primary"
