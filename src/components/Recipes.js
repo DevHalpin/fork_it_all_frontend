@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   Card,
   CardDeck,
@@ -8,7 +8,7 @@ import {
   Form,
   Alert,
 } from "react-bootstrap";
-import { TwistCreateModal, TwistEditModal } from "./Modal";
+import {TwistCreateModal, TwistEditModal} from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -58,7 +58,7 @@ const Recipes = (props) => {
       //     setHandle(response.data.user);
       //   });
       // })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
   }, [id]);
@@ -114,15 +114,7 @@ const Recipes = (props) => {
     // Recipe options menu
     <>
       <Container fluid>
-        {showAlert && (
-          <Alert
-            onClose={() => setShowAlert(false)}
-            dismissible
-            variant="primary"
-          >
-            Added to favorites!
-          </Alert>
-        )}
+        {showAlert && <Alert onClose={() => setShowAlert(false)} dismissible variant="primary">Added to favorites!</Alert>}
         {/* Twist modals */}
         <TwistCreateModal
           show={isCreateModalOpen}

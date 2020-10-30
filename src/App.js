@@ -11,7 +11,6 @@ import Recipes from "./components/Recipes";
 import My_Twists from "./components/My_Twists";
 import Fave_Twists from "./components/Fave_Twists";
 import Fave_Users from "./components/Fave_Users";
-import UserDashboard from "./components/User_Dashboard";
 export default function App() {
   const [state, setState] = useState({
     loggedInStatus: "NOT_LOGGED_IN",
@@ -69,7 +68,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route
-          path="/user_profile"
+          path="/user_profile/:user"
           render={(props) => (
             <UserProfile
               {...props}
@@ -84,20 +83,8 @@ export default function App() {
           render={(props) => <Recipes {...props} user={state.user} />}
         />
         <Route exact path="/my_twists/:user" component={My_Twists} />
-        <Route
-          exact
-          path="/fave_twists/:recipe/twists/:twist"
-          component={Fave_Twists}
-        />
-        <Route path="/my_twists" component={My_Twists} />
-        <Route path="/fave_twists" component={Fave_Twists} />
-        <Route
-          path="/user_dashboard"
-          render={(props) => (
-            <UserDashboard {...props} loggedInStatus={state.loggedInStatus} />
-          )}
-        />
-        <Route path="/fave_users" component={Fave_Users} />
+        <Route path="/fave_twists/:user" component={Fave_Twists} />
+        <Route path="/fave_users/:user" component={Fave_Users} />
         <Route component={Error} />
       </Switch>
       <Footer />

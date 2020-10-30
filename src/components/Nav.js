@@ -57,20 +57,17 @@ function NavbarNav(props) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
-              <Link to="/user_profile">Profile</Link>
-              <Link to="/recipes">
+              <Link to="/user_profile/48">Profile</Link>
+              <Link to="/recipes/12">
                 Recipes
                 </Link>
-              <Link to="/my_twists">
+              <Link to="/my_twists/41">
                 My Twists
                 </Link>
-              <Link to="/fave_twists">
+              <Link to="/fave_twists/85">
                 Fave Twists
               </Link>
-              <Link to="/user_dashboard">
-                Dashboard
-              </Link>
-              <Link to="/fave_users">
+              <Link to="/fave_users/19">
                 Fave Users
               </Link>
             </Nav>
