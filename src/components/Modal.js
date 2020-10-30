@@ -110,7 +110,6 @@ const TwistCreateModal = (props) => {
 // Edit twist modal
 const TwistEditModal = (props) => {
   const { show, onHide, user, recipe } = props;
-  console.log(props);
   const [editState, setEditState] = useState({
     content: "",
     private: false,
@@ -131,20 +130,6 @@ const TwistEditModal = (props) => {
     console.log(editState);
     axios
       .put("/api/twists", {
-        content: editState.content,
-        recipe_id: recipe,
-        is_private: editState.private,
-      })
-      .catch((error) => {
-        console.log("Error: ", error);
-      });
-    event.preventDefault();
-  };
-
-  const handleDeleteSubmit = (event) => {
-    // console.log(deleteState);
-    axios
-      .delete("/api/twists", {
         content: editState.content,
         recipe_id: recipe,
         is_private: editState.private,
@@ -182,7 +167,18 @@ const TwistEditModal = (props) => {
 };
 
 // Edit twist modal
-const TwistDeleteModal = ({ show, onHide }) => {
+const TwistDeleteModal = (props) => {
+  const { show, onHide, twist } = props;
+  console.log(props.twist);
+
+  const handleDeleteSubmit = (event) => {
+    console.log(`/api/twists/${twist.id}`);
+    axios.delete(`/api/twists/${twist.id}`, {}).catch((error) => {
+      console.log("Error: ", error);
+    });
+    event.preventDefault();
+  };
+
   return (
     <>
       <Modal show={show} onHide={onHide}>
@@ -197,7 +193,11 @@ const TwistDeleteModal = ({ show, onHide }) => {
                   Are you sure you want to delete this twist?
                 </Form.Label>
               </Form.Group>
-              <Button variant="danger" type="submit">
+              <Button
+                variant="danger"
+                type="submit"
+                onClick={handleDeleteSubmit}
+              >
                 Delete
               </Button>
             </Form>

@@ -127,6 +127,11 @@ const Recipes = (props) => {
           onHide={handleEditAlert}
           recipe={props.match.params.recipe}
         />
+        <TwistDeleteModal
+          show={isDeleteModalOpen}
+          onHide={toggleDeleteModal}
+          twist={twist ? twist : undefined}
+        />
 
         {/* Show twists when disabled */}
         {showTwists === false ? (
@@ -219,10 +224,6 @@ const Recipes = (props) => {
                   onClick={toggleDeleteModal}
                   variant="primary"
                 >
-                  <TwistDeleteModal
-                    show={isDeleteModalOpen}
-                    onHide={toggleDeleteModal}
-                  />
                   Delete this twist
                 </Button>
               ) : null}
