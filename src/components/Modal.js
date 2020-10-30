@@ -5,7 +5,9 @@ import "../styles/Modal.scss";
 import axios from "axios";
 
 // Create twist modal
-const TwistCreateModal = ({ show, onHide }) => {
+const TwistCreateModal = (props) => {
+  const { show, onHide, user, recipe } = props;
+  console.log(recipe);
   const [state, setState] = useState({ content: "" });
 
   const handleChange = (event) => {
@@ -18,8 +20,8 @@ const TwistCreateModal = ({ show, onHide }) => {
     axios
       .post("/api/twists", {
         content: state.content,
-        recipe_id: 5,
-        user_id: 101,
+        recipe_id: recipe,
+        user_id: user.id,
         tags: "addition",
         slug: "222hgvf74kt34",
         is_private: false,
@@ -71,8 +73,7 @@ const TwistCreateModal = ({ show, onHide }) => {
 };
 
 // Edit twist modal
-const TwistEditModal = ({show, onHide}) => {
-
+const TwistEditModal = ({ show, onHide }) => {
   return (
     <>
       <Modal show={show} onHide={onHide}>

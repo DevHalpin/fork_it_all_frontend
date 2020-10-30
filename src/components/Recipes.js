@@ -1,14 +1,6 @@
-import React, {useState, useEffect} from "react";
-import {
-  Card,
-  CardDeck,
-  Container,
-  Col,
-  Button,
-  Form,
-  Alert
-} from "react-bootstrap";
-import {TwistCreateModal, TwistEditModal} from "./Modal";
+import React, { useState, useEffect } from "react";
+import { Card, CardDeck, Container, Col, Button, Form } from "react-bootstrap";
+import { TwistCreateModal, TwistEditModal } from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -58,7 +50,7 @@ const Recipes = (props) => {
       //     setHandle(response.data.user);
       //   });
       // })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   }, [id]);
@@ -102,26 +94,42 @@ const Recipes = (props) => {
   };
 
   const handleFavorite = () => {
-    axios.put(`/api/twists/${twist.id}/favorite?type=favorite`, {twist_id: `${twist.id}`})
-      .then(() =>
-        handleFavoriteAlert()
-      );
+    axios
+      .put(`/api/twists/${twist.id}/favorite?type=favorite`, {
+        twist_id: `${twist.id}`,
+      })
+      .then(() => handleFavoriteAlert());
   };
-
 
   // if (user) {
   return (
     // Recipe options menu
     <>
       <Container fluid>
-
-        {showAlert && <Alert onClose={() => setShowAlert(false)} dismissible variant="primary">Added to favorites!</Alert>}
+        {showAlert && (
+          <Alert
+            onClose={() => setShowAlert(false)}
+            dismissible
+            variant="primary"
+          >
+            Added to favorites!
+          </Alert>
+        )}
         {/* Twist modals */}
-        <TwistCreateModal show={isCreateModalOpen} onHide={toggleCreateModal} />
+        <TwistCreateModal
+          show={isCreateModalOpen}
+          onHide={toggleCreateModal}
+          user={props.user}
+          recipe={props.match.params.recipe}
+        />
         <TwistEditModal show={isEditModalOpen} onHide={toggleEditModal} />
 
         {/* Show twists when disabled */}
-        {showTwists === false ? (<Button align="right" onClick={setShowTwists}>Enable Twists</Button>) : null}
+        {showTwists === false ? (
+          <Button align="right" onClick={setShowTwists}>
+            Enable Twists
+          </Button>
+        ) : null}
 
         {/* // Recipe display */}
         <CardDeck className="recipe-columns">
@@ -138,7 +146,11 @@ const Recipes = (props) => {
           </Card>
 
           {/* Twist display */}
-          <Card className={showTwists ? "text-center twist-card" : "twist-card-hide"}>
+          <Card
+            className={
+              showTwists ? "text-center twist-card" : "twist-card-hide"
+            }
+          >
             <Card.Header as="h5">User Twists!</Card.Header>
             <Card.Body>
               <Card.Title>
@@ -150,16 +162,43 @@ const Recipes = (props) => {
                 {twist !== undefined ? twist.content : null}
               </Card.Text>
               {/* Twist randomize and social options */}
-              <Button className="twist-button-random" onClick={() => randomTwist()} variant="primary">
+              <Button
+                className="twist-button-random"
+                onClick={() => randomTwist()}
+                variant="primary"
+              >
                 Randomize
-              </Button><br />
-              <Button className="twist-buttons" variant="primary">Share</Button>
-              <Button className="twist-buttons" variant="primary">Rate</Button>
-              <Button className="twist-buttons" variant="primary" onClick={() => {
-                handleFavorite();
-              }} >Favorite</Button>
-              <Button className="twist-buttons" onClick={toggleEditModal} variant="primary">Edit</Button>
-              <Button className="twist-buttons" onClick={toggleCreateModal} variant="primary">Create</Button>
+              </Button>
+              <br />
+              <Button className="twist-buttons" variant="primary">
+                Share
+              </Button>
+              <Button className="twist-buttons" variant="primary">
+                Rate
+              </Button>
+              <Button
+                className="twist-buttons"
+                variant="primary"
+                onClick={() => {
+                  handleFavorite();
+                }}
+              >
+                Favorite
+              </Button>
+              <Button
+                className="twist-buttons"
+                onClick={toggleEditModal}
+                variant="primary"
+              >
+                Edit
+              </Button>
+              <Button
+                className="twist-buttons"
+                onClick={toggleCreateModal}
+                variant="primary"
+              >
+                Create
+              </Button>
             </Card.Body>
             <Form>
               <Form.Group as={Col}>
@@ -184,7 +223,11 @@ const Recipes = (props) => {
               </Form.Group>
 
               <Form.Group controlId="formBasicCheckbox">
-                <Form.Check onClick={() => setShowTwists(false)} type="checkbox" label="Disable Twists" />
+                <Form.Check
+                  onClick={() => setShowTwists(false)}
+                  type="checkbox"
+                  label="Disable Twists"
+                />
               </Form.Group>
             </Form>
           </Card>
