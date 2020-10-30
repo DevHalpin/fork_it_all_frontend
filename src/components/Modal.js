@@ -1,21 +1,18 @@
-import React, { useState } from "react";
-import { Modal, Button, Form, Col } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import React, {useState} from "react";
+import {Modal, Button, Form, Col, Alert} from "react-bootstrap";
+import {useHistory} from "react-router-dom";
 import "../styles/Modal.scss";
 import axios from "axios";
 
 // Create twist modal
 const TwistCreateModal = (props) => {
-  const { show, onHide, user, recipe } = props;
+  const {show, onHide, user, recipe} = props;
   console.log(recipe);
-  const [state, setState] = useState({
-    content: "",
-    private: false,
-    category: "Ingredient Replacement",
-  });
+  const [state, setState] = useState({content: "", private: false});
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleChange = (event) => {
-    const { type, checked } = event.target;
+    const {type, checked} = event.target;
     const eventValue = event.target.value;
     setState({
       ...state,
@@ -48,9 +45,23 @@ const TwistCreateModal = (props) => {
     event.preventDefault();
   };
 
+  const handleCreateAlert = () => {
+    setShowAlert(true);
+  };
+
   return (
     <>
       <Modal show={show} onHide={onHide}>
+        {showAlert && (
+          <Alert
+            onClose={() => setShowAlert(false)}
+            dismissible
+            variant="primary"
+          >
+            Twist has been created.
+            Click the x to close me or create another one!
+          </Alert>
+        )}
         <Modal.Dialog>
           <Modal.Header onClick={onHide} closeButton>
             <Modal.Title>Create a New Twist</Modal.Title>
@@ -94,7 +105,7 @@ const TwistCreateModal = (props) => {
                   </Form.Control>
                 </Form.Group>
               </Form.Group>
-              <Button variant="primary" type="submit">
+              <Button onClick={() => handleCreateAlert()} variant="primary" type="submit">
                 Submit Twist
               </Button>
               <Form.Group controlId="formBasicCheckbox">
@@ -115,7 +126,7 @@ const TwistCreateModal = (props) => {
 };
 
 // Edit twist modal
-const TwistEditModal = ({ show, onHide }) => {
+const TwistEditModal = ({show, onHide}) => {
   return (
     <>
       <Modal show={show} onHide={onHide}>
@@ -131,7 +142,7 @@ const TwistEditModal = ({ show, onHide }) => {
                 </Form.Label>
                 <Form.Control type="text" placeholder="Enter new twist" />
               </Form.Group>
-              <Button variant="primary" type="submit">
+              <Button onClick={onHide} variant="primary" type="submit">
                 Submit Twist
               </Button>
             </Form>
@@ -145,7 +156,7 @@ const TwistEditModal = ({ show, onHide }) => {
 // Login Modal
 const LoginModal = (props) => {
   const history = useHistory();
-  const { show, onHide, handleLogin } = props;
+  const {show, onHide, handleLogin} = props;
 
   const [state, setState] = useState({
     email: "",
@@ -166,7 +177,7 @@ const LoginModal = (props) => {
           email: state.email,
           password: state.password,
         },
-        { withCredentials: true }
+        {withCredentials: true}
       )
       .then((response) => {
         if (response.data.logged_in) {
@@ -181,7 +192,7 @@ const LoginModal = (props) => {
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
-    setState({ ...state, [event.target.name]: eventValue });
+    setState({...state, [event.target.name]: eventValue});
   };
 
   return (
@@ -232,7 +243,7 @@ const LoginModal = (props) => {
 // Register Modal
 const RegisterModal = (props) => {
   const history = useHistory();
-  const { show, onHide, handleLogin } = props;
+  const {show, onHide, handleLogin} = props;
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -259,7 +270,7 @@ const RegisterModal = (props) => {
           handle: state.handle,
           name: state.name,
         },
-        { withCredentials: true }
+        {withCredentials: true}
       )
       .then((response) => {
         if (response.data.status === "created") {
@@ -274,7 +285,7 @@ const RegisterModal = (props) => {
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
-    setState({ ...state, [event.target.name]: eventValue });
+    setState({...state, [event.target.name]: eventValue});
   };
 
   return (
@@ -356,4 +367,4 @@ const RegisterModal = (props) => {
   );
 };
 
-export { TwistCreateModal, TwistEditModal, LoginModal, RegisterModal };
+export {TwistCreateModal, TwistEditModal, LoginModal, RegisterModal};
