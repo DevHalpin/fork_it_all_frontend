@@ -8,7 +8,7 @@ import {
   Form,
   Alert,
 } from "react-bootstrap";
-import { TwistCreateModal, TwistEditModal } from "./Modal";
+import { TwistCreateModal, TwistEditModal, TwistDeleteModal } from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -22,6 +22,7 @@ const Recipes = (props) => {
   // Modal state
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   // Twist display state
   const [showTwists, setShowTwists] = useState(true);
@@ -47,6 +48,9 @@ const Recipes = (props) => {
   };
   const toggleEditModal = () => {
     setEditModalOpen(!isEditModalOpen);
+  };
+  const toggleDeleteModal = () => {
+    setDeleteModalOpen(!isDeleteModalOpen);
   };
 
   const handleFavoriteAlert = () => {
@@ -133,21 +137,23 @@ const Recipes = (props) => {
               <Button className="twist-buttons" variant="primary">
                 Share
               </Button>
-              {userHandle !== recipe.handle ? (
+              {userHandle && userHandle !== recipe.handle ? (
                 <Button className="twist-buttons" variant="primary">
                   Rate
                 </Button>
               ) : null}
-              <Button
-                className="twist-buttons"
-                variant="primary"
-                onClick={() => {
-                  handleFavorite();
-                }}
-              >
-                Favorite
-              </Button>
-              {userHandle === recipe.handle ? (
+              {userHandle && userHandle === recipe.handle ? (
+                <Button
+                  className="twist-buttons"
+                  variant="primary"
+                  onClick={() => {
+                    handleFavorite();
+                  }}
+                >
+                  Favorite
+                </Button>
+              ) : null}
+              {userHandle && userHandle === recipe.handle ? (
                 <Button
                   className="twist-buttons"
                   onClick={toggleEditModal}
@@ -156,13 +162,28 @@ const Recipes = (props) => {
                   Edit
                 </Button>
               ) : null}
-              <Button
-                className="twist-buttons"
-                onClick={toggleCreateModal}
-                variant="primary"
-              >
-                Create
-              </Button>
+              {userHandle ? (
+                <Button
+                  className="twist-buttons"
+                  onClick={toggleCreateModal}
+                  variant="primary"
+                >
+                  Create
+                </Button>
+              ) : null}
+              {userHandle ? (
+                <Button
+                  className="twist-buttons"
+                  onClick={toggleDeleteModal}
+                  variant="primary"
+                >
+                  <TwistDeleteModal
+                    show={isDeleteModalOpen}
+                    onHide={toggleDeleteModal}
+                  />
+                  Delete this twist
+                </Button>
+              ) : null}
             </Card.Body>
             <Form>
               <Form.Group as={Col}>
