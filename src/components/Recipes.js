@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardDeck,
@@ -8,7 +8,7 @@ import {
   Form,
   Alert,
 } from "react-bootstrap";
-import {TwistCreateModal, TwistEditModal, TwistDeleteModal} from "./Modal";
+import { TwistCreateModal, TwistEditModal, TwistDeleteModal } from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -124,7 +124,11 @@ const Recipes = (props) => {
           user={props.user}
           recipe={props.match.params.recipe}
         />
-        <TwistEditModal show={isEditModalOpen} onHide={handleEditAlert} />
+        <TwistEditModal
+          show={isEditModalOpen}
+          onHide={handleEditAlert}
+          recipe={props.match.params.recipe}
+        />
 
         {/* Show twists when disabled */}
         {showTwists === false ? (

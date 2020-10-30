@@ -1,12 +1,12 @@
-import React, {useState} from "react";
-import {Modal, Button, Form, Col, Alert} from "react-bootstrap";
-import {useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { Modal, Button, Form, Col, Alert } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import "../styles/Modal.scss";
 import axios from "axios";
 
 // Create twist modal
 const TwistCreateModal = (props) => {
-  const {show, onHide, user, recipe} = props;
+  const { show, onHide, user, recipe } = props;
   const [state, setState] = useState({
     content: "",
     private: false,
@@ -14,7 +14,7 @@ const TwistCreateModal = (props) => {
   });
   //handle state changes for checkbox and field content
   const handleChange = (event) => {
-    const {type, checked} = event.target;
+    const { type, checked } = event.target;
     const eventValue = event.target.value;
     setState({
       ...state,
@@ -109,7 +109,8 @@ const TwistCreateModal = (props) => {
 
 // Edit twist modal
 const TwistEditModal = (props) => {
-  const {show, onHide, user, recipe} = props;
+  const { show, onHide, user, recipe } = props;
+  console.log(props);
   const [editState, setEditState] = useState({
     content: "",
     private: false,
@@ -117,7 +118,7 @@ const TwistEditModal = (props) => {
   });
 
   const handleEditChange = (event) => {
-    const {type, checked} = event.target;
+    const { type, checked } = event.target;
     const eventValue = event.target.value;
     setEditState({
       ...editState,
@@ -134,11 +135,20 @@ const TwistEditModal = (props) => {
         recipe_id: recipe,
         is_private: editState.private,
       })
-      // .then((response) => {
-      //   if (response.data.status === "created") {
-      //     handleSuccessfulAuth(response.data);
-      //   }
-      // })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+    event.preventDefault();
+  };
+
+  const handleDeleteSubmit = (event) => {
+    // console.log(deleteState);
+    axios
+      .delete("/api/twists", {
+        content: editState.content,
+        recipe_id: recipe,
+        is_private: editState.private,
+      })
       .catch((error) => {
         console.log("Error: ", error);
       });
@@ -172,7 +182,7 @@ const TwistEditModal = (props) => {
 };
 
 // Edit twist modal
-const TwistDeleteModal = ({show, onHide}) => {
+const TwistDeleteModal = ({ show, onHide }) => {
   return (
     <>
       <Modal show={show} onHide={onHide}>
@@ -201,7 +211,7 @@ const TwistDeleteModal = ({show, onHide}) => {
 // Login Modal
 const LoginModal = (props) => {
   const history = useHistory();
-  const {show, onHide, handleLogin} = props;
+  const { show, onHide, handleLogin } = props;
 
   const [state, setState] = useState({
     email: "",
@@ -222,7 +232,7 @@ const LoginModal = (props) => {
           email: state.email,
           password: state.password,
         },
-        {withCredentials: true}
+        { withCredentials: true }
       )
       .then((response) => {
         if (response.data.logged_in) {
@@ -237,7 +247,7 @@ const LoginModal = (props) => {
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
-    setState({...state, [event.target.name]: eventValue});
+    setState({ ...state, [event.target.name]: eventValue });
   };
 
   return (
@@ -288,7 +298,7 @@ const LoginModal = (props) => {
 // Register Modal
 const RegisterModal = (props) => {
   const history = useHistory();
-  const {show, onHide, handleLogin} = props;
+  const { show, onHide, handleLogin } = props;
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -315,7 +325,7 @@ const RegisterModal = (props) => {
           handle: state.handle,
           name: state.name,
         },
-        {withCredentials: true}
+        { withCredentials: true }
       )
       .then((response) => {
         if (response.data.status === "created") {
@@ -330,7 +340,7 @@ const RegisterModal = (props) => {
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
-    setState({...state, [event.target.name]: eventValue});
+    setState({ ...state, [event.target.name]: eventValue });
   };
 
   return (
