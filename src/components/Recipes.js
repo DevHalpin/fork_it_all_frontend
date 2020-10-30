@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   Card,
   CardDeck,
@@ -8,7 +8,7 @@ import {
   Form,
   Alert,
 } from "react-bootstrap";
-import { TwistCreateModal, TwistEditModal } from "./Modal";
+import {TwistCreateModal, TwistEditModal, TwistDeleteModal} from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -18,11 +18,16 @@ const Recipes = (props) => {
   const userHandle = props.user.handle;
   const [recipe, setRecipe] = useState({});
   const [twist, setTwist] = useState({});
-  const [showAlert, setShowAlert] = useState(false);
+
+  // Alert state
+  const [showFaveAlert, setShowFaveAlert] = useState(false);
+  const [showCreateAlert, setShowCreateAlert] = useState(false);
+  const [showEditAlert, setShowEditAlert] = useState(false);
 
   // Modal state
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   // Twist display state
   const [showTwists, setShowTwists] = useState(true);
@@ -54,9 +59,12 @@ const Recipes = (props) => {
   const toggleEditModal = () => {
     setEditModalOpen(!isEditModalOpen);
   };
+  const toggleDeleteModal = () => {
+    setDeleteModalOpen(!isDeleteModalOpen);
+  };
 
   const handleFavoriteAlert = () => {
-    setShowAlert(true);
+    setShowFaveAlert(true);
   };
 
   const handleFavorite = () => {
@@ -67,28 +75,56 @@ const Recipes = (props) => {
       .then(() => handleFavoriteAlert());
   };
 
+  const handleCreateAlert = () => {
+    setShowCreateAlert(true);
+    toggleCreateModal();
+  };
+
+  const handleEditAlert = () => {
+    setShowEditAlert(true);
+    toggleEditModal();
+  };
+
   // if (recipe) {
   return (
-    // Recipe options menu
     <>
       <Container fluid>
-        {showAlert && (
+        {showFaveAlert && (
           <Alert
-            onClose={() => setShowAlert(false)}
+            onClose={() => setShowFaveAlert(false)}
             dismissible
             variant="primary"
           >
             Added to favorites!
           </Alert>
         )}
+        {showCreateAlert && (
+          <Alert
+            onClose={() => setShowCreateAlert(false)}
+            dismissible
+            variant="primary"
+          >
+            Twist has been created!
+          </Alert>
+        )}
+        {showEditAlert && (
+          <Alert
+            onClose={() => setShowEditAlert(false)}
+            dismissible
+            variant="primary"
+          >
+            Updated twist has been saved!
+          </Alert>
+        )}
+
         {/* Twist modals */}
         <TwistCreateModal
           show={isCreateModalOpen}
-          onHide={toggleCreateModal}
+          onHide={handleCreateAlert}
           user={props.user}
           recipe={props.match.params.recipe}
         />
-        <TwistEditModal show={isEditModalOpen} onHide={toggleEditModal} />
+        <TwistEditModal show={isEditModalOpen} onHide={handleEditAlert} />
 
         {/* Show twists when disabled */}
         {showTwists === false ? (
@@ -168,13 +204,28 @@ const Recipes = (props) => {
                   Edit
                 </Button>
               ) : null}
-              <Button
-                className="twist-buttons"
-                onClick={toggleCreateModal}
-                variant="primary"
-              >
-                Create
-              </Button>
+              {userHandle ? (
+                <Button
+                  className="twist-buttons"
+                  onClick={toggleCreateModal}
+                  variant="primary"
+                >
+                  Create
+                </Button>
+              ) : null}
+              {userHandle ? (
+                <Button
+                  className="twist-buttons"
+                  onClick={toggleDeleteModal}
+                  variant="primary"
+                >
+                  <TwistDeleteModal
+                    show={isDeleteModalOpen}
+                    onHide={toggleDeleteModal}
+                  />
+                  Delete this twist
+                </Button>
+              ) : null}
             </Card.Body>
             <Form>
               <Form.Group as={Col}>
