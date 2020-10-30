@@ -212,7 +212,7 @@ const Recipes = (props) => {
                   Create
                 </Button>
               ) : null}
-              {userHandle ? (
+              {twist && userHandle ? (
                 <Button
                   className="twist-buttons"
                   onClick={toggleDeleteModal}
