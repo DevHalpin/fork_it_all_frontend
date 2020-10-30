@@ -125,7 +125,7 @@ const Recipes = (props) => {
         <TwistEditModal
           show={isEditModalOpen}
           onHide={handleEditAlert}
-          recipe={props.match.params.recipe}
+          twist={twist ? twist : undefined}
         />
         <TwistDeleteModal
           show={isDeleteModalOpen}

@@ -109,7 +109,8 @@ const TwistCreateModal = (props) => {
 
 // Edit twist modal
 const TwistEditModal = (props) => {
-  const { show, onHide, user, recipe } = props;
+  const { show, onHide, user, twist } = props;
+  console.log(twist.content);
   const [editState, setEditState] = useState({
     content: "",
     private: false,
