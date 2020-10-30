@@ -7,9 +7,12 @@ import axios from "axios";
 // Create twist modal
 const TwistCreateModal = (props) => {
   const {show, onHide, user, recipe} = props;
-  console.log(recipe);
-  const [state, setState] = useState({content: "", private: false});
-  const [showAlert, setShowAlert] = useState(false);
+  const [state, setState] = useState({
+    content: "",
+    private: false,
+    category: "Ingredient Replacement",
+  });
+
 
   const handleChange = (event) => {
     const {type, checked} = event.target;
@@ -19,7 +22,6 @@ const TwistCreateModal = (props) => {
       [event.target.name]: eventValue,
       [event.target.name]: type === "checkbox" ? checked : eventValue,
     });
-    console.log(event.target);
   };
 
   const handleSubmit = (event) => {
@@ -45,23 +47,9 @@ const TwistCreateModal = (props) => {
     event.preventDefault();
   };
 
-  const handleCreateAlert = () => {
-    setShowAlert(true);
-  };
-
   return (
     <>
       <Modal show={show} onHide={onHide}>
-        {showAlert && (
-          <Alert
-            onClose={() => setShowAlert(false)}
-            dismissible
-            variant="primary"
-          >
-            Twist has been created.
-            Click the x to close me or create another one!
-          </Alert>
-        )}
         <Modal.Dialog>
           <Modal.Header onClick={onHide} closeButton>
             <Modal.Title>Create a New Twist</Modal.Title>
@@ -105,7 +93,7 @@ const TwistCreateModal = (props) => {
                   </Form.Control>
                 </Form.Group>
               </Form.Group>
-              <Button onClick={() => handleCreateAlert()} variant="primary" type="submit">
+              <Button onClick={onHide} variant="primary" type="submit">
                 Submit Twist
               </Button>
               <Form.Group controlId="formBasicCheckbox">
@@ -126,7 +114,44 @@ const TwistCreateModal = (props) => {
 };
 
 // Edit twist modal
-const TwistEditModal = ({show, onHide}) => {
+const TwistEditModal = (props) => {
+  const {show, onHide, user, recipe} = props;
+  console.log(props);
+  const [editState, setEditState] = useState({
+    content: "",
+    private: false,
+    category: "Ingredient Replacement",
+  });
+
+  const handleEditChange = (event) => {
+    const {type, checked} = event.target;
+    const eventValue = event.target.value;
+    setEditState({
+      ...editState,
+      [event.target.name]: eventValue,
+      [event.target.name]: type === "checkbox" ? checked : eventValue,
+    });
+  };
+
+  const handleEditSubmit = (event) => {
+    console.log(editState);
+    axios
+      .put("/api/twists", {
+        content: editState.content,
+        recipe_id: recipe,
+        is_private: editState.private,
+      })
+      // .then((response) => {
+      //   if (response.data.status === "created") {
+      //     handleSuccessfulAuth(response.data);
+      //   }
+      // })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+    event.preventDefault();
+  };
+
   return (
     <>
       <Modal show={show} onHide={onHide}>
@@ -135,7 +160,7 @@ const TwistEditModal = ({show, onHide}) => {
             <Modal.Title>Edit your Twist</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form>
+            <Form onSubmit={handleEditSubmit}>
               <Form.Group>
                 <Form.Label>
                   Found a better change for this recipe? Enter it here!
