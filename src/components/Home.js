@@ -45,7 +45,6 @@ export default function Home(props) {
       const recipe = result.data.recipe;
 
       setThree(recipe);
-      console.log(three);
     };
     fetchRandom();
     fetchLiked();

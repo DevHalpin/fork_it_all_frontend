@@ -15,12 +15,7 @@ import "../styles/App.scss";
 
 const Recipes = (props) => {
   let id = props.match.params.recipe;
-
-  const [recipe, setRecipe] = useState("");
-  const [twist, setTwist] = useState("");
-  const [user, setUser] = useState("");
-  const [temp, setTemp] = useState("");
-  const [handle, setHandle] = useState("");
+  const [recipe, setRecipe] = useState({});
   const [showAlert, setShowAlert] = useState(false);
 
   // Modal state
@@ -32,62 +27,21 @@ const Recipes = (props) => {
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
-    const randomizer = Math.floor(Math.random() * 100);
-    const promiseRecipes = axios.get(`/api/recipes/${id}`);
-    const promiseUsers = axios.get(`/api/users/${randomizer}?recipes=${id}`);
-    const promises = [promiseUsers, promiseRecipes];
-
-    Promise.all(promises)
-      .then((responseArr) => {
-        console.log(responseArr[0]);
-        console.log(responseArr[1]);
-        //this is the correct user id
-        // setTemp(responseArr[0].data.twists[0].user_id);
-        // console.log(twist);
-        setRecipe(responseArr[1].data.recipe);
-        setTwist(responseArr[0].data.twists[0]);
-        setUser(responseArr[0].data.user);
-        console.log(user);
-        console.log("twists", twist === undefined);
-        // setTemp(responseArr[0].data.twists[0].user_id);
-      })
-      // .then(() => {
-      //   console.log(temp);
-      //   axios.get(`/api/users/${temp}?recipes=${id}`).then((response) => {
-      //     console.log(response.data.user);
-      //     setHandle(response.data.user);
-      //   });
-      // })
-      .catch(function(error) {
-        console.log(error);
-      });
+    axios
+    .get(`/api/recipes/${id}?random=1`)
+    .then((response) =>{
+      setRecipe(response.data.recipe)
+    })
   }, [id]);
-
-  //theres nothing for it we have to make another axios call - if random doesnt have an associated twist
-  //if twist.user_id != user.id?
-  const getUserifRandomFails = () => {
-    console.log(temp);
-    axios.get(`/api/users/${temp}?recipes=${id}`).then((response) => {
-      console.log(response.data.user);
-      setUser(response.data.user);
-    });
-  };
 
   // Find a random twist
   const randomTwist = () => {
-    const randomizer = Math.floor(Math.random() * 100);
-    const promiseRecipes = axios.get(`/api/recipes/${id}`);
-    const promiseUsers = axios.get(`/api/users/${randomizer}?recipes=${id}`);
-    const promises = [promiseRecipes, promiseUsers];
-
-    Promise.all(promises).then((responseArr) => {
-      // console.log(responseArr[0].data, "responseArr[0] is:");
-      console.log(responseArr[1].data);
-      // setTwist(responseArr[1].data.twist);
-      //this allows us to pick a user and change the handle of said user
-      setUser(responseArr[1].data.user);
-    });
-  };
+    axios
+    .get(`/api/recipes/${id}?random=1`)
+    .then((response) =>{
+      setRecipe(response.data.recipe)
+    })
+  }
 
   // Toggle for modals
   const toggleCreateModal = () => {
@@ -103,8 +57,8 @@ const Recipes = (props) => {
 
   const handleFavorite = () => {
     axios
-      .put(`/api/twists/${twist.id}/favorite?type=favorite`, {
-        twist_id: `${twist.id}`,
+      .put(`/api/twists/${recipe.id}/favorite?type=favorite`, {
+        twist_id: `${recipe.id}`,
       })
       .then(() => handleFavoriteAlert());
   };
@@ -154,12 +108,12 @@ const Recipes = (props) => {
             <Card.Header as="h5">User Twists!</Card.Header>
             <Card.Body>
               <Card.Title>
-                {twist !== undefined
-                  ? `${user.handle} suggests including the following twist:`
+                {recipe.handle !== undefined
+                  ? `${recipe.handle} suggests including the following twist:`
                   : "No twists exist for this recipe"}
               </Card.Title>
               <Card.Text>
-                {twist !== undefined ? twist.content : null}
+                {recipe.content !== undefined ? recipe.content : null}
               </Card.Text>
               {/* Twist randomize and social options */}
               <Button
