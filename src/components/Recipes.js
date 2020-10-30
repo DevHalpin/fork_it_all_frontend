@@ -35,7 +35,7 @@ const Recipes = (props) => {
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     axios.get(`/api/recipes/${id}?random=1`).then((response) => {
-      console.log(response.data.recipe.twist_id);
+      // console.log(response.data.recipe.twist_id);
       setTwist(response.data.recipe);
     });
     axios.get(`/api/recipes/${id}`).then((response) => {
@@ -213,7 +213,7 @@ const Recipes = (props) => {
                   Create
                 </Button>
               ) : null}
-              {twist && userHandle ? (
+              {twist && userHandle && userHandle === twist.handle ? (
                 <Button
                   className="twist-buttons"
                   onClick={toggleDeleteModal}
