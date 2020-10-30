@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import "../styles/Modal.scss";
 import axios from "axios";
@@ -8,7 +8,11 @@ import axios from "axios";
 const TwistCreateModal = (props) => {
   const { show, onHide, user, recipe } = props;
   console.log(recipe);
-  const [state, setState] = useState({ content: "", private: false });
+  const [state, setState] = useState({
+    content: "",
+    private: false,
+    category: "Ingredient Replacement",
+  });
 
   const handleChange = (event) => {
     const { type, checked } = event.target;
@@ -28,7 +32,7 @@ const TwistCreateModal = (props) => {
         content: state.content,
         recipe_id: recipe,
         user_id: user.id,
-        tags: "addition",
+        tags: state.category,
         slug: "222hgvf74kt34",
         is_private: state.private,
         sort_order: 1,
@@ -66,6 +70,29 @@ const TwistCreateModal = (props) => {
                   required
                   name="content"
                 />
+                <Form.Group as={Col}>
+                  <Form.Label>Select a Category for Twist</Form.Label>
+                  <Form.Control
+                    as="select"
+                    id="inlineFormCustomSelect"
+                    value={state.category}
+                    onChange={handleChange}
+                    name="category"
+                    custom
+                  >
+                    <option value="Ingredient Replacement">
+                      Ingredient Replacement
+                    </option>
+                    <option value="Cooking Time">Cooking Time</option>
+                    <option value="Healthy Options">Healthy Options</option>
+                    <option value="Add Something Extra">
+                      Add Something Extra
+                    </option>
+                    <option value="Take Something Out">
+                      Take Something Out
+                    </option>
+                  </Form.Control>
+                </Form.Group>
               </Form.Group>
               <Button variant="primary" type="submit">
                 Submit Twist
