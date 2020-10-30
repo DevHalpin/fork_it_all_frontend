@@ -11,8 +11,14 @@ const TwistCreateModal = (props) => {
   const [state, setState] = useState({ content: "", private: false });
 
   const handleChange = (event) => {
+    const { type, checked } = event.target;
     const eventValue = event.target.value;
-    setState({ ...state, [event.target.name]: eventValue });
+    setState({
+      ...state,
+      [event.target.name]: eventValue,
+      [event.target.name]: type === "checkbox" ? checked : eventValue,
+    });
+    console.log(event.target);
   };
 
   const handleSubmit = (event) => {
@@ -67,8 +73,10 @@ const TwistCreateModal = (props) => {
               <Form.Group controlId="formBasicCheckbox">
                 <Form.Check
                   type="checkbox"
+                  checked={state.private}
                   label="Set Twist Private"
-                  onClick={handleChange}
+                  name="private"
+                  onChange={handleChange}
                 />
               </Form.Group>
             </Form>

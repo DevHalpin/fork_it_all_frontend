@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardDeck,
@@ -8,7 +8,7 @@ import {
   Form,
   Alert,
 } from "react-bootstrap";
-import {TwistCreateModal, TwistEditModal} from "./Modal";
+import { TwistCreateModal, TwistEditModal } from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -27,21 +27,17 @@ const Recipes = (props) => {
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
-    axios
-    .get(`/api/recipes/${id}?random=1`)
-    .then((response) =>{
-      setRecipe(response.data.recipe)
-    })
+    axios.get(`/api/recipes/${id}?random=1`).then((response) => {
+      setRecipe(response.data.recipe);
+    });
   }, [id]);
 
   // Find a random twist
   const randomTwist = () => {
-    axios
-    .get(`/api/recipes/${id}?random=1`)
-    .then((response) =>{
-      setRecipe(response.data.recipe)
-    })
-  }
+    axios.get(`/api/recipes/${id}?random=1`).then((response) => {
+      setRecipe(response.data.recipe);
+    });
+  };
 
   // Toggle for modals
   const toggleCreateModal = () => {
@@ -63,12 +59,20 @@ const Recipes = (props) => {
       .then(() => handleFavoriteAlert());
   };
 
-  // if (user) {
+  // if (recipe) {
   return (
     // Recipe options menu
     <>
       <Container fluid>
-        {showAlert && <Alert onClose={() => setShowAlert(false)} dismissible variant="primary">Added to favorites!</Alert>}
+        {showAlert && (
+          <Alert
+            onClose={() => setShowAlert(false)}
+            dismissible
+            variant="primary"
+          >
+            Added to favorites!
+          </Alert>
+        )}
         {/* Twist modals */}
         <TwistCreateModal
           show={isCreateModalOpen}
