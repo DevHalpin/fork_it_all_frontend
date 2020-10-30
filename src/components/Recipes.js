@@ -13,8 +13,13 @@ const Recipes = (props) => {
   const [user, setUser] = useState("");
   const [temp, setTemp] = useState("");
   const [handle, setHandle] = useState("");
+
+  // Modal state
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
+
+  // Twist display state
+  const [showTwists, setShowTwists] = useState(true);
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
@@ -94,9 +99,16 @@ const Recipes = (props) => {
     // Recipe options menu
     <>
       <Container fluid>
+        {/* Twist modals */}
         <TwistCreateModal show={isCreateModalOpen} onHide={toggleCreateModal} />
         <TwistEditModal show={isEditModalOpen} onHide={toggleEditModal} />
 
+        {/* Show twists when disabled */}
+        {showTwists === false ? (
+          <Button align="right" onClick={setShowTwists}>
+            Enable Twists
+          </Button>
+        ) : null}
         {/* // Recipe display */}
         <CardDeck className="recipe-columns">
           <Card className="recipe-card">
@@ -112,7 +124,11 @@ const Recipes = (props) => {
           </Card>
 
           {/* Twist display */}
-          <Card className="text-center twist-card">
+          <Card
+            className={
+              showTwists ? "text-center twist-card" : "twist-card-hide"
+            }
+          >
             <Card.Header as="h5">User Twists!</Card.Header>
             <Card.Body>
               <Card.Title>
@@ -168,7 +184,11 @@ const Recipes = (props) => {
               </Form.Group>
 
               <Form.Group controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Disable Twists" />
+                <Form.Check
+                  onClick={() => setShowTwists(false)}
+                  type="checkbox"
+                  label="Disable Twists"
+                />
               </Form.Group>
             </Form>
           </Card>
