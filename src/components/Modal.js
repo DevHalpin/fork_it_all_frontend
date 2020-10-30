@@ -12,8 +12,7 @@ const TwistCreateModal = (props) => {
     private: false,
     category: "Ingredient Replacement",
   });
-
-
+  //handle state changes for checkbox and field content
   const handleChange = (event) => {
     const {type, checked} = event.target;
     const eventValue = event.target.value;
@@ -36,11 +35,6 @@ const TwistCreateModal = (props) => {
         is_private: state.private,
         sort_order: 1,
       })
-      // .then((response) => {
-      //   if (response.data.status === "created") {
-      //     handleSuccessfulAuth(response.data);
-      //   }
-      // })
       .catch((error) => {
         console.log("Error: ", error);
       });
@@ -169,6 +163,33 @@ const TwistEditModal = (props) => {
               </Form.Group>
               <Button onClick={onHide} variant="primary" type="submit">
                 Submit Twist
+              </Button>
+            </Form>
+          </Modal.Body>
+        </Modal.Dialog>
+      </Modal>
+    </>
+  );
+};
+
+// Edit twist modal
+const TwistDeleteModal = ({show, onHide}) => {
+  return (
+    <>
+      <Modal show={show} onHide={onHide}>
+        <Modal.Dialog>
+          <Modal.Header onClick={onHide} closeButton>
+            <Modal.Title>Edit your Twist</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group>
+                <Form.Label>
+                  Are you sure you want to delete this twist?
+                </Form.Label>
+              </Form.Group>
+              <Button variant="danger" type="submit">
+                Delete
               </Button>
             </Form>
           </Modal.Body>
@@ -392,4 +413,10 @@ const RegisterModal = (props) => {
   );
 };
 
-export {TwistCreateModal, TwistEditModal, LoginModal, RegisterModal};
+export {
+  TwistCreateModal,
+  TwistEditModal,
+  TwistDeleteModal,
+  LoginModal,
+  RegisterModal,
+};
