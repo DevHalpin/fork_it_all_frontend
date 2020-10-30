@@ -7,7 +7,6 @@ import axios from "axios";
 // Create twist modal
 const TwistCreateModal = (props) => {
   const { show, onHide, user, recipe } = props;
-  console.log(recipe);
   const [state, setState] = useState({
     content: "",
     private: false,
@@ -22,7 +21,6 @@ const TwistCreateModal = (props) => {
       [event.target.name]: eventValue,
       [event.target.name]: type === "checkbox" ? checked : eventValue,
     });
-    console.log(event.target);
   };
 
   const handleSubmit = (event) => {

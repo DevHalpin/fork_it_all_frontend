@@ -15,6 +15,7 @@ import "../styles/App.scss";
 
 const Recipes = (props) => {
   let id = props.match.params.recipe;
+  const userHandle = props.user.handle;
   const [recipe, setRecipe] = useState({});
   const [showAlert, setShowAlert] = useState(false);
 
@@ -28,6 +29,7 @@ const Recipes = (props) => {
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     axios.get(`/api/recipes/${id}?random=1`).then((response) => {
+      console.log(response.data.recipe);
       setRecipe(response.data.recipe);
     });
   }, [id]);
@@ -143,13 +145,15 @@ const Recipes = (props) => {
               >
                 Favorite
               </Button>
-              <Button
-                className="twist-buttons"
-                onClick={toggleEditModal}
-                variant="primary"
-              >
-                Edit
-              </Button>
+              {userHandle === recipe.handle ? (
+                <Button
+                  className="twist-buttons"
+                  onClick={toggleEditModal}
+                  variant="primary"
+                >
+                  Edit
+                </Button>
+              ) : null}
               <Button
                 className="twist-buttons"
                 onClick={toggleCreateModal}
