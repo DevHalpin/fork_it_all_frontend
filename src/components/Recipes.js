@@ -133,9 +133,11 @@ const Recipes = (props) => {
               <Button className="twist-buttons" variant="primary">
                 Share
               </Button>
-              <Button className="twist-buttons" variant="primary">
-                Rate
-              </Button>
+              {userHandle !== recipe.handle ? (
+                <Button className="twist-buttons" variant="primary">
+                  Rate
+                </Button>
+              ) : null}
               <Button
                 className="twist-buttons"
                 variant="primary"
