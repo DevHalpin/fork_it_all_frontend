@@ -34,16 +34,14 @@ export default function Home(props) {
     };
     const fetchRandom = async () => {
       //this variable needs to be hard coded to the search bar?
-      const result = await axios.get("/api/recipes?random=1");
-      const recipe = result.data.recipe;
-
+      const result = await axios.get("/api/twists?random=1");
+      const recipe = result.data;
       setRandom(recipe);
     };
     const fetchThreeRecent = async () => {
       // this variable needs to be hard coded to the search bar?
       const result = await axios.get("/api/recipes?three=1");
       const recipe = result.data.recipe;
-
       setThree(recipe);
     };
     fetchRandom();
