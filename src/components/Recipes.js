@@ -17,6 +17,7 @@ const Recipes = (props) => {
   let id = props.match.params.recipe;
   const userHandle = props.user.handle;
   const [recipe, setRecipe] = useState({});
+  const [twist, setTwist] = useState({});
   const [showAlert, setShowAlert] = useState(false);
 
   // Modal state
@@ -28,16 +29,21 @@ const Recipes = (props) => {
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
-    axios.get(`/api/recipes/${id}?random=1`).then((response) => {
-      console.log(response.data.recipe);
-      setRecipe(response.data.recipe);
+    axios
+    .get(`/api/recipes/${id}?random=1`)
+    .then((response) => {
+      setTwist(response.data.recipe);
     });
+    axios.get(`/api/recipes/${id}`)
+    .then((response) => {
+      setRecipe(response.data.recipe)
+    })
   }, [id]);
 
   // Find a random twist
   const randomTwist = () => {
     axios.get(`/api/recipes/${id}?random=1`).then((response) => {
-      setRecipe(response.data.recipe);
+      setTwist(response.data.recipe);
     });
   };
 
@@ -55,8 +61,8 @@ const Recipes = (props) => {
 
   const handleFavorite = () => {
     axios
-      .put(`/api/twists/${recipe.id}/favorite?type=favorite`, {
-        twist_id: `${recipe.id}`,
+      .put(`/api/twists/${twist.id}/favorite?type=favorite`, {
+        twist_id: `${twist.id}`,
       })
       .then(() => handleFavoriteAlert());
   };
@@ -114,40 +120,46 @@ const Recipes = (props) => {
             <Card.Header as="h5">User Twists!</Card.Header>
             <Card.Body>
               <Card.Title>
-                {recipe.handle !== undefined
-                  ? `${recipe.handle} suggests including the following twist:`
+                {twist !== null
+                  ? `${twist.handle} suggests including the following twist:`
                   : "No twists exist for this recipe"}
               </Card.Title>
               <Card.Text>
-                {recipe.content !== undefined ? recipe.content : null}
+                {twist !== null ? twist.content : null}
               </Card.Text>
               {/* Twist randomize and social options */}
-              <Button
+              {twist !== null ?
+                <Button
                 className="twist-button-random"
                 onClick={() => randomTwist()}
                 variant="primary"
-              >
+                >
                 Randomize
               </Button>
+              : null }
               <br />
-              <Button className="twist-buttons" variant="primary">
-                Share
-              </Button>
-              {userHandle !== recipe.handle ? (
+              {twist !== null ?
+                <Button className="twist-buttons" variant="primary">
+                  Share
+                </Button>
+              : null }
+              {twist !== null && userHandle !== twist.handle ? (
                 <Button className="twist-buttons" variant="primary">
                   Rate
                 </Button>
               ) : null}
-              <Button
-                className="twist-buttons"
-                variant="primary"
-                onClick={() => {
-                  handleFavorite();
-                }}
-              >
-                Favorite
-              </Button>
-              {userHandle === recipe.handle ? (
+              {twist !== null ?
+                <Button
+                  className="twist-buttons"
+                  variant="primary"
+                  onClick={() => {
+                    handleFavorite();
+                  }}
+                >
+                  Favorite
+                </Button>
+              : null } 
+              {twist !== null && userHandle === twist.handle ? (
                 <Button
                   className="twist-buttons"
                   onClick={toggleEditModal}
