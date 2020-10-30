@@ -6,6 +6,7 @@ import {
   Col,
   Button,
   Form,
+  Alert
 } from "react-bootstrap";
 import {TwistCreateModal, TwistEditModal} from "./Modal";
 import axios from "axios";
@@ -20,6 +21,7 @@ const Recipes = (props) => {
   const [user, setUser] = useState("");
   const [temp, setTemp] = useState("");
   const [handle, setHandle] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   // Modal state
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
@@ -95,15 +97,25 @@ const Recipes = (props) => {
     setEditModalOpen(!isEditModalOpen);
   };
 
-  const handleFavorite = () => {
-    axios.put(`/api/twists/${twist.id}/favorite?type=favorite`, {twist_id: `${twist.id}`});
+  const handleFavoriteAlert = () => {
+    setShowAlert(true);
   };
+
+  const handleFavorite = () => {
+    axios.put(`/api/twists/${twist.id}/favorite?type=favorite`, {twist_id: `${twist.id}`})
+      .then(() =>
+        handleFavoriteAlert()
+      );
+  };
+
 
   // if (user) {
   return (
     // Recipe options menu
     <>
       <Container fluid>
+
+        {showAlert && <Alert onClose={() => setShowAlert(false)} dismissible variant="primary">Added to favorites!</Alert>}
         {/* Twist modals */}
         <TwistCreateModal show={isCreateModalOpen} onHide={toggleCreateModal} />
         <TwistEditModal show={isEditModalOpen} onHide={toggleEditModal} />
@@ -137,12 +149,15 @@ const Recipes = (props) => {
               <Card.Text>
                 {twist !== undefined ? twist.content : null}
               </Card.Text>
+              {/* Twist randomize and social options */}
               <Button className="twist-button-random" onClick={() => randomTwist()} variant="primary">
                 Randomize
               </Button><br />
-              <Button className="twist-buttons" onClick={toggleEditModal} variant="primary">Share</Button>
-              <Button className="twist-buttons" onClick={toggleEditModal} variant="primary">Rate</Button>
-              <Button className="twist-buttons" onClick={toggleEditModal} variant="primary">Favorite</Button>
+              <Button className="twist-buttons" variant="primary">Share</Button>
+              <Button className="twist-buttons" variant="primary">Rate</Button>
+              <Button className="twist-buttons" variant="primary" onClick={() => {
+                handleFavorite();
+              }} >Favorite</Button>
               <Button className="twist-buttons" onClick={toggleEditModal} variant="primary">Edit</Button>
               <Button className="twist-buttons" onClick={toggleCreateModal} variant="primary">Create</Button>
             </Card.Body>
