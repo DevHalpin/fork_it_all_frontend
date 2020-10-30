@@ -34,15 +34,13 @@ const Recipes = (props) => {
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
-    axios
-    .get(`/api/recipes/${id}?random=1`)
-    .then((response) => {
+    axios.get(`/api/recipes/${id}?random=1`).then((response) => {
+      // console.log(response.data.recipe.twist_id);
       setTwist(response.data.recipe);
     });
-    axios.get(`/api/recipes/${id}`)
-    .then((response) => {
-      setRecipe(response.data.recipe)
-    })
+    axios.get(`/api/recipes/${id}`).then((response) => {
+      setRecipe(response.data.recipe);
+    });
   }, [id]);
 
   // Find a random twist
@@ -164,31 +162,29 @@ const Recipes = (props) => {
                   ? `${twist.handle} suggests including the following twist:`
                   : "No twists exist for this recipe"}
               </Card.Title>
-              <Card.Text>
-                {twist !== null ? twist.content : null}
-              </Card.Text>
+              <Card.Text>{twist !== null ? twist.content : null}</Card.Text>
               {/* Twist randomize and social options */}
-              {twist !== null ?
+              {twist !== null ? (
                 <Button
-                className="twist-button-random"
-                onClick={() => randomTwist()}
-                variant="primary"
+                  className="twist-button-random"
+                  onClick={() => randomTwist()}
+                  variant="primary"
                 >
-                Randomize
-              </Button>
-              : null }
+                  Randomize
+                </Button>
+              ) : null}
               <br />
-              {twist !== null ?
+              {twist !== null ? (
                 <Button className="twist-buttons" variant="primary">
                   Share
                 </Button>
-              : null }
-              {twist !== null && userHandle !== twist.handle ? (
+              ) : null}
+              {userHandle && twist !== null && userHandle !== twist.handle ? (
                 <Button className="twist-buttons" variant="primary">
                   Rate
                 </Button>
               ) : null}
-              {twist !== null ?
+              {userHandle && twist !== null && userHandle !== twist.handle ? (
                 <Button
                   className="twist-buttons"
                   variant="primary"
@@ -198,7 +194,7 @@ const Recipes = (props) => {
                 >
                   Favorite
                 </Button>
-              : null } 
+              ) : null}
               {twist !== null && userHandle === twist.handle ? (
                 <Button
                   className="twist-buttons"
@@ -217,7 +213,7 @@ const Recipes = (props) => {
                   Create
                 </Button>
               ) : null}
-              {userHandle ? (
+              {twist && userHandle && userHandle === twist.handle ? (
                 <Button
                   className="twist-buttons"
                   onClick={toggleDeleteModal}
