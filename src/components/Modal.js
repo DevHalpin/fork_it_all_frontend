@@ -8,7 +8,7 @@ import axios from "axios";
 const TwistCreateModal = (props) => {
   const { show, onHide, user, recipe } = props;
   console.log(recipe);
-  const [state, setState] = useState({ content: "" });
+  const [state, setState] = useState({ content: "", private: false });
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
@@ -24,7 +24,7 @@ const TwistCreateModal = (props) => {
         user_id: user.id,
         tags: "addition",
         slug: "222hgvf74kt34",
-        is_private: false,
+        is_private: state.private,
         sort_order: 1,
       })
       // .then((response) => {
@@ -64,6 +64,13 @@ const TwistCreateModal = (props) => {
               <Button variant="primary" type="submit">
                 Submit Twist
               </Button>
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Set Twist Private"
+                  onClick={handleChange}
+                />
+              </Form.Group>
             </Form>
           </Modal.Body>
         </Modal.Dialog>
