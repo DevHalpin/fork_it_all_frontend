@@ -25,7 +25,7 @@ function NavbarNav(props) {
     axios
       .get(`http://localhost:3001/api/recipes?search=${state.search}`)
       .then((response) => {
-        history.push(`/recipes/${response.data.recipe.id}`);
+        history.push(`/recipes/${response.data.id}`);
       })
       .catch((error) => {
         console.log("Error: ", error);

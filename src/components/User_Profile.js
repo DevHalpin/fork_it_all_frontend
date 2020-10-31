@@ -1,11 +1,21 @@
+import React, {useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Profile.scss";
 import axios from "axios";
-import {Nav, NavItem, NavLink, Form, FormControl, Button, Container, Row, Image, Col} from "react-bootstrap";
+import {Form, Button, Container, Row, Image, Col} from "react-bootstrap";
 
 function User_Profile(props) {
   const id = parseInt(props.match.params.user);
-  console.log(props);
+  const [user, setUser] = useState(props.user);
+
+
+  useEffect(() => {
+    axios.get(`/api/users/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setUser(response.data);
+      });
+  }, [id]);
 
   const editUser = (data) => {
     axios.put(`api/users/${props.user.id}`, data);
@@ -25,14 +35,14 @@ function User_Profile(props) {
               <Image src={imageSource} alt="Profile picture" />
               <Row>
                 <div id="change-photo">
-                  {props.user.id === id ? (<Button bsPrefix className="file btn btn-lg btn-primary">
+                  {user.id === id ? (<Button bsPrefix className="gen-button file btn btn-lg btn-primary">
                     Change Photo
                     <input type="file" name="file" />
                   </Button>) : null}
                 </div>
                 <div id="edit-profile">
-                  {props.user.id === id ?
-                    (<Button bsPrefix type="submit" className="file btn btn-lg btn-primary" name="btnAddMore">Edit Profile</Button>) : (<Button bsPrefix type="submit" className="file btn btn-lg btn-primary" name="btnAddMore">Follow User</Button>)}
+                  {user.id === id ?
+                    (<Button bsPrefix type="submit" className="gen-button file btn btn-lg btn-primary" name="btnAddMore">Edit Profile</Button>) : (<Button bsPrefix type="submit" className="gen-button file btn btn-lg btn-primary" name="btnAddMore">Follow User</Button>)}
                 </div>
               </Row>
             </div>
@@ -107,3 +117,4 @@ function User_Profile(props) {
 }
 
 export default User_Profile;
+
