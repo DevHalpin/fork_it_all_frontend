@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardDeck,
@@ -8,18 +8,19 @@ import {
   Form,
   Alert,
 } from "react-bootstrap";
-<<<<<<< HEAD
-import {TwistCreateModal, TwistEditModal, TwistDeleteModal} from "./Modal";
-=======
-import { TwistCreateModal, TwistEditModal, TwistDeleteModal, TwistShareModal } from "./Modal";
->>>>>>> 1bdf67520c68900c426c83d65de82266ce2a2ea3
+import {
+  TwistCreateModal,
+  TwistEditModal,
+  TwistDeleteModal,
+  TwistShareModal,
+} from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
 
 const Recipes = (props) => {
   let id = props.match.params.recipe;
-  let twistId = props.match.params.twist
+  let twistId = props.match.params.twist;
   const userHandle = props.user.handle;
   const [recipe, setRecipe] = useState({});
   const [twist, setTwist] = useState({});
@@ -28,7 +29,6 @@ const Recipes = (props) => {
   const [showFaveAlert, setShowFaveAlert] = useState(false);
   const [showCreateAlert, setShowCreateAlert] = useState(false);
   const [showEditAlert, setShowEditAlert] = useState(false);
-
 
   // Modal state
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
@@ -42,12 +42,10 @@ const Recipes = (props) => {
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     if (twistId !== undefined) {
-      axios.get(`/api/recipes/${id}?twist=${twistId}`)
-      .then((response) => {
+      axios.get(`/api/recipes/${id}?twist=${twistId}`).then((response) => {
         setTwist(response.data.recipe);
-      })
-    }
-    else {
+      });
+    } else {
       axios.get(`/api/recipes/${id}?random=1`).then((response) => {
         // console.log(response.data.recipe.twist_id);
         setTwist(response.data.recipe);
@@ -133,7 +131,6 @@ const Recipes = (props) => {
             Updated twist has been saved!
           </Alert>
         )}
-        
 
         {/* Twist modals */}
         <TwistCreateModal
@@ -152,13 +149,13 @@ const Recipes = (props) => {
           onHide={toggleDeleteModal}
           twist={twist ? twist : undefined}
         />
-        {twist !== null ?
-        <TwistShareModal
-          show={isShareModalOpen}
-          onHide={toggleShareModal}
-          url={`http://localhost:3000/twists/${twist.slug}`}
-        />
-        : null}
+        {twist !== null ? (
+          <TwistShareModal
+            show={isShareModalOpen}
+            onHide={toggleShareModal}
+            url={`http://localhost:3000/twists/${twist.slug}`}
+          />
+        ) : null}
 
         {/* Show twists when disabled */}
         {showTwists === false ? (
@@ -207,7 +204,11 @@ const Recipes = (props) => {
               ) : null}
               <br />
               {twist !== null ? (
-                <Button className="twist-buttons" variant="primary" onClick={toggleShareModal}>
+                <Button
+                  className="twist-buttons"
+                  variant="primary"
+                  onClick={toggleShareModal}
+                >
                   Share
                 </Button>
               ) : null}
