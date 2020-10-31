@@ -1,9 +1,44 @@
 import React, {useState} from "react";
-import {Modal, Button, Form, Col, Alert} from "react-bootstrap";
+import {Modal, Button, Form, Col} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
+import copy from "copy-to-clipboard";
 import "../styles/Modal.scss";
 import axios from "axios";
+import faker from "faker";
 
+const TwistShareModal = (props) => {
+  const {show, onHide, url} = props;
+
+  const message = `Your share link is: ${url}`;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  function copyToClipboard() {
+    copy(url);
+  };
+  return (
+    <Modal show={show} onHide={onHide}>
+      <Modal.Dialog>
+        <Modal.Header onClick={onHide} closeButton>
+          <Modal.Title>Share a Twist</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Label>
+                {message}
+              </Form.Label>
+            </Form.Group>
+            <Button onClick={copyToClipboard} variant="primary" type="submit">
+              Copy Link
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal.Dialog>
+    </Modal>
+  );
+};
 // Create twist modal
 const TwistCreateModal = (props) => {
   const {show, onHide, user, recipe, onSubmit} = props;
@@ -31,7 +66,7 @@ const TwistCreateModal = (props) => {
         recipe_id: recipe,
         user_id: user.id,
         tags: state.category,
-        slug: "222hgvf74kt34",
+        slug: faker.lorem.slug(1),
         is_private: state.private,
         sort_order: 1,
       })
@@ -109,8 +144,8 @@ const TwistCreateModal = (props) => {
 
 // Edit twist modal
 const TwistEditModal = (props) => {
-  const {show, onHide, user, recipe} = props;
-  console.log(props);
+  const {show, onHide, user, twist} = props;
+  console.log(twist.content);
   const [editState, setEditState] = useState({
     content: "",
     private: false,
@@ -132,21 +167,7 @@ const TwistEditModal = (props) => {
     axios
       .put("/api/twists", {
         content: editState.content,
-        recipe_id: recipe,
-        is_private: editState.private,
-      })
-      .catch((error) => {
-        console.log("Error: ", error);
-      });
-    event.preventDefault();
-  };
-
-  const handleDeleteSubmit = (event) => {
-    // console.log(deleteState);
-    axios
-      .delete("/api/twists", {
-        content: editState.content,
-        recipe_id: recipe,
+        recipe_id: twist,
         is_private: editState.private,
       })
       .catch((error) => {
@@ -182,7 +203,18 @@ const TwistEditModal = (props) => {
 };
 
 // Edit twist modal
-const TwistDeleteModal = ({show, onHide}) => {
+const TwistDeleteModal = (props) => {
+  const {show, onHide, twist} = props;
+  console.log(props.twist);
+
+  const handleDeleteSubmit = (event) => {
+    console.log(`/api/twists/${twist.id}`);
+    axios.delete(`/api/twists/${twist.id}`, {}).catch((error) => {
+      console.log("Error: ", error);
+    });
+    event.preventDefault();
+  };
+
   return (
     <>
       <Modal show={show} onHide={onHide}>
@@ -197,7 +229,11 @@ const TwistDeleteModal = ({show, onHide}) => {
                   Are you sure you want to delete this twist?
                 </Form.Label>
               </Form.Group>
-              <Button variant="danger" type="submit">
+              <Button
+                variant="danger"
+                type="submit"
+                onClick={handleDeleteSubmit}
+              >
                 Delete
               </Button>
             </Form>
@@ -426,6 +462,7 @@ export {
   TwistCreateModal,
   TwistEditModal,
   TwistDeleteModal,
+  TwistShareModal,
   LoginModal,
   RegisterModal,
 };

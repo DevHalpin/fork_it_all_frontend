@@ -11,6 +11,8 @@ import Recipes from "./components/Recipes";
 import My_Twists from "./components/My_Twists";
 import Fave_Twists from "./components/Fave_Twists";
 import Fave_Users from "./components/Fave_Users";
+import Slug from "./components/Slug";
+
 export default function App() {
   const [state, setState] = useState({
     loggedInStatus: "NOT_LOGGED_IN",
@@ -78,12 +80,13 @@ export default function App() {
           )}
         />
         <Route
-          path="/recipes/:recipe"
+          path="/recipes/:recipe/:twists?/:twist?"
           render={(props) => <Recipes {...props} user={state.user} />}
         />
         <Route path="/my_twists/:user" component={My_Twists} />
         <Route path="/fave_twists/:user" component={Fave_Twists} />
         <Route path="/fave_users/:user" component={Fave_Users} />
+        <Route path="/twists/:slug" component={Slug} />
         <Route component={Error} />
       </Switch>
       <Footer />
