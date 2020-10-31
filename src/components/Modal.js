@@ -110,9 +110,8 @@ const TwistCreateModal = (props) => {
 // Edit twist modal
 const TwistEditModal = (props) => {
   const { show, onHide, user, twist } = props;
-  console.log(twist.content);
   const [editState, setEditState] = useState({
-    content: "",
+    content: twist.content,
     private: false,
     category: "Ingredient Replacement",
   });
@@ -130,9 +129,8 @@ const TwistEditModal = (props) => {
   const handleEditSubmit = (event) => {
     console.log(editState);
     axios
-      .put("/api/twists", {
+      .put(`/api/twists/${twist.id}`, {
         content: editState.content,
-        recipe_id: recipe,
         is_private: editState.private,
       })
       .catch((error) => {
@@ -154,7 +152,13 @@ const TwistEditModal = (props) => {
                 <Form.Label>
                   Found a better change for this recipe? Enter it here!
                 </Form.Label>
-                <Form.Control type="text" placeholder="Enter new twist" />
+                <Form.Control
+                  type="text"
+                  placeholder="Edit your twist"
+                  value={editState.content}
+                  onChange={handleEditChange}
+                  name={"content"}
+                />
               </Form.Group>
               <Button onClick={onHide} variant="primary" type="submit">
                 Submit Twist
@@ -170,7 +174,6 @@ const TwistEditModal = (props) => {
 // Edit twist modal
 const TwistDeleteModal = (props) => {
   const { show, onHide, twist } = props;
-  console.log(props.twist);
 
   const handleDeleteSubmit = (event) => {
     console.log(`/api/twists/${twist.id}`);
@@ -185,7 +188,7 @@ const TwistDeleteModal = (props) => {
       <Modal show={show} onHide={onHide}>
         <Modal.Dialog>
           <Modal.Header onClick={onHide} closeButton>
-            <Modal.Title>Edit your Twist</Modal.Title>
+            <Modal.Title>Delete your Twist?</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
