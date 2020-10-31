@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import {Modal, Button, Form, Col} from "react-bootstrap";
-import {useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { Modal, Button, Form, Col, Alert } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import copy from "copy-to-clipboard";
 import "../styles/Modal.scss";
 import axios from "axios";
 import faker from "faker";
 
 const TwistShareModal = (props) => {
-  const {show, onHide, url} = props;
+  const { show, onHide, url } = props;
 
   const message = `Your share link is: ${url}`;
   const handleSubmit = (event) => {
@@ -16,7 +16,7 @@ const TwistShareModal = (props) => {
 
   function copyToClipboard() {
     copy(url);
-  };
+  }
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Dialog>
@@ -26,9 +26,7 @@ const TwistShareModal = (props) => {
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group>
-              <Form.Label>
-                {message}
-              </Form.Label>
+              <Form.Label>{message}</Form.Label>
             </Form.Group>
             <Button onClick={copyToClipboard} variant="primary" type="submit">
               Copy Link
@@ -41,7 +39,7 @@ const TwistShareModal = (props) => {
 };
 // Create twist modal
 const TwistCreateModal = (props) => {
-  const {show, onHide, user, recipe, onSubmit} = props;
+  const { show, onHide, user, recipe, onSubmit } = props;
   const [state, setState] = useState({
     content: "",
     private: false,
@@ -49,7 +47,7 @@ const TwistCreateModal = (props) => {
   });
   //handle state changes for checkbox and field content
   const handleChange = (event) => {
-    const {type, checked} = event.target;
+    const { type, checked } = event.target;
     const eventValue = event.target.value;
     setState({
       ...state,
@@ -144,16 +142,23 @@ const TwistCreateModal = (props) => {
 
 // Edit twist modal
 const TwistEditModal = (props) => {
-  const {show, onHide, user, twist} = props;
-  console.log(twist.content);
+  const twistContent = props.twist.content;
+  const { show, onHide, user, twist } = props;
   const [editState, setEditState] = useState({
-    content: "",
+    content: twist.content,
     private: false,
     category: "Ingredient Replacement",
   });
 
+  useEffect(
+    (twistContent) => {
+      setEditState({ content: twist.content });
+    },
+    [twist]
+  );
+
   const handleEditChange = (event) => {
-    const {type, checked} = event.target;
+    const { type, checked } = event.target;
     const eventValue = event.target.value;
     setEditState({
       ...editState,
@@ -165,7 +170,7 @@ const TwistEditModal = (props) => {
   const handleEditSubmit = (event) => {
     console.log(editState);
     axios
-      .put("/api/twists", {
+      .put(`/api/twists/${twist.id}`, {
         content: editState.content,
         recipe_id: twist,
         is_private: editState.private,
@@ -189,7 +194,13 @@ const TwistEditModal = (props) => {
                 <Form.Label>
                   Found a better change for this recipe? Enter it here!
                 </Form.Label>
-                <Form.Control type="text" placeholder="Enter new twist" />
+                <Form.Control
+                  type="text"
+                  placeholder="Edit your twist"
+                  value={editState.content}
+                  onChange={handleEditChange}
+                  name={"content"}
+                />
               </Form.Group>
               <Button onClick={onHide} variant="primary" type="submit">
                 Submit Twist
@@ -204,8 +215,7 @@ const TwistEditModal = (props) => {
 
 // Edit twist modal
 const TwistDeleteModal = (props) => {
-  const {show, onHide, twist} = props;
-  console.log(props.twist);
+  const { show, onHide, twist } = props;
 
   const handleDeleteSubmit = (event) => {
     console.log(`/api/twists/${twist.id}`);
@@ -220,7 +230,7 @@ const TwistDeleteModal = (props) => {
       <Modal show={show} onHide={onHide}>
         <Modal.Dialog>
           <Modal.Header onClick={onHide} closeButton>
-            <Modal.Title>Edit your Twist</Modal.Title>
+            <Modal.Title>Delete your Twist?</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -247,7 +257,7 @@ const TwistDeleteModal = (props) => {
 // Login Modal
 const LoginModal = (props) => {
   const history = useHistory();
-  const {show, onHide, handleLogin} = props;
+  const { show, onHide, handleLogin } = props;
 
   const [state, setState] = useState({
     email: "",
@@ -268,7 +278,7 @@ const LoginModal = (props) => {
           email: state.email,
           password: state.password,
         },
-        {withCredentials: true}
+        { withCredentials: true }
       )
       .then((response) => {
         if (response.data.logged_in) {
@@ -283,7 +293,7 @@ const LoginModal = (props) => {
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
-    setState({...state, [event.target.name]: eventValue});
+    setState({ ...state, [event.target.name]: eventValue });
   };
 
   return (
@@ -334,7 +344,7 @@ const LoginModal = (props) => {
 // Register Modal
 const RegisterModal = (props) => {
   const history = useHistory();
-  const {show, onHide, handleLogin} = props;
+  const { show, onHide, handleLogin } = props;
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -361,7 +371,7 @@ const RegisterModal = (props) => {
           handle: state.handle,
           name: state.name,
         },
-        {withCredentials: true}
+        { withCredentials: true }
       )
       .then((response) => {
         if (response.data.status === "created") {
@@ -376,7 +386,7 @@ const RegisterModal = (props) => {
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
-    setState({...state, [event.target.name]: eventValue});
+    setState({ ...state, [event.target.name]: eventValue });
   };
 
   return (

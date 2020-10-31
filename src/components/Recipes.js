@@ -142,7 +142,7 @@ const Recipes = (props) => {
         <TwistEditModal
           show={isEditModalOpen}
           onHide={handleEditAlert}
-          twist={twist ? twist : undefined}
+          twist={twist ? twist : "no twist"}
         />
         <TwistDeleteModal
           show={isDeleteModalOpen}
