@@ -4,7 +4,8 @@ import axios from "axios";
 import {Nav, NavItem, NavLink, Form, FormControl, Button, Container, Row, Image, Col} from "react-bootstrap";
 
 function User_Profile(props) {
-  console.log(props)
+  const id = parseInt(props.match.params.user);
+  console.log(props);
 
   const editUser = (data) => {
     axios.put(`api/users/${props.user.id}`, data);
@@ -12,209 +13,96 @@ function User_Profile(props) {
 
   let imageSource = "";
   props.user.profile_picture !== null ?
-  imageSource = props.user.profile_picture :
-  imageSource = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+    imageSource = props.user.profile_picture :
+    imageSource = "https://www.flaticon.com/svg/static/icons/svg/817/817747.svg";
+
   return (
     <Container className="emp-profile">
-      <form method="post">
+      <Form method="post">
         <Row>
           <Col className="md-4">
-            <div class="profile-img">
-              <Image src={imageSource} alt=""/>
-              <div class="file btn btn-lg btn-primary">
-                  Change Photo
-                  <input type="file" name="file"/>
+            <div className="profile-img">
+              <Image src={imageSource} alt="Profile picture" />
+              <Row>
+                <div id="change-photo">
+                  {props.user.id === id ? (<Button variant="primary" className="file btn btn-lg btn-primary">
+                    Change Photo
+                    <input type="file" name="file" />
+                  </Button>) : null}
+                </div>
+                <div id="edit-profile">
+                  {props.user.id === id ?
+                    (<Button variant="primary" type="submit" className="file btn btn-lg btn-primary" name="btnAddMore">Edit Profile</Button>) : (<Button variant="primary" type="submit" className="file btn btn-lg btn-primary" name="btnAddMore">Follow User</Button>)}
+                </div>
+              </Row>
+            </div>
+            <div className="tab-content profile-tab" id="myTabContent">
+              <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div className="row">
+                  <div className="col-md-4 top-row">
+                    <label className="info-labels">User Handle</label>
+                  </div>
+                  <div className="col-md-4 top-row">
+                    <p>{props.user.handle}</p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-4">
+                    <label className="info-labels">Name</label>
+                  </div>
+                  <div className="col-md-4">
+                    <p>{props.user.name}</p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-4">
+                    <label className="info-labels">Email</label>
+                  </div>
+                  <div className="col-md-4">
+                    <p>{props.user.email}</p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-4">
+                    <label className="info-labels">Phone</label>
+                  </div>
+                  <div className="col-md-4">
+                    <p>123 456 7890</p>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-4">
+                    <label className="info-labels">Profession</label>
+                  </div>
+                  <div className="col-md-5">
+                    <p>Professional Dino Chef</p>
+                  </div>
+                </div>
               </div>
             </div>
           </Col>
-          <Col className="md-6">
-            <div class="profile-head">
-              <h5>
+          <Col className="md-8">
+            <div className="profile-head">
+              <h3>
                 {props.user.name}
-              </h5>
+              </h3>
+            </div>
+            <div>
+              <h5>My Bio</h5>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu risus quis varius quam quisque id. Quis vel eros donec ac odio tempor orci. Nulla malesuada pellentesque elit eget gravida cum sociis. Mauris commodo quis imperdiet massa tincidunt. Id leo in vitae turpis massa sed. Et netus et malesuada fames ac turpis egestas. Fermentum iaculis eu non diam phasellus vestibulum. Odio tempor orci dapibus ultrices in iaculis nunc sed. Faucibus purus in massa tempor nec feugiat nisl pretium.
+              </p>
+              <p>
+                Eget nullam non nisi est sit amet. Diam quis enim lobortis scelerisque fermentum. Mattis rhoncus urna neque viverra justo nec ultrices dui. Orci phasellus egestas tellus rutrum tellus pellentesque. Nisl rhoncus mattis rhoncus urna neque. Morbi quis commodo odio aenean sed adipiscing diam. Scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Sit amet aliquam id diam maecenas ultricies mi eget. Purus gravida quis blandit turpis cursus in hac. Scelerisque eu ultrices vitae auctor eu augue ut. At auctor urna nunc id cursus metus aliquam eleifend mi. Lacus laoreet non curabitur gravida arcu ac tortor dignissim convallis. Commodo viverra maecenas accumsan lacus vel. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Lectus nulla at volutpat diam ut venenatis tellus in.
+              </p>
+              <p>
+                Tristique senectus et netus et malesuada. Magna fermentum iaculis eu non diam phasellus. Elementum pulvinar etiam non quam. Ut venenatis tellus in metus vulputate eu scelerisque. Vel eros donec ac odio tempor orci dapibus ultrices. Sit amet aliquam id diam maecenas ultricies. Neque ornare aenean euismod elementum nisi quis. Laoreet id donec ultrices tincidunt arcu non sodales neque. Tempor orci eu lobortis elementum nibh tellus molestie. Massa massa ultricies mi quis hendrerit dolor magna eget. Dolor sed viverra ipsum nunc aliquet bibendum. Accumsan tortor posuere ac ut.
+              </p>
             </div>
           </Col>
-          <div class="col-md-2">
-              <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-          </div>
         </Row>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="profile-work">
-                <p>WORK LINK</p>
-                <a href="">Website Link</a><br/>
-                <a href="">Bootsnipp Profile</a><br/>
-                <a href="">Bootply Profile</a>
-                <p>SKILLS</p>
-                <a href="">Web Designer</a><br/>
-                <a href="">Web Developer</a><br/>
-                <a href="">WordPress</a><br/>
-                <a href="">WooCommerce</a><br/>
-                <a href="">PHP, .Net</a><br/>
-            </div>
-          </div>
-          <div class="col-md-8">
-              <div class="tab-content profile-tab" id="myTabContent">
-                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>User Handle</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>{props.user.handle}</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Name</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>{props.user.name}</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Email</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>{props.user.email}</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Phone</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>123 456 7890</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Profession</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>Web Developer and Designer</p>
-                                  </div>
-                              </div>
-                  </div>
-                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Experience</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>Expert</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Hourly Rate</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>10$/hr</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Total Projects</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>230</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>English Level</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>Expert</p>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-md-6">
-                                      <label>Availability</label>
-                                  </div>
-                                  <div class="col-md-6">
-                                      <p>6 months</p>
-                                  </div>
-                              </div>
-                      <div class="row">
-                          <div class="col-md-12">
-                              <label>Your Bio</label><br/>
-                              <p>Your detail description</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-      </form>           
-    </Container>
-    // <Container className="emp-profile">
-    //   <Row>
-    //     <Col className="md-4">
-    //       <div className="profile-img">
-    //         <Image src={`${props.user.profile_picture}`} alt="" />
-    //       </div>
-    //       <div className="file btn btn-lg btn-primary">
-    //         Change Photo
-    //         <input type="file" name="file" />
-    //       </div>
-    //       <div></div>
-    //     </Col>
-    //     <Col className="md-6">
-    //       <div className="profile-head">
-    //         <h5>{props.user.name}</h5>
-    //         <h6>{props.user.handle}</h6>
-    //         <p className="proile-rating">
-    //           Follows : <span>2471</span>
-    //         </p>
-    //         <Nav className="nav-tabs" id="myTab" role="tablist">
-    //           <NavItem>
-    //             <NavLink className="active"
-    //               id="home-tab"
-    //               data-toggle="tab"
-    //               href="#home"
-    //               role="tab"
-    //               aria-controls="home"
-    //               aria-selected="true"
-    //             >
-    //               Bio
-    //             </NavLink>
-    //           </NavItem>
-    //           <li className="nav-item">
-    //             <a
-    //               className="nav-link"
-    //               id="profile-tab"
-    //               data-toggle="tab"
-    //               href="#profile"
-    //               role="tab"
-    //               aria-controls="profile"
-    //               aria-selected="false"
-    //             >
-    //               Twists
-    //             </a>
-    //           </li>
-    //         </Nav>
-    //         {props.user.bio}
-    //       </div>
-    //     </Col>
-    //     <Col className="md-2">
-    //       <input
-    //         type="submit"
-    //         className="profile-edit-btn"
-    //         name="btnAddMore"
-    //         value="Edit Profile"
-    //         onClick={() => {
-    //           // editUser(data);
-    //         }}
-    //       />
-    //     </Col>
-    //   </Row>
-    //   <Row>
-    //     <h1>Consider using this space for Twists?</h1>
-    //   </Row>
-    // </Container>
+      </Form >
+    </Container >
   );
 }
 

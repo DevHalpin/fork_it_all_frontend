@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   Card,
   CardDeck,
@@ -8,7 +8,7 @@ import {
   Form,
   Alert,
 } from "react-bootstrap";
-import { TwistCreateModal, TwistEditModal, TwistDeleteModal } from "./Modal";
+import {TwistCreateModal, TwistEditModal, TwistDeleteModal} from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -23,6 +23,7 @@ const Recipes = (props) => {
   const [showFaveAlert, setShowFaveAlert] = useState(false);
   const [showCreateAlert, setShowCreateAlert] = useState(false);
   const [showEditAlert, setShowEditAlert] = useState(false);
+
 
   // Modal state
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
@@ -217,7 +218,7 @@ const Recipes = (props) => {
                 <Button
                   className="twist-buttons"
                   onClick={toggleDeleteModal}
-                  variant="primary"
+                  variant="danger"
                 >
                   <TwistDeleteModal
                     show={isDeleteModalOpen}
