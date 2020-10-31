@@ -8,23 +8,30 @@ import axios from "axios";
 import {LoginModal, RegisterModal} from "./Modal";
 
 function NavbarNav(props) {
+  const [state, setState] = useState({
+    search: ""
+  });
   const history = useHistory();
-  function handleSubmit(e) {
-    e.preventDefault();
-    const formData = new FormData(e.target),
-      formDataObj = Object.fromEntries(formData.entries()).search;
-    fetch(`/api/recipes?search=${formDataObj}`, {
-      method: 'GET',
-    })
+  
+  const handleChange = (event) => {
+    const eventValue = event.target.value;
+    setState({
+      ...state,
+      [event.target.name]: eventValue
+    });
+  };
+
+  const handleSubmit = (event) => {
+    axios
+      .get(`http://localhost:3001/api/recipes?search=${state.search}`)
       .then((response) => {
-        return response.json();
+        history.push(`/recipes/${response.data.recipe.id}`)
       })
-      .then((res) => {
-        const id = res.recipe.id;
-        history.push(`/recipes/${id}`);
-        console.log(res);
+      .catch((error) => {
+        console.log("Error: ", error);
       });
-  }
+    event.preventDefault();
+  };
 
   const handleLogOutClick = () => {
     axios.delete("/api/logout", {withCredentials: true})
@@ -81,7 +88,13 @@ function NavbarNav(props) {
           />
         </Link>
         <Form inline onSubmit={handleSubmit}>
-          <FormControl type="text" name="search" placeholder="Search" className="mr-sm-2" />
+        <FormControl
+                  type="text"
+                  name="search"
+                  placeholder="Search here!"
+                  value={state.search}
+                  onChange={handleChange}
+                />
           <Button variant="success" type="submit" className="mr-sm-2">
             Search
           </Button>
