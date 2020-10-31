@@ -127,6 +127,7 @@ const Recipes = (props) => {
             onClose={() => setShowFaveAlert(false)}
             dismissible
             bsPrefix
+            className="alert"
           >
             Added to favorites!
           </Alert>
@@ -136,6 +137,7 @@ const Recipes = (props) => {
             onClose={() => setShowCreateAlert(false)}
             dismissible
             bsPrefix
+            className="alert"
           >
             Twist has been created!
           </Alert>
@@ -145,6 +147,7 @@ const Recipes = (props) => {
             onClose={() => setShowEditAlert(false)}
             dismissible
             bsPrefix
+            className="alert"
           >
             Updated twist has been saved!
           </Alert>
