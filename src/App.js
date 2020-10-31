@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./styles/App.scss";
 import axios from "axios";
 import NavbarNav from "./components/Nav";
@@ -11,6 +11,7 @@ import Recipes from "./components/Recipes";
 import My_Twists from "./components/My_Twists";
 import Fave_Twists from "./components/Fave_Twists";
 import Fave_Users from "./components/Fave_Users";
+import Create_Recipe from "./components/Create_Recipe";
 import Slug from "./components/Slug";
 
 export default function App() {
@@ -20,7 +21,7 @@ export default function App() {
   });
   const checkLoginStatus = () => {
     axios
-      .get("/api/logged_in", {withCredentials: true})
+      .get("/api/logged_in", { withCredentials: true })
       .then((response) => {
         if (
           response.data.logged_in &&
@@ -87,6 +88,10 @@ export default function App() {
         <Route path="/fave_twists/:user" component={Fave_Twists} />
         <Route path="/fave_users/:user" component={Fave_Users} />
         <Route path="/twists/:slug" component={Slug} />
+        <Route
+          path="/create_recipe/"
+          render={(props) => <Create_Recipe {...props} user={state.user} />}
+        />
         <Route component={Error} />
       </Switch>
       <Footer />
