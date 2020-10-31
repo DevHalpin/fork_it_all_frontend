@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Modal, Button, Form, Col, Alert} from "react-bootstrap";
+import {Modal, Button, Form, Col} from "react-bootstrap";
 import {useHistory} from "react-router-dom";
 import copy from "copy-to-clipboard";
 import "../styles/Modal.scss";
@@ -37,9 +37,9 @@ const TwistShareModal = (props) => {
     </Modal>
   );
 };
-// Create twist modal
+
 const TwistCreateModal = (props) => {
-  const {show, onHide, user, recipe, onSubmit} = props;
+  const {show, onHide, user, recipe} = props;
   const [state, setState] = useState({
     content: "",
     private: false,
@@ -57,7 +57,6 @@ const TwistCreateModal = (props) => {
   };
 
   const handleSubmit = (event) => {
-    console.log(state);
     axios
       .post("/api/twists", {
         content: state.content,
@@ -140,10 +139,9 @@ const TwistCreateModal = (props) => {
   );
 };
 
-// Edit twist modal
 const TwistEditModal = (props) => {
   const twistContent = props.twist.content;
-  const {show, onHide, user, twist} = props;
+  const {show, onHide, twist} = props;
   const [editState, setEditState] = useState({
     content: twist.content,
     private: false,
@@ -168,7 +166,6 @@ const TwistEditModal = (props) => {
   };
 
   const handleEditSubmit = (event) => {
-    console.log(editState);
     axios
       .put(`/api/twists/${twist.id}`, {
         content: editState.content,
@@ -213,12 +210,11 @@ const TwistEditModal = (props) => {
   );
 };
 
-// Edit twist modal
+
 const TwistDeleteModal = (props) => {
   const {show, onHide, twist} = props;
 
   const handleDeleteSubmit = (event) => {
-    console.log(`/api/twists/${twist.id}`);
     axios.delete(`/api/twists/${twist.id}`, {}).catch((error) => {
       console.log("Error: ", error);
     });
@@ -255,7 +251,6 @@ const TwistDeleteModal = (props) => {
   );
 };
 
-// Login Modal
 const LoginModal = (props) => {
   const history = useHistory();
   const {show, onHide, handleLogin} = props;
@@ -274,7 +269,7 @@ const LoginModal = (props) => {
   const handleSubmit = (event) => {
     axios
       .post(
-        "http://localhost:3001/api/sessions",
+        "/api/sessions",
         {
           email: state.email,
           password: state.password,
@@ -342,7 +337,6 @@ const LoginModal = (props) => {
   );
 };
 
-// Register Modal
 const RegisterModal = (props) => {
   const history = useHistory();
   const {show, onHide, handleLogin} = props;
@@ -361,10 +355,9 @@ const RegisterModal = (props) => {
   };
 
   const handleSubmit = (event) => {
-    console.log(state);
     axios
       .post(
-        "http://localhost:3001/api/registrations",
+        "/api/registrations",
         {
           email: state.email,
           password: state.password,

@@ -12,9 +12,6 @@ const My_Twists = () => {
     axios
       .get(`/api/myTwists`)
       .then((response) => {
-        console.log(response.data);
-        // let parsedResponse = JSON.parse(response.data.message);
-        // console.log(parsedResponse);
         setTwists(response.data);
       })
       .catch(function(error) {

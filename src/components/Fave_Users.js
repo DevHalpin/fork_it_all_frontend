@@ -23,9 +23,6 @@ const Fave_Users = (props) => {
     axios
       .get(`/api/users/${id}`)
       .then((response) => {
-        console.log(response.data);
-        // let parsedResponse = JSON.parse(response.data.message);
-        // console.log(parsedResponse);
         setUser(response.data);
       })
       .catch(function(error) {

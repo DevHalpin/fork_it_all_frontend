@@ -14,7 +14,6 @@ const Fave_Twists = () => {
         setTwists(response.data);
       });
   }, []);
-  console.log(twists);
 
   const twistsCard = twists.map((twist) => {
     return (
