@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Container, Card, CardGroup} from 'react-bootstrap';
+import {Container, Card, Row} from 'react-bootstrap';
 import '../styles/App.scss';
 import axios from 'axios';
 
@@ -21,23 +21,25 @@ const My_Twists = () => {
         console.log(error);
       });
   }, []);
+  
+  const twistsCard = twists.map(twist => (
+    <Card key={twist.twist_id} style={{width: "15rem"}}>
+      <Card.Img src={`${twist.meal_image}`} variant="top" alt="Card image" />
+      <Card.Body>
+        <Card.Title>{`${twist.name}`}</Card.Title>
+        <Card.Text>
+          {`${twist.content}`}
+        </Card.Text>
+        <Card.Link href={`/recipes/${twist.recipe_id}/twists/${twist.twist_id}`} variant="primary">View this recipe</Card.Link>
+      </Card.Body>
+    </Card>
+  ))
 
   return (
-    <Container>
-      <CardGroup className="mt-3">
-        {twists.map(twist => (
-          <Card>
-            <Card.Img src={`${twist.meal_image}`} variant="top" alt="Card image" />
-            <Card.Body>
-              <Card.Title>{`${twist.name}`}</Card.Title>
-              <Card.Text>
-                {`${twist.content}`}
-              </Card.Text>
-              <Card.Link href={`/recipes/${twist.recipe_id}/twists/${twist.twist_id}`} variant="primary">View this recipe</Card.Link>
-            </Card.Body>
-          </Card>
-        ))}
-      </CardGroup>
+    <Container className="d-flex">
+      <Row className="justify-content-center">
+        {twistsCard}
+      </Row>
     </Container>
   );
 };

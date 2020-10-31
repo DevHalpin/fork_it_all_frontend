@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Card, CardDeck} from 'react-bootstrap';
+import {Card, Row, Container} from 'react-bootstrap';
 import '../styles/App.scss';
 import axios from 'axios';
 
@@ -16,8 +16,9 @@ const Fave_Twists = () => {
   }, []);
   console.log(twists);
 
-  const twistsCard = twists.map(twist => (
-    <Card key={twist.twist_id} style={{width: "30rem"}}>
+  const twistsCard = twists.map((twist) => {
+    return (
+      <Card key={twist.twist_id} style={{width: "15rem"}}>
       <Card.Img src={`${twist.meal_image}`} variant="top" alt="Card image" />
       <Card.Body>
         <Card.Title>{`${twist.name}`}</Card.Title>
@@ -26,16 +27,15 @@ const Fave_Twists = () => {
         </Card.Text>
         <Card.Link href={`/recipes/${twist.recipe_id}/twists/${twist.twist_id}`} variant="primary">View this recipe</Card.Link>
       </Card.Body>
-    </Card>
-  ));
+      </Card>
+    )})
 
   return (
-    <>
-      <CardDeck className="mt-3">
+    <Container className="d-flex">
+      <Row className="justify-content-center">
         {twistsCard}
-      </CardDeck>
-    </>
+      </Row>
+    </Container>
   );
 };
-
 export default Fave_Twists;
