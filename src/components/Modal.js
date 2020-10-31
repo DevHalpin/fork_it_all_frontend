@@ -1,9 +1,44 @@
 import React, { useState } from "react";
-import { Modal, Button, Form, Col, Alert } from "react-bootstrap";
+import { Modal, Button, Form, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import copy from "copy-to-clipboard"; 
 import "../styles/Modal.scss";
 import axios from "axios";
+import faker from "faker";
 
+const TwistShareModal = (props) => {
+  const {show, onHide, url} = props;
+  
+  const message = `Your share link is: ${url}`
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  }
+
+  function copyToClipboard() {
+    copy(url)
+  };
+  return (
+    <Modal show={show} onHide={onHide}>
+      <Modal.Dialog>
+        <Modal.Header onClick={onHide} closeButton>
+          <Modal.Title>Share a Twist</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Label>
+                {message}
+              </Form.Label>
+            </Form.Group>
+            <Button onClick={copyToClipboard} variant="primary" type="submit">
+              Copy Link
+            </Button>
+          </Form>
+        </Modal.Body>
+      </Modal.Dialog>
+    </Modal>
+  );
+}
 // Create twist modal
 const TwistCreateModal = (props) => {
   const { show, onHide, user, recipe } = props;
@@ -31,7 +66,7 @@ const TwistCreateModal = (props) => {
         recipe_id: recipe,
         user_id: user.id,
         tags: state.category,
-        slug: "222hgvf74kt34",
+        slug: faker.lorem.slug(1),
         is_private: state.private,
         sort_order: 1,
       })
@@ -426,6 +461,7 @@ export {
   TwistCreateModal,
   TwistEditModal,
   TwistDeleteModal,
+  TwistShareModal,
   LoginModal,
   RegisterModal,
 };
