@@ -50,16 +50,16 @@ const Recipes = (props) => {
     if (twistId !== undefined) {
       axios.get(`/api/recipes/${id}?twist=${twistId}`)
         .then((response) => {
-          setTwist(response.data.recipe);
+          setTwist(response.data);
         });
     }
     else {
       axios.get(`/api/recipes/${id}?random=1`).then((response) => {
-        setTwist(response.data.recipe);
+        setTwist(response.data);
       });
     }
     axios.get(`/api/recipes/${id}`).then((response) => {
-      setRecipe(response.data.recipe);
+      setRecipe(response.data);
     });
     axios.get('/api/faveTwists').then((response) => {
       const favoriteArr = [];

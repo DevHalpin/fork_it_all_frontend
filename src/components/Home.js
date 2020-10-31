@@ -29,7 +29,7 @@ export default function Home(props) {
     const fetchLiked = async () => {
       //this variable needs to be hard coded to the search bar?
       const result = await axios.get("/api/recipes/1");
-      const recipe = result.data.recipe;
+      const recipe = result.data;
       setRecipe(recipe);
     };
     const fetchRandom = async () => {
@@ -41,7 +41,7 @@ export default function Home(props) {
     const fetchThreeRecent = async () => {
       // this variable needs to be hard coded to the search bar?
       const result = await axios.get("/api/recipes?three=1");
-      const recipe = result.data.recipe;
+      const recipe = result.data;
       setThree(recipe);
     };
     fetchRandom();
