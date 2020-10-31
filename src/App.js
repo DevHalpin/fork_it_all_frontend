@@ -83,9 +83,9 @@ export default function App() {
           path="/recipes/:recipe/:twists?/:twist?"
           render={(props) => <Recipes {...props} user={state.user} />}
         />
-        <Route path="/my_twists/:user" component={My_Twists} />
-        <Route path="/fave_twists/:user" component={Fave_Twists} />
-        <Route path="/fave_users/:user" component={Fave_Users} />
+        <Route path="/my_twists/" component={My_Twists} />
+        <Route path="/fave_twists/" component={Fave_Twists} />
+        <Route path="/fave_users/" component={Fave_Users} />
         <Route path="/twists/:slug" component={Slug} />
         <Route component={Error} />
       </Switch>

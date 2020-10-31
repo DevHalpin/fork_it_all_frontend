@@ -1,19 +1,28 @@
+import React, { useState,useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Profile.scss";
 import axios from "axios";
-import {Nav, NavItem, NavLink, Form, FormControl, Button, Container, Row, Image, Col} from "react-bootstrap";
+import { Form, Button, Container, Row, Image, Col} from "react-bootstrap";
 
 function User_Profile(props) {
   const id = parseInt(props.match.params.user);
-  console.log(props);
+  const [user, setUser] = useState(props.user)
+
+  useEffect(() => {
+    axios.get(`/api/users/${id}`)
+    .then((response) => {
+      console.log(response.data)
+      setUser(response.data)
+    })
+  }, [id])
 
   const editUser = (data) => {
-    axios.put(`api/users/${props.user.id}`, data);
+    axios.put(`api/users/${user.id}`, data);
   };
 
   let imageSource = "";
-  props.user.profile_picture !== null ?
-    imageSource = props.user.profile_picture :
+  user.profile_picture !== null ?
+    imageSource = user.profile_picture :
     imageSource = "https://www.flaticon.com/svg/static/icons/svg/817/817747.svg";
 
   return (
@@ -43,7 +52,7 @@ function User_Profile(props) {
                     <label className="info-labels">User Handle</label>
                   </div>
                   <div className="col-md-4 top-row">
-                    <p>{props.user.handle}</p>
+                    <p>{user.handle}</p>
                   </div>
                 </div>
                 <div className="row">
@@ -51,7 +60,7 @@ function User_Profile(props) {
                     <label className="info-labels">Name</label>
                   </div>
                   <div className="col-md-4">
-                    <p>{props.user.name}</p>
+                    <p>{user.name}</p>
                   </div>
                 </div>
                 <div className="row">
@@ -59,7 +68,7 @@ function User_Profile(props) {
                     <label className="info-labels">Email</label>
                   </div>
                   <div className="col-md-4">
-                    <p>{props.user.email}</p>
+                    <p>{user.email}</p>
                   </div>
                 </div>
                 <div className="row">
@@ -84,7 +93,7 @@ function User_Profile(props) {
           <Col className="md-8">
             <div className="profile-head">
               <h3>
-                {props.user.name}
+                {user.name}
               </h3>
             </div>
             <div>

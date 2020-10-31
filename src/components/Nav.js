@@ -62,19 +62,19 @@ function NavbarNav(props) {
         <RegisterModal handleLogin={props.handleLogin} id="register-modal" show={isRegisterModalOpen} onHide={toggleRegisterModal} toggleLoginModal />
         <Row>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse id="basic-navbar-nav" >
             <Nav>
-              <Link to="/user_profile/48">Profile</Link>
+              <Link to={`/user_profile/${props.user.id}`}>Profile</Link>
               <Link to="/recipes/43">
                 Recipes
                 </Link>
-              <Link to="/my_twists/41">
+              <Link to="/my_twists/">
                 My Twists
                 </Link>
-              <Link to="/fave_twists/85">
+              <Link to="/fave_twists/">
                 Fave Twists
               </Link>
-              <Link to="/fave_users/19">
+              <Link to="/fave_users/">
                 Fave Users
               </Link>
             </Nav>
