@@ -5,7 +5,8 @@ body {
     flex-direction: column;
     margin: 0;
     min-height: 100%;
-    padding-bottom: 4.5em
+    padding-bottom: 4.5em;
+    position: relative;
 }
 
 // Site background
@@ -20,6 +21,8 @@ body {
 #footer {
   position: fixed;
   margin-top: auto;
+  overflow: visible;
+  z-index: 100;
   left: 0;
   bottom: 0;
   height: 4.5em;
@@ -37,4 +40,11 @@ body {
 #dino-chef-mascot {
   height: 3em;
   padding-right: 0.5em
+}
+
+.carousel-caption {
+  top: auto;
+  bottom: 0;
+  position: relative;
+  z-index: 1
 }

@@ -66,7 +66,7 @@ export default function Home(props) {
                 src={three[0].meal_image}
                 alt="Recipe"
               />
-              <Carousel.Caption>
+              <Carousel.Caption className="carousel-caption">
                 <h3>{three[0].name}</h3>
                 <h6>Meal region: {three[0].region}</h6>
                 <h6>Meal type: {three[0].meal_type}</h6>

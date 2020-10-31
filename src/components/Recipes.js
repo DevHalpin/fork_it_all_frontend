@@ -20,7 +20,7 @@ const Recipes = (props) => {
   const [recipe, setRecipe] = useState({});
   const [twist, setTwist] = useState({});
   const [favorites, setFavorites] = useState([]);
-  const [favorited, setFavorited] = useState(false)
+  const [favorited, setFavorited] = useState(false);
 
   // Alert state
   const [showFaveAlert, setShowFaveAlert] = useState(false);
@@ -37,13 +37,13 @@ const Recipes = (props) => {
   const [showTwists, setShowTwists] = useState(true);
 
   const checkFavorited = () => {
-    if (favorites.includes(twist.id) && favorited === false){
-      setFavorited(true)
+    if (favorites.includes(twist.id) && favorited === false) {
+      setFavorited(true);
     }
-    else if (!favorites.includes(twist.id) && favorited === true){
-      setFavorited(false)
+    else if (!favorites.includes(twist.id) && favorited === true) {
+      setFavorited(false);
     }
-  }
+  };
 
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
@@ -62,16 +62,16 @@ const Recipes = (props) => {
       setRecipe(response.data.recipe);
     });
     axios.get('/api/faveTwists').then((response) => {
-      const favoriteArr = []
+      const favoriteArr = [];
       response.data.forEach(favorite => {
-        favoriteArr.push(favorite.twist_id)
-      })
-      setFavorites(favoriteArr)
-    })
+        favoriteArr.push(favorite.twist_id);
+      });
+      setFavorites(favoriteArr);
+    });
   }, [id, twistId]);
 
   if (favorites.length > 0 && twist && twist.id !== undefined) {
-    checkFavorited()
+    checkFavorited();
   }
 
   // Find a random twist
