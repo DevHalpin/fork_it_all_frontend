@@ -28,7 +28,7 @@ const TwistShareModal = (props) => {
             <Form.Group>
               <Form.Label>{message}</Form.Label>
             </Form.Group>
-            <Button onClick={copyToClipboard} variant="primary" type="submit">
+            <Button onClick={copyToClipboard} variant="custom-primary" type="submit">
               Copy Link
             </Button>
           </Form>
@@ -120,7 +120,7 @@ const TwistCreateModal = (props) => {
                   </Form.Control>
                 </Form.Group>
               </Form.Group>
-              <Button onClick={onHide} variant="primary" type="submit">
+              <Button onClick={onHide} variant="custom-primary" type="submit">
                 Submit Twist
               </Button>
               <Form.Group controlId="formBasicCheckbox">
@@ -202,7 +202,7 @@ const TwistEditModal = (props) => {
                   name={"content"}
                 />
               </Form.Group>
-              <Button onClick={onHide} variant="primary" type="submit">
+              <Button onClick={onHide} variant="custom-primary" type="submit">
                 Submit Twist
               </Button>
             </Form>
@@ -330,7 +330,7 @@ const LoginModal = (props) => {
                   required
                 />
               </Form.Group>
-              <Button onClick={onHide} variant="primary" type="submit">
+              <Button onClick={onHide} variant="custom-primary" type="submit">
                 Login
               </Button>
             </Form>
@@ -457,7 +457,7 @@ const RegisterModal = (props) => {
                   required
                 />
               </Form.Group>
-              <Button onClick={onHide} variant="primary" type="submit">
+              <Button onClick={onHide} variant="custom-primary" type="submit">
                 Register
               </Button>
             </Form>

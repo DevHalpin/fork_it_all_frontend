@@ -89,9 +89,9 @@ function NavbarNav(props) {
         <Row>
           {props.loggedInStatus === "NOT_LOGGED_IN" ?
             (<>
-              <Button id="login-modal" onClick={toggleLoginModal} variant="primary" className="mr-sm-2">
+              <Button id="login-modal" onClick={toggleLoginModal} variant="custom-primary" className="mr-sm-2">
                 Login
-            </Button>  <Button id="register-modal" onClick={toggleRegisterModal} variant="primary" className="mr-sm-2">
+            </Button>  <Button id="register-modal" onClick={toggleRegisterModal} variant="custom-primary" className="mr-sm-2">
                 Register
             </Button>
             </>)

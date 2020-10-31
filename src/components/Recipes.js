@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   Card,
   CardDeck,
@@ -8,12 +8,7 @@ import {
   Form,
   Alert,
 } from "react-bootstrap";
-import {
-  TwistCreateModal,
-  TwistEditModal,
-  TwistDeleteModal,
-  TwistShareModal,
-} from "./Modal";
+import {TwistCreateModal, TwistEditModal, TwistDeleteModal, TwistShareModal} from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -42,10 +37,12 @@ const Recipes = (props) => {
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     if (twistId !== undefined) {
-      axios.get(`/api/recipes/${id}?twist=${twistId}`).then((response) => {
-        setTwist(response.data.recipe);
-      });
-    } else {
+      axios.get(`/api/recipes/${id}?twist=${twistId}`)
+        .then((response) => {
+          setTwist(response.data.recipe);
+        });
+    }
+    else {
       axios.get(`/api/recipes/${id}?random=1`).then((response) => {
         // console.log(response.data.recipe.twist_id);
         setTwist(response.data.recipe);
@@ -149,13 +146,13 @@ const Recipes = (props) => {
           onHide={toggleDeleteModal}
           twist={twist ? twist : undefined}
         />
-        {twist !== null ? (
+        {twist !== null ?
           <TwistShareModal
             show={isShareModalOpen}
             onHide={toggleShareModal}
             url={`http://localhost:3000/twists/${twist.slug}`}
           />
-        ) : null}
+          : null}
 
         {/* Show twists when disabled */}
         {showTwists === false ? (

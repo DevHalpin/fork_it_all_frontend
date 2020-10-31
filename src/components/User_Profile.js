@@ -25,14 +25,14 @@ function User_Profile(props) {
               <Image src={imageSource} alt="Profile picture" />
               <Row>
                 <div id="change-photo">
-                  {props.user.id === id ? (<Button variant="primary" className="file btn btn-lg btn-primary">
+                  {props.user.id === id ? (<Button variant="custom-primary" className="file btn btn-lg btn-primary">
                     Change Photo
                     <input type="file" name="file" />
                   </Button>) : null}
                 </div>
                 <div id="edit-profile">
                   {props.user.id === id ?
-                    (<Button variant="primary" type="submit" className="file btn btn-lg btn-primary" name="btnAddMore">Edit Profile</Button>) : (<Button variant="primary" type="submit" className="file btn btn-lg btn-primary" name="btnAddMore">Follow User</Button>)}
+                    (<Button variant="custom-primary" type="submit" className="file btn btn-lg btn-primary" name="btnAddMore">Edit Profile</Button>) : (<Button variant="custom-primary" type="submit" className="file btn btn-lg btn-primary" name="btnAddMore">Follow User</Button>)}
                 </div>
               </Row>
             </div>
