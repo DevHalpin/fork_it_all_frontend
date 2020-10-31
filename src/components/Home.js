@@ -61,7 +61,7 @@ export default function Home(props) {
           >
             <Carousel.Item>
               <img
-                style={{height: "25em"}}
+                // style={{height: "25em"}}
                 className="d-block w-100"
                 src={three[0].meal_image}
                 alt="Recipe"
@@ -74,7 +74,7 @@ export default function Home(props) {
             </Carousel.Item>
             <Carousel.Item>
               <img
-                style={{height: "25em"}}
+                // style={{height: "25em"}}
                 className="d-block w-100"
                 src={three[1].meal_image}
                 alt="Recipe"
@@ -87,7 +87,7 @@ export default function Home(props) {
             </Carousel.Item>
             <Carousel.Item>
               <img
-                style={{height: "25em"}}
+                // style={{height: "25em"}}
                 className="d-block w-100"
                 src={three[2].meal_image}
                 alt="Recipe"
