@@ -77,7 +77,7 @@ const Recipes = (props) => {
   // Find a random twist
   const randomTwist = () => {
     axios.get(`/api/recipes/${id}?random=1`).then((response) => {
-      setTwist(response.data.recipe);
+      setTwist(response.data);
     });
   };
 

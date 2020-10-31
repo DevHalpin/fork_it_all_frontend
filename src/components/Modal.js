@@ -16,6 +16,7 @@ const TwistShareModal = (props) => {
 
   function copyToClipboard() {
     copy(url);
+    onHide()
   }
   return (
     <Modal show={show} onHide={onHide}>
@@ -140,7 +141,6 @@ const TwistCreateModal = (props) => {
 };
 
 const TwistEditModal = (props) => {
-  const twistContent = props.twist.content;
   const {show, onHide, twist} = props;
   const [editState, setEditState] = useState({
     content: twist.content,
@@ -148,12 +148,10 @@ const TwistEditModal = (props) => {
     category: "Ingredient Replacement",
   });
 
-  useEffect(
-    (twistContent) => {
-      setEditState({content: twist.content});
-    },
-    [twist]
-  );
+  useEffect(() => {
+    setEditState({content: twist.content}
+    );
+  }, [twist])
 
   const handleEditChange = (event) => {
     const {type, checked} = event.target;
@@ -229,7 +227,7 @@ const TwistDeleteModal = (props) => {
             <Modal.Title>Delete your Twist?</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form>
+            <Form onSubmit={handleDeleteSubmit}>
               <Form.Group>
                 <Form.Label>
                   Are you sure you want to delete this twist?
@@ -239,7 +237,7 @@ const TwistDeleteModal = (props) => {
                 className="gen-button logout-button"
                 bsPrefix
                 type="submit"
-                onClick={handleDeleteSubmit}
+                onClick={onHide}
               >
                 Delete
               </Button>
