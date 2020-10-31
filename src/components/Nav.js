@@ -64,19 +64,17 @@ function NavbarNav(props) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" >
             <Nav>
-              <Link to={`/user_profile/${props.user.id}`}>Profile</Link>
-              <Link to="/recipes/43">
+              <Link to={`/user_profile/${props.user.id}`} id="nav-link">Profile</Link>
+              <Link to="/recipes/43" id="nav-link">
                 Recipes
                 </Link>
-              <Link to="/my_twists/">
+              <Link to="/my_twists/" id="nav-link">
                 My Twists
                 </Link>
-              <Link to="/fave_twists/">
+              <Link to="/fave_twists/" id="nav-link">
                 Fave Twists
               </Link>
-              <Link to="/fave_users/">
-                Fave Users
-              </Link>
+              <Link to="/fave_users/" id="nav-link">Fave Users</Link>
             </Nav>
           </Navbar.Collapse>
         </Row>

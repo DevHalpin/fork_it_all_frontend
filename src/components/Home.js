@@ -112,7 +112,7 @@ export default function Home(props) {
                 <Card.Img variant="top" src={recipe.meal_image} />
                 <Card.Body>
                   <Card.Title>{recipe.name}</Card.Title>
-                  <Card.Link href={`/recipes/${recipe.id}`} variant="primary">
+                  <Card.Link href={`/recipes/${recipe.id}`} className="card-link">
                     View this recipe
                   </Card.Link>
                 </Card.Body>
@@ -130,7 +130,7 @@ export default function Home(props) {
                 <Card.Img variant="top" src={random.meal_image} />
                 <Card.Body>
                   <Card.Title>{random.name}</Card.Title>
-                  <Card.Link href={`/recipes/${random.id}`} variant="primary">
+                  <Card.Link href={`/recipes/${random.id}`} className="card-link">
                     View this twist
                   </Card.Link>
                 </Card.Body>

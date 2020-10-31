@@ -180,7 +180,7 @@ const Recipes = (props) => {
 
         {/* Show twists when disabled */}
         {showTwists === false ? (
-          <Button align="right" onClick={setShowTwists} className="gen-button">
+          <Button onClick={setShowTwists} className="gen-button login-buttons enable-button">
             Enable Twists
           </Button>
         ) : null}

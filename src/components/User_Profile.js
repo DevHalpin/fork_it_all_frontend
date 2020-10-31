@@ -1,28 +1,19 @@
-import React, { useState,useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Profile.scss";
 import axios from "axios";
-import { Form, Button, Container, Row, Image, Col} from "react-bootstrap";
+import {Nav, NavItem, NavLink, Form, FormControl, Button, Container, Row, Image, Col} from "react-bootstrap";
 
 function User_Profile(props) {
   const id = parseInt(props.match.params.user);
-  const [user, setUser] = useState(props.user)
-
-  useEffect(() => {
-    axios.get(`/api/users/${id}`)
-    .then((response) => {
-      console.log(response.data)
-      setUser(response.data)
-    })
-  }, [id])
+  console.log(props);
 
   const editUser = (data) => {
-    axios.put(`api/users/${user.id}`, data);
+    axios.put(`api/users/${props.user.id}`, data);
   };
 
   let imageSource = "";
-  user.profile_picture !== null ?
-    imageSource = user.profile_picture :
+  props.user.profile_picture !== null ?
+    imageSource = props.user.profile_picture :
     imageSource = "https://www.flaticon.com/svg/static/icons/svg/817/817747.svg";
 
   return (
@@ -34,14 +25,14 @@ function User_Profile(props) {
               <Image src={imageSource} alt="Profile picture" />
               <Row>
                 <div id="change-photo">
-                  {props.user.id === id ? (<Button bsPrefix className="gen-button file btn btn-lg btn-primary">
+                  {props.user.id === id ? (<Button bsPrefix className="file btn btn-lg btn-primary">
                     Change Photo
                     <input type="file" name="file" />
                   </Button>) : null}
                 </div>
                 <div id="edit-profile">
                   {props.user.id === id ?
-                    (<Button bsPrefix type="submit" className="gen-button file btn btn-lg btn-primary" name="btnAddMore">Edit Profile</Button>) : (<Button bsPrefix type="submit" className="gen-button file btn btn-lg btn-primary" name="btnAddMore">Follow User</Button>)}
+                    (<Button bsPrefix type="submit" className="file btn btn-lg btn-primary" name="btnAddMore">Edit Profile</Button>) : (<Button bsPrefix type="submit" className="file btn btn-lg btn-primary" name="btnAddMore">Follow User</Button>)}
                 </div>
               </Row>
             </div>
@@ -52,7 +43,7 @@ function User_Profile(props) {
                     <label className="info-labels">User Handle</label>
                   </div>
                   <div className="col-md-4 top-row">
-                    <p>{user.handle}</p>
+                    <p>{props.user.handle}</p>
                   </div>
                 </div>
                 <div className="row">
@@ -60,7 +51,7 @@ function User_Profile(props) {
                     <label className="info-labels">Name</label>
                   </div>
                   <div className="col-md-4">
-                    <p>{user.name}</p>
+                    <p>{props.user.name}</p>
                   </div>
                 </div>
                 <div className="row">
@@ -68,7 +59,7 @@ function User_Profile(props) {
                     <label className="info-labels">Email</label>
                   </div>
                   <div className="col-md-4">
-                    <p>{user.email}</p>
+                    <p>{props.user.email}</p>
                   </div>
                 </div>
                 <div className="row">
@@ -93,7 +84,7 @@ function User_Profile(props) {
           <Col className="md-8">
             <div className="profile-head">
               <h3>
-                {user.name}
+                {props.user.name}
               </h3>
             </div>
             <div>

@@ -26,7 +26,11 @@
 }
 
 .navbar-light .navbar-toggler-icon  {
-  background-image: url(https://previews.123rf.com/images/fokaspokas/fokaspokas1809/fokaspokas180900164/108564673-hamburger-menu-web-icon-white-icon-with-shadow-on-transparent-background.jpg)
+  background-image: url(https://previews.123rf.com/images/fokaspokas/fokaspokas1809/fokaspokas180900164/108564673-hamburger-menu-web-icon-white-icon-with-shadow-on-transparent-background.jpg);
+}
+
+.dropdown-menu {
+  z-index: 5
 }
 
 .search-button {
@@ -38,4 +42,11 @@
 .search-button:active {
   box-shadow: 0 0 #87a86f; 
   background-color: #87a86f;
+}
+
+#nav-link {
+  // background-color:
+  font-weight: 500;
+  border-radius: 0.2em;
+  color: darkgray
 }

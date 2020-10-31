@@ -19,16 +19,17 @@ const Fave_Twists = () => {
   const twistsCard = twists.map((twist) => {
     return (
       <Card key={twist.twist_id} style={{width: "15rem"}}>
-      <Card.Img src={`${twist.meal_image}`} variant="top" alt="Card image" />
-      <Card.Body>
-        <Card.Title>{`${twist.name}`}</Card.Title>
-        <Card.Text>
-          {`${twist.content}`}
-        </Card.Text>
-        <Card.Link href={`/recipes/${twist.recipe_id}/twists/${twist.twist_id}`} variant="primary">View this recipe</Card.Link>
-      </Card.Body>
+        <Card.Img src={`${twist.meal_image}`} variant="top" alt="Card image" />
+        <Card.Body>
+          <Card.Title>{`${twist.name}`}</Card.Title>
+          <Card.Text>
+            {`${twist.content}`}
+          </Card.Text>
+          <Card.Link href={`/recipes/${twist.recipe_id}/twists/${twist.twist_id}`} className="card-link">View this recipe</Card.Link>
+        </Card.Body>
       </Card>
-    )})
+    );
+  });
 
   return (
     <Container className="d-flex">
