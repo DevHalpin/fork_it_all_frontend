@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Col, Alert } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import "../styles/Modal.scss";
@@ -109,12 +109,20 @@ const TwistCreateModal = (props) => {
 
 // Edit twist modal
 const TwistEditModal = (props) => {
+  const twistContent = props.twist.content;
   const { show, onHide, user, twist } = props;
   const [editState, setEditState] = useState({
     content: twist.content,
     private: false,
     category: "Ingredient Replacement",
   });
+
+  useEffect(
+    (twistContent) => {
+      setEditState({ content: twist.content });
+    },
+    [twist]
+  );
 
   const handleEditChange = (event) => {
     const { type, checked } = event.target;
