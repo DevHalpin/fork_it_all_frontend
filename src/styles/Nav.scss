@@ -28,3 +28,14 @@
 .navbar-light .navbar-toggler-icon  {
   background-image: url(https://previews.123rf.com/images/fokaspokas/fokaspokas1809/fokaspokas180900164/108564673-hamburger-menu-web-icon-white-icon-with-shadow-on-transparent-background.jpg)
 }
+
+.search-button {
+  margin: 5px;
+  background-color: #9abf7f;
+  box-shadow: 0px 4px 0px #87a86f;
+}
+
+.search-button:active {
+  box-shadow: 0 0 #87a86f; 
+  background-color: #87a86f;
+}

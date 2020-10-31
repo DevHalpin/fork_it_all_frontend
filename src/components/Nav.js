@@ -12,7 +12,7 @@ function NavbarNav(props) {
     search: ""
   });
   const history = useHistory();
-  
+
   const handleChange = (event) => {
     const eventValue = event.target.value;
     setState({
@@ -25,7 +25,7 @@ function NavbarNav(props) {
     axios
       .get(`http://localhost:3001/api/recipes?search=${state.search}`)
       .then((response) => {
-        history.push(`/recipes/${response.data.recipe.id}`)
+        history.push(`/recipes/${response.data.recipe.id}`);
       })
       .catch((error) => {
         console.log("Error: ", error);
@@ -65,7 +65,7 @@ function NavbarNav(props) {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav>
               <Link to="/user_profile/48">Profile</Link>
-              <Link to="/recipes/12">
+              <Link to="/recipes/43">
                 Recipes
                 </Link>
               <Link to="/my_twists/41">
@@ -88,29 +88,29 @@ function NavbarNav(props) {
           />
         </Link>
         <Form inline onSubmit={handleSubmit}>
-        <FormControl
-                  type="text"
-                  name="search"
-                  placeholder="Search here!"
-                  value={state.search}
-                  onChange={handleChange}
-                />
-          <Button variant="success" type="submit" className="mr-sm-2">
+          <FormControl
+            type="text"
+            name="search"
+            placeholder="Search here!"
+            value={state.search}
+            onChange={handleChange}
+          />
+          <Button bsPrefix type="submit" className="mr-sm-2 search-button gen-button">
             Search
           </Button>
         </Form>
         <Row>
           {props.loggedInStatus === "NOT_LOGGED_IN" ?
             (<>
-              <Button id="login-modal" onClick={toggleLoginModal} variant="custom-primary" className="mr-sm-2">
+              <Button id="login-modal" onClick={toggleLoginModal} bsPrefix className="mr-sm-2 login-buttons gen-button">
                 Login
-            </Button>  <Button id="register-modal" onClick={toggleRegisterModal} variant="custom-primary" className="mr-sm-2">
+            </Button>  <Button id="register-modal" onClick={toggleRegisterModal} bsPrefix className="mr-sm-2 login-buttons gen-button">
                 Register
             </Button>
             </>)
             : <>
-              <p className="user-handle">User: {props.user.handle} </p>
-              <Button onClick={handleLogOutClick} variant="danger" className="mr-sm-2">
+              <div className="user-handle">User: {props.user.handle} </div>
+              <Button onClick={handleLogOutClick} bsPrefix className="mr-sm-2 logout-button gen-button">
                 Log out
           </Button>
             </>

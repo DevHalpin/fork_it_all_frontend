@@ -126,7 +126,7 @@ const Recipes = (props) => {
           <Alert
             onClose={() => setShowFaveAlert(false)}
             dismissible
-            variant="primary"
+            bsPrefix
           >
             Added to favorites!
           </Alert>
@@ -135,7 +135,7 @@ const Recipes = (props) => {
           <Alert
             onClose={() => setShowCreateAlert(false)}
             dismissible
-            variant="primary"
+            bsPrefix
           >
             Twist has been created!
           </Alert>
@@ -144,7 +144,7 @@ const Recipes = (props) => {
           <Alert
             onClose={() => setShowEditAlert(false)}
             dismissible
-            variant="primary"
+            bsPrefix
           >
             Updated twist has been saved!
           </Alert>
@@ -177,7 +177,7 @@ const Recipes = (props) => {
 
         {/* Show twists when disabled */}
         {showTwists === false ? (
-          <Button align="right" onClick={setShowTwists}>
+          <Button align="right" onClick={setShowTwists} className="gen-button">
             Enable Twists
           </Button>
         ) : null}
@@ -213,9 +213,9 @@ const Recipes = (props) => {
               {/* Twist randomize and social options */}
               {twist !== null ? (
                 <Button
-                  className="twist-button-random"
+                  className="twist-button-random gen-button login-buttons"
                   onClick={() => randomTwist()}
-                  variant="primary"
+                  bsPrefix
                 >
                   Randomize
                 </Button>
@@ -223,22 +223,22 @@ const Recipes = (props) => {
               <br />
               {twist !== null ? (
                 <Button
-                  className="twist-buttons"
-                  variant="primary"
+                  className="login-buttons gen-button"
+                  bsPrefix
                   onClick={toggleShareModal}
                 >
                   Share
                 </Button>
               ) : null}
               {userHandle && twist !== null && userHandle !== twist.handle ? (
-                <Button className="twist-buttons" variant="primary">
+                <Button className="login-buttons gen-button" bsPrefix>
                   Rate
                 </Button>
               ) : null}
               {userHandle && twist !== null && userHandle !== twist.handle && favorited === false ? (
                 <Button
-                  className="twist-buttons"
-                  variant="primary"
+                  className="login-buttons gen-button"
+                  bsPrefix
                   onClick={() => {
                     handleFavorite();
                   }}
@@ -248,29 +248,29 @@ const Recipes = (props) => {
               ) : null}
               {twist !== null && userHandle === twist.handle ? (
                 <Button
-                  className="twist-buttons"
+                  className="login-buttons gen-button"
                   onClick={toggleEditModal}
-                  variant="primary"
+                  bsPrefix
                 >
                   Edit
                 </Button>
               ) : null}
               {userHandle ? (
                 <Button
-                  className="twist-buttons"
+                  className="login-buttons gen-button"
                   onClick={toggleCreateModal}
-                  variant="primary"
+                  bsPrefix
                 >
                   Create
                 </Button>
               ) : null}
               {twist && userHandle && userHandle === twist.handle ? (
                 <Button
-                  className="twist-buttons"
+                  className="logout-button gen-button"
                   onClick={toggleDeleteModal}
-                  variant="danger"
+                  bsPrefix
                 >
-                  Delete this twist
+                  Delete
                 </Button>
               ) : null}
             </Card.Body>
