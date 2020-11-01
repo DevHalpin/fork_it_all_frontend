@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Nav.scss";
 import {Link, useHistory} from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
-import {Nav, Navbar, Form, FormControl, Button, Container, Row} from "react-bootstrap";
+import {Nav, Navbar, Form, FormControl, Button, Container, Row, Dropdown} from "react-bootstrap";
 import axios from "axios";
 import {LoginModal, RegisterModal} from "./Modal";
 
@@ -61,20 +61,24 @@ function NavbarNav(props) {
         <LoginModal handleLogin={props.handleLogin} id="login-modal" show={isLoginModalOpen} onHide={toggleLoginModal} toggleRegisterModal />
         <RegisterModal handleLogin={props.handleLogin} id="register-modal" show={isRegisterModalOpen} onHide={toggleRegisterModal} toggleLoginModal />
         <Row>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav" >
-            <Nav>
-              <Link to={`/user_profile/${props.user.id}`} id="nav-link">Profile</Link>
-              <Link to="/recipes/43" id="nav-link">
+          <Navbar.Toggle aria-controls="basic-navbar-nav"><i class="material-icons">menu</i></Navbar.Toggle>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="dropdown-menu">
+              <Link role="menuitem" to={`/user_profile/${props.user.id}`} id="nav-link">Profile</Link>
+              <Dropdown.Divider />
+              <Link role="menuitem" to="/recipes/43" id="nav-link">
                 Recipes
                 </Link>
-              <Link to="/my_twists/" id="nav-link">
+              <Dropdown.Divider />
+              <Link role="menuitem" to="/my_twists/" id="nav-link">
                 My Twists
                 </Link>
-              <Link to="/fave_twists/" id="nav-link">
+              <Dropdown.Divider />
+              <Link role="menuitem" to="/fave_twists/" id="nav-link">
                 Fave Twists
               </Link>
-              <Link to="/fave_users/" id="nav-link">Fave Users</Link>
+              <Dropdown.Divider />
+              <Link role="menuitem" to="/fave_users/" id="nav-link">Fave Users</Link>
             </Nav>
           </Navbar.Collapse>
         </Row>
