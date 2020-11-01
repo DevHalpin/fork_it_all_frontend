@@ -7,6 +7,7 @@ import {
   Button,
   Form,
   Alert,
+  NavDropdown
 } from "react-bootstrap";
 import {
   TwistCreateModal,
@@ -215,7 +216,13 @@ const Recipes = (props) => {
                 {`${recipe.name}`}{" "}
               </Card.Header>
               <Card.Text className="recipe-text">
-                {`${recipe.instructions}`}
+                Region:<br />{`${recipe.region}`}
+                <NavDropdown.Divider />
+                Type:<br />{`${recipe.meal_type}`}
+                <NavDropdown.Divider />
+                Recipe Video:<br />{`${recipe.video_url}`}
+                <NavDropdown.Divider />
+                Instructions:<br />{`${recipe.instructions}`}
               </Card.Text>
             </Card.Body>
           </Card>
