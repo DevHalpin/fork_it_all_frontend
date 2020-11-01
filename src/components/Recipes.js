@@ -59,6 +59,7 @@ const Recipes = (props) => {
       });
     }
     axios.get(`/api/recipes/${id}`).then((response) => {
+      console.log(response);
       setRecipe(response.data);
     });
     axios.get('/api/faveTwists').then((response) => {
@@ -200,114 +201,148 @@ const Recipes = (props) => {
           </Card>
 
           {/* Twist display */}
-          <Card
-            className={
-              showTwists ? "text-center twist-card" : "twist-card-hide"
-            }
-          >
-            <Card.Header as="h5">User Twists!</Card.Header>
-            <Card.Body>
-              <Card.Title>
-                {twist !== null
-                  ? `${twist.handle} suggests including the following twist:`
-                  : "No twists exist for this recipe"}
-              </Card.Title>
-              <Card.Text>{twist !== null ? twist.content : null}</Card.Text>
-              {/* Twist randomize and social options */}
-              {twist !== null ? (
-                <Button
-                  className="twist-button-random gen-button login-buttons"
-                  onClick={() => randomTwist()}
-                  bsPrefix
-                >
-                  Randomize
-                </Button>
-              ) : null}
-              <br />
-              {twist !== null ? (
-                <Button
-                  className="login-buttons gen-button"
-                  bsPrefix
-                  onClick={toggleShareModal}
-                >
-                  Share
-                </Button>
-              ) : null}
-              {userHandle && twist !== null && userHandle !== twist.handle ? (
-                <Button className="login-buttons gen-button" bsPrefix>
-                  Rate
-                </Button>
-              ) : null}
-              {userHandle && twist !== null && userHandle !== twist.handle && favorited === false ? (
-                <Button
-                  className="login-buttons gen-button"
-                  bsPrefix
-                  onClick={() => {
-                    handleFavorite();
-                  }}
-                >
-                  Favorite
-                </Button>
-              ) : null}
-              {twist !== null && userHandle === twist.handle ? (
-                <Button
-                  className="login-buttons gen-button"
-                  onClick={toggleEditModal}
-                  bsPrefix
-                >
-                  Edit
-                </Button>
-              ) : null}
-              {userHandle ? (
-                <Button
-                  className="login-buttons gen-button"
-                  onClick={toggleCreateModal}
-                  bsPrefix
-                >
-                  Create
-                </Button>
-              ) : null}
-              {twist && userHandle && userHandle === twist.handle ? (
-                <Button
-                  className="logout-button gen-button"
-                  onClick={toggleDeleteModal}
-                  bsPrefix
-                >
-                  Delete
-                </Button>
-              ) : null}
-            </Card.Body>
-            <Form>
-              <Form.Group as={Col}>
-                <Form.Label>Find Twists by User</Form.Label>
-                <Form.Control
-                  size="md"
-                  type="text"
-                  placeholder="Enter a user handle"
-                />
-              </Form.Group>
+          <Col>
+            <Card
+              className={
+                showTwists ? "text-center twist-card" : "twist-card-hide"
+              }
+            >
+              <Card.Header as="h5">User Twists</Card.Header>
+              <Card.Body>
+                <Card.Title>
+                  {twist !== null
+                    ? `${twist.handle} suggests including the following twist:`
+                    : "No twists exist for this recipe"}
+                </Card.Title>
+                <Card.Text>{twist !== null ? twist.content : null}</Card.Text>
+                {/* Twist randomize and social options */}
+                {twist !== null ? (
+                  <Button
+                    className="twist-button-random gen-button login-buttons"
+                    onClick={() => randomTwist()}
+                    bsPrefix
+                  >
+                    Randomize
+                  </Button>
+                ) : null}
+                <br />
+                {twist !== null ? (
+                  <Button
+                    className="login-buttons gen-button"
+                    bsPrefix
+                    onClick={toggleShareModal}
+                  >
+                    Share
+                  </Button>
+                ) : null}
+                {userHandle && twist !== null && userHandle !== twist.handle ? (
+                  <Button className="login-buttons gen-button" bsPrefix>
+                    Rate
+                  </Button>
+                ) : null}
+                {userHandle && twist !== null && userHandle !== twist.handle && favorited === false ? (
+                  <Button
+                    className="login-buttons gen-button"
+                    bsPrefix
+                    onClick={() => {
+                      handleFavorite();
+                    }}
+                  >
+                    Favorite
+                  </Button>
+                ) : null}
+                {twist !== null && userHandle === twist.handle ? (
+                  <Button
+                    className="login-buttons gen-button"
+                    onClick={toggleEditModal}
+                    bsPrefix
+                  >
+                    Edit
+                  </Button>
+                ) : null}
+                {userHandle ? (
+                  <Button
+                    className="login-buttons gen-button"
+                    onClick={toggleCreateModal}
+                    bsPrefix
+                  >
+                    Create
+                  </Button>
+                ) : null}
+                {twist && userHandle && userHandle === twist.handle ? (
+                  <Button
+                    className="logout-button gen-button"
+                    onClick={toggleDeleteModal}
+                    bsPrefix
+                  >
+                    Delete
+                  </Button>
+                ) : null}
+              </Card.Body>
+              <Form className="twist-form">
+                <Form.Group as={Col}>
+                  <Form.Label>Find Twists by User</Form.Label>
+                  <Form.Control
+                    size="md"
+                    type="text"
+                    placeholder="Enter a user handle"
+                  />
+                </Form.Group>
 
-              <Form.Group as={Col}>
-                <Form.Label>Search by Twist Type</Form.Label>
-                <Form.Control as="select" id="inlineFormCustomSelect" custom>
-                  <option value="0">Select an option</option>
-                  <option value="1">Ingredient Replacement</option>
-                  <option value="2">Cooking Time</option>
-                  <option value="3">Healthy Options</option>
-                  <option value="4">Add Something Extra</option>
-                  <option value="5">Take Something Out</option>
-                </Form.Control>
-              </Form.Group>
+                <Form.Group as={Col}>
+                  <Form.Label>Search by Twist Type</Form.Label>
+                  <Form.Control as="select" id="inlineFormCustomSelect" custom>
+                    <option value="0">Select an option</option>
+                    <option value="1">Ingredient Replacement</option>
+                    <option value="2">Cooking Time</option>
+                    <option value="3">Healthy Options</option>
+                    <option value="4">Add Something Extra</option>
+                    <option value="5">Take Something Out</option>
+                  </Form.Control>
+                </Form.Group>
 
-              <Form.Group controlId="formBasicCheckbox">
-                <Form.Check
-                  onClick={() => setShowTwists(false)}
-                  type="checkbox"
-                  label="Disable Twists"
-                />
-              </Form.Group>
-            </Form>
-          </Card>
+                <Form.Group controlId="formBasicCheckbox">
+                  <Form.Check
+                    onClick={() => setShowTwists(false)}
+                    type="checkbox"
+                    label="Disable Twists"
+                  />
+                </Form.Group>
+              </Form>
+            </Card>
+
+            {/* Ingredient display */}
+            <Card className="twist-card">
+              <Card.Body className="ingredient-body">
+                <Card.Header as="h5" className="text-center ingredient-header">
+                  Ingredients
+              </Card.Header>
+                <Card.Text className="ingredient-text text-center">
+                  {`${recipe.ingredient1}`} {`${recipe.measure1}`}<br />
+                  {`${recipe.ingredient2}`} {`${recipe.measure2}`}<br />
+                  {`${recipe.ingredient3}`} {`${recipe.measure3}`}<br />
+                  {`${recipe.ingredient4}`} {`${recipe.measure4}`}<br />
+                  {`${recipe.ingredient5}`} {`${recipe.measure5}`}<br />
+                  {`${recipe.ingredient6}`} {`${recipe.measure6}`}<br />
+                  {`${recipe.ingredient7}`} {`${recipe.measure7}`}<br />
+                  {`${recipe.ingredient8}`} {`${recipe.measure8}`}<br />
+                  {`${recipe.ingredient9}`} {`${recipe.measure9}`}<br />
+                  {`${recipe.ingredient10}`} {`${recipe.measure10}`}<br />
+                  {`${recipe.ingredient11}`} {`${recipe.measure11}`}<br />
+                  {`${recipe.ingredient12}`} {`${recipe.measure12}`}<br />
+                  {`${recipe.ingredient13}`} {`${recipe.measure13}`}<br />
+                  {`${recipe.ingredient14}`} {`${recipe.measure14}`}<br />
+                  {`${recipe.ingredient15}`} {`${recipe.measure15}`}<br />
+                  {`${recipe.ingredient15}`} {`${recipe.measure15}`}<br />
+                  {`${recipe.ingredient16}`} {`${recipe.measure16}`}<br />
+                  {`${recipe.ingredient17}`} {`${recipe.measure17}`}<br />
+                  {`${recipe.ingredient18}`} {`${recipe.measure18}`}<br />
+                  {`${recipe.ingredient19}`} {`${recipe.measure19}`}<br />
+                  {`${recipe.ingredient20}`} {`${recipe.measure20}`}<br />
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
         </CardDeck>
       </Container>
     </>
