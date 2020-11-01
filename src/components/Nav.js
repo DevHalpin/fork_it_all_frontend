@@ -61,24 +61,24 @@ function NavbarNav(props) {
         <LoginModal handleLogin={props.handleLogin} id="login-modal" show={isLoginModalOpen} onHide={toggleLoginModal} toggleRegisterModal />
         <RegisterModal handleLogin={props.handleLogin} id="register-modal" show={isRegisterModalOpen} onHide={toggleRegisterModal} toggleLoginModal />
         <Row>
-          <Navbar.Toggle aria-controls="basic-navbar-nav"><i className="material-icons">menu</i></Navbar.Toggle>
+          <Navbar.Toggle aria-controls="basic-navbar-nav"><i className="material-icons menu">menu</i></Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="dropdown-menu">
-              <Link role="menuitem" to={`/user_profile/${props.user.id}`} id="nav-link">Profile</Link>
-              <Dropdown.Divider />
               <Link role="menuitem" to="/recipes/43" id="nav-link">
-                Recipes
-                </Link>
-              <Dropdown.Divider />
-              <Link role="menuitem" to="/my_twists/" id="nav-link">
-                My Twists
-                </Link>
-              <Dropdown.Divider />
-              <Link role="menuitem" to="/fave_twists/" id="nav-link">
-                Fave Twists
+                Recipes  <i className="material-icons menu-links md-24">food_bank</i>
               </Link>
               <Dropdown.Divider />
-              <Link role="menuitem" to="/fave_users/" id="nav-link">Fave Users</Link>
+              <Link role="menuitem" to={`/user_profile/${props.user.id}`} id="nav-link">Profile  <i className="material-icons menu-links md-24">account_box</i></Link>
+              <Dropdown.Divider />
+              <Link role="menuitem" to="/my_twists/" id="nav-link">
+                My Twists  <i className="material-icons menu-links md-24">menu_book</i>
+              </Link>
+              <Dropdown.Divider />
+              <Link role="menuitem" to="/fave_twists/" id="nav-link">
+                Fave Twists  <i className="material-icons menu-links md-24">favorite</i>
+              </Link>
+              <Dropdown.Divider />
+              <Link role="menuitem" to="/fave_users/" id="nav-link">Fave Users  <i className="material-icons menu-links md-18">group_add</i></Link>
             </Nav>
           </Navbar.Collapse>
         </Row>
@@ -98,7 +98,7 @@ function NavbarNav(props) {
             onChange={handleChange}
           />
           <Button bsPrefix type="submit" className="mr-sm-2 search-button gen-button">
-            Search
+            <i className="material-icons md-18">search</i>  Search
           </Button>
         </Form>
         <Row>

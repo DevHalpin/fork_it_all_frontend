@@ -25,18 +25,13 @@
   padding-right: 0.6em
 }
 
-// .navbar-light .navbar-toggler-icon  {
-//   background-image: url(https://www.shareicon.net/data/512x512/2017/02/15/878712_list_512x512.png);
-//   color: white
-// }
-
 .dropdown-menu {
   position: fixed;
   margin: 4.5%;
   margin-left: 2.5%;
   top: 1.1em;
   left: 0;
-  width: 10%;
+  width: 5%;
   background-color: whitesmoke;
   cursor: pointer;
   opacity: 100;
@@ -68,6 +63,6 @@
   background-color: #87a86f;
 }
 
-.material-icons{ 
-  color: rgba(255, 255, 255, 1); 
+.menu { 
+  color: rgba(255, 255, 255, 1);
 }
