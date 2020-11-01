@@ -28,15 +28,16 @@ function User_Profile(props) {
 
   const handleProfileEditSubmit = (event) => {
     event.preventDefault();
-    axios.patch(`/api/users/${props.user.id}`, {
-      // profile_picture: photo.raw,
+    const patchObj = { user:{
       email: "charla@oconnell.com",
       profile_picture: "https://www.fillmurray.com/200/300",
       name: "Everett Predovic",
       handle: "Andaleeni",
-      bio:
-        "Labore et excepturi vero expedita aut reiciendis laboriosam inventore fugiat voluptatum a ipsum itaque sapiente accusamus amet doloribus aliquid necessitatibus laborum quasi ea illo numquam temporibus aperiam voluptatem aut aut odit repellat ut occaecati quo id vero est asperiores natus fuga et architecto consequuntur atque est nobis eum sed officia nemo voluptatem ullam quas ut veniam vitae iusto et sequi quis ut sint nulla asperiores cumque similique veritatis in quia a velit sunt nihil suscipit sit voluptate iure placeat natus",
-    });
+      password: "1234",
+      password_confirmation: "1234",
+      
+    }};
+    axios.patch(`/api/users/${props.user.id}`, patchObj);
   };
 
   const handlePhotoUpload = (event) => {

@@ -79,6 +79,7 @@ export default function App() {
             />
           )}
         />
+        <Route exact path="/recipes/undefined" component={Error} />
         <Route
           path="/recipes/:recipe/:twists?/:twist?"
           render={(props) => <Recipes {...props} user={state.user} />}

@@ -61,7 +61,7 @@ function NavbarNav(props) {
         <LoginModal handleLogin={props.handleLogin} id="login-modal" show={isLoginModalOpen} onHide={toggleLoginModal} toggleRegisterModal />
         <RegisterModal handleLogin={props.handleLogin} id="register-modal" show={isRegisterModalOpen} onHide={toggleRegisterModal} toggleLoginModal />
         <Row>
-          <Navbar.Toggle aria-controls="basic-navbar-nav"><i class="material-icons">menu</i></Navbar.Toggle>
+          <Navbar.Toggle aria-controls="basic-navbar-nav"><i className="material-icons">menu</i></Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="dropdown-menu">
               <Link role="menuitem" to={`/user_profile/${props.user.id}`} id="nav-link">Profile</Link>
