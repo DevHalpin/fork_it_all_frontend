@@ -14,7 +14,8 @@ function User_Profile(props) {
   });
 
   const [photo, setPhoto] = useState({
-    file: null,
+    preview: "",
+    raw: "",
   });
 
   const handleProfileEditChange = (event) => {
@@ -26,29 +27,27 @@ function User_Profile(props) {
   };
 
   const handleProfileEditSubmit = (event) => {
-    axios
-      .put(`/api/users/${user.id}`, {
-        profile_picture: profileEditState.profile_picture,
-        // recipe_id: twist,
-        // is_private: editState.private,
-      })
-      .then(() => {
-        axios
-          .get(`/api/users/${id}`)
-          .then((response) => {
-            setUser(response.data);
-          })
-          .catch((error) => {
-            console.log("Error: ", error);
-          });
-        event.preventDefault();
-      });
+    event.preventDefault();
+    axios.patch(`/api/users/${props.user.id}`, {
+      // profile_picture: photo.raw,
+      email: "charla@oconnell.com",
+      profile_picture: "https://www.fillmurray.com/200/300",
+      name: "Everett Predovic",
+      handle: "Andaleeni",
+      bio:
+        "Labore et excepturi vero expedita aut reiciendis laboriosam inventore fugiat voluptatum a ipsum itaque sapiente accusamus amet doloribus aliquid necessitatibus laborum quasi ea illo numquam temporibus aperiam voluptatem aut aut odit repellat ut occaecati quo id vero est asperiores natus fuga et architecto consequuntur atque est nobis eum sed officia nemo voluptatem ullam quas ut veniam vitae iusto et sequi quis ut sint nulla asperiores cumque similique veritatis in quia a velit sunt nihil suscipit sit voluptate iure placeat natus",
+    });
   };
 
   const handlePhotoUpload = (event) => {
-    setPhoto({
-      file: URL.createObjectURL(event.target.files[0]),
-    });
+    if (event.target.files.length) {
+      setPhoto({
+        preview: URL.createObjectURL(event.target.files[0]),
+        raw: event.target.files[0],
+      });
+      // console.log(photo.raw);
+      // console.log(photo.preview);
+    }
   };
 
   useEffect(() => {
@@ -74,7 +73,7 @@ function User_Profile(props) {
           <Col className="md-4">
             <div className="profile-img">
               <Image
-                src={photo.file !== null ? photo.file : imageSource}
+                src={photo.preview !== "" ? photo.preview : imageSource}
                 alt="Profile picture"
               />
               <Row>
@@ -85,12 +84,7 @@ function User_Profile(props) {
                       className="gen-button file btn btn-lg btn-primary"
                     >
                       Change Photo
-                      <input
-                        type="file"
-                        name="file"
-                        value={profileEditState.profile_picture}
-                        onChange={handlePhotoUpload}
-                      />
+                      <input type="file" onChange={handlePhotoUpload} />
                     </Button>
                   ) : null}
                 </div>
