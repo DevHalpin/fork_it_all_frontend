@@ -23,7 +23,7 @@ function NavbarNav(props) {
 
   const handleSubmit = (event) => {
     axios
-      .get(`http://localhost:3001/api/recipes?search=${state.search}`)
+      .get(`/api/recipes?search=${state.search}`)
       .then((response) => {
         history.push(`/recipes/${response.data.id}`);
       })

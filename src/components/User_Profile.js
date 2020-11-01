@@ -11,11 +11,10 @@ function User_Profile(props) {
 
   useEffect(() => {
     axios.get(`/api/users/${id}`)
-      .then((response) => {
-        console.log(response.data);
-        setUser(response.data);
-      });
-  }, [id]);
+    .then((response) => {
+      setUser(response.data)
+    })
+  }, [id])
 
   const editUser = (data) => {
     axios.put(`api/users/${props.user.id}`, data);
