@@ -44,6 +44,32 @@ const Recipes = (props) => {
   //Reducer test
   const [state, dispatch] = useReducer(reducer, people);
 
+  const people = [
+    { name: "Jay", alive: true },
+    { name: "Kailee", alive: true },
+    { name: "John", alive: true },
+    { name: "Mia", alive: true },
+  ];
+
+  const reducer = (people, action) => {
+    if (action.type == "chomp") {
+      return people.map((person) => {
+        if (person.name == action.payload) {
+          person.alive = false;
+        }
+        return person;
+      });
+    }
+    if (action.type == "revive") {
+      return people.map((person) => {
+        if (person.name == action.payload) {
+          person.alive = true;
+        }
+        return person;
+      });
+    }
+  };
+
   const checkFavorited = () => {
     if (favorites.includes(twist.id) && favorited === false) {
       setFavorited(true);
