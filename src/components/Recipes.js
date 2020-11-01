@@ -8,7 +8,12 @@ import {
   Form,
   Alert,
 } from "react-bootstrap";
-import {TwistCreateModal, TwistEditModal, TwistDeleteModal, TwistShareModal} from "./Modal";
+import {
+  TwistCreateModal,
+  TwistEditModal,
+  TwistDeleteModal,
+  TwistShareModal,
+} from "./Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -39,8 +44,7 @@ const Recipes = (props) => {
   const checkFavorited = () => {
     if (favorites.includes(twist.id) && favorited === false) {
       setFavorited(true);
-    }
-    else if (!favorites.includes(twist.id) && favorited === true) {
+    } else if (!favorites.includes(twist.id) && favorited === true) {
       setFavorited(false);
     }
   };
@@ -48,12 +52,10 @@ const Recipes = (props) => {
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     if (twistId !== undefined) {
-      axios.get(`/api/recipes/${id}?twist=${twistId}`)
-        .then((response) => {
-          setTwist(response.data);
-        });
-    }
-    else {
+      axios.get(`/api/recipes/${id}?twist=${twistId}`).then((response) => {
+        setTwist(response.data);
+      });
+    } else {
       axios.get(`/api/recipes/${id}?random=1`).then((response) => {
         setTwist(response.data);
       });
@@ -62,9 +64,9 @@ const Recipes = (props) => {
       console.log(response);
       setRecipe(response.data);
     });
-    axios.get('/api/faveTwists').then((response) => {
+    axios.get("/api/faveTwists").then((response) => {
       const favoriteArr = [];
-      response.data.forEach(favorite => {
+      response.data.forEach((favorite) => {
         favoriteArr.push(favorite.twist_id);
       });
       setFavorites(favoriteArr);
@@ -78,6 +80,12 @@ const Recipes = (props) => {
   // Find a random twist
   const randomTwist = () => {
     axios.get(`/api/recipes/${id}?random=1`).then((response) => {
+      setTwist(response.data);
+    });
+  };
+  //used for updating the edit twist content
+  const specificTwist = (id, twist) => {
+    axios.get(`/api/recipes/${id}?twist=${twist}`).then((response) => {
       setTwist(response.data);
     });
   };
@@ -160,28 +168,40 @@ const Recipes = (props) => {
           onHide={handleCreateAlert}
           user={props.user}
           recipe={props.match.params.recipe}
+          random={() => {
+            randomTwist();
+          }}
         />
         <TwistEditModal
           show={isEditModalOpen}
           onHide={handleEditAlert}
           twist={twist ? twist : "no twist"}
+          getSpecifcTwist={() => {
+            specificTwist(id, twist.id);
+          }}
         />
         <TwistDeleteModal
           show={isDeleteModalOpen}
           onHide={toggleDeleteModal}
           twist={twist ? twist : undefined}
+          random={() => {
+            randomTwist();
+          }}
         />
-        {twist !== null ?
+        {twist !== null ? (
           <TwistShareModal
             show={isShareModalOpen}
             onHide={toggleShareModal}
             url={`http://localhost:3000/twists/${twist.slug}`}
           />
-          : null}
+        ) : null}
 
         {/* Show twists when disabled */}
         {showTwists === false ? (
-          <Button onClick={setShowTwists} className="gen-button login-buttons enable-button">
+          <Button
+            onClick={setShowTwists}
+            className="gen-button login-buttons enable-button"
+          >
             Enable Twists
           </Button>
         ) : null}

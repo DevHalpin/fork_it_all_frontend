@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from "react";
-import {Modal, Button, Form, Col} from "react-bootstrap";
-import {useHistory} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Modal, Button, Form, Col } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import copy from "copy-to-clipboard";
 import "../styles/Modal.scss";
 import axios from "axios";
 import faker from "faker";
 
 const TwistShareModal = (props) => {
-  const {show, onHide, url} = props;
+  const { show, onHide, url } = props;
 
   const message = `Your share link is: ${url}`;
   const handleSubmit = (event) => {
@@ -16,7 +16,7 @@ const TwistShareModal = (props) => {
 
   function copyToClipboard() {
     copy(url);
-    onHide()
+    onHide();
   }
   return (
     <Modal show={show} onHide={onHide}>
@@ -29,7 +29,12 @@ const TwistShareModal = (props) => {
             <Form.Group>
               <Form.Label>{message}</Form.Label>
             </Form.Group>
-            <Button onClick={copyToClipboard} bsPrefix type="submit" className="gen-button login-buttons">
+            <Button
+              onClick={copyToClipboard}
+              bsPrefix
+              type="submit"
+              className="gen-button login-buttons"
+            >
               Copy Link
             </Button>
           </Form>
@@ -40,7 +45,7 @@ const TwistShareModal = (props) => {
 };
 
 const TwistCreateModal = (props) => {
-  const {show, onHide, user, recipe} = props;
+  const { show, onHide, user, recipe, random } = props;
   const [state, setState] = useState({
     content: "",
     private: false,
@@ -48,7 +53,7 @@ const TwistCreateModal = (props) => {
   });
   //handle state changes for checkbox and field content
   const handleChange = (event) => {
-    const {type, checked} = event.target;
+    const { type, checked } = event.target;
     const eventValue = event.target.value;
     setState({
       ...state,
@@ -67,6 +72,9 @@ const TwistCreateModal = (props) => {
         slug: faker.lorem.slug(1),
         is_private: state.private,
         sort_order: 1,
+      })
+      .then(() => {
+        random();
       })
       .catch((error) => {
         console.log("Error: ", error);
@@ -120,7 +128,12 @@ const TwistCreateModal = (props) => {
                   </Form.Control>
                 </Form.Group>
               </Form.Group>
-              <Button onClick={onHide} bsPrefix type="submit" className="gen-button login-buttons">
+              <Button
+                onClick={onHide}
+                bsPrefix
+                type="submit"
+                className="gen-button login-buttons"
+              >
                 Submit Twist
               </Button>
               <Form.Group controlId="formBasicCheckbox">
@@ -141,7 +154,7 @@ const TwistCreateModal = (props) => {
 };
 
 const TwistEditModal = (props) => {
-  const {show, onHide, twist} = props;
+  const { show, onHide, twist, getSpecifcTwist } = props;
   const [editState, setEditState] = useState({
     content: twist.content,
     private: false,
@@ -149,12 +162,11 @@ const TwistEditModal = (props) => {
   });
 
   useEffect(() => {
-    setEditState({content: twist.content}
-    );
-  }, [twist])
+    setEditState({ content: twist.content });
+  }, [twist]);
 
   const handleEditChange = (event) => {
-    const {type, checked} = event.target;
+    const { type, checked } = event.target;
     const eventValue = event.target.value;
     setEditState({
       ...editState,
@@ -169,6 +181,9 @@ const TwistEditModal = (props) => {
         content: editState.content,
         recipe_id: twist,
         is_private: editState.private,
+      })
+      .then(() => {
+        getSpecifcTwist();
       })
       .catch((error) => {
         console.log("Error: ", error);
@@ -197,7 +212,12 @@ const TwistEditModal = (props) => {
                   name={"content"}
                 />
               </Form.Group>
-              <Button onClick={onHide} bsPrefix type="submit" className="gen-button login-buttons">
+              <Button
+                onClick={onHide}
+                bsPrefix
+                type="submit"
+                className="gen-button login-buttons"
+              >
                 Submit Twist
               </Button>
             </Form>
@@ -208,14 +228,18 @@ const TwistEditModal = (props) => {
   );
 };
 
-
 const TwistDeleteModal = (props) => {
-  const {show, onHide, twist} = props;
+  const { show, onHide, twist, random } = props;
 
   const handleDeleteSubmit = (event) => {
-    axios.delete(`/api/twists/${twist.id}`, {}).catch((error) => {
-      console.log("Error: ", error);
-    });
+    axios
+      .delete(`/api/twists/${twist.id}`, {})
+      .then(() => {
+        random();
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
     event.preventDefault();
   };
 
@@ -251,7 +275,7 @@ const TwistDeleteModal = (props) => {
 
 const LoginModal = (props) => {
   const history = useHistory();
-  const {show, onHide, handleLogin} = props;
+  const { show, onHide, handleLogin } = props;
 
   const [state, setState] = useState({
     email: "",
@@ -272,7 +296,7 @@ const LoginModal = (props) => {
           email: state.email,
           password: state.password,
         },
-        {withCredentials: true}
+        { withCredentials: true }
       )
       .then((response) => {
         if (response.data.logged_in) {
@@ -287,7 +311,7 @@ const LoginModal = (props) => {
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
-    setState({...state, [event.target.name]: eventValue});
+    setState({ ...state, [event.target.name]: eventValue });
   };
 
   return (
@@ -324,7 +348,12 @@ const LoginModal = (props) => {
                   required
                 />
               </Form.Group>
-              <Button onClick={onHide} bsPrefix type="submit" className="gen-button login-buttons">
+              <Button
+                onClick={onHide}
+                bsPrefix
+                type="submit"
+                className="gen-button login-buttons"
+              >
                 Login
               </Button>
             </Form>
@@ -337,7 +366,7 @@ const LoginModal = (props) => {
 
 const RegisterModal = (props) => {
   const history = useHistory();
-  const {show, onHide, handleLogin} = props;
+  const { show, onHide, handleLogin } = props;
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -363,7 +392,7 @@ const RegisterModal = (props) => {
           handle: state.handle,
           name: state.name,
         },
-        {withCredentials: true}
+        { withCredentials: true }
       )
       .then((response) => {
         if (response.data.status === "created") {
@@ -378,7 +407,7 @@ const RegisterModal = (props) => {
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
-    setState({...state, [event.target.name]: eventValue});
+    setState({ ...state, [event.target.name]: eventValue });
   };
 
   return (
@@ -449,7 +478,12 @@ const RegisterModal = (props) => {
                   required
                 />
               </Form.Group>
-              <Button onClick={onHide} bsPrefix type="submit" className="gen-button login-buttons">
+              <Button
+                onClick={onHide}
+                bsPrefix
+                type="submit"
+                className="gen-button login-buttons"
+              >
                 Register
               </Button>
             </Form>
