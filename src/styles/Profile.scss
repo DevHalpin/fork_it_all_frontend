@@ -4,7 +4,8 @@
   margin-bottom: 3%;
   border-radius: 0.5rem;
   background: #fff;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 .profile-img {
   text-align: center;
@@ -37,6 +38,11 @@
   display: inline-block;
 }
 
+.save {
+  display: flex;
+  float: right;
+}
+
 .profile-tab label {
   font-weight: 600;
 }
@@ -46,9 +52,13 @@
 }
 
 .info-labels {
-  padding-left: 2em
+  padding-left: 2em;
 }
 
 .top-row {
-  padding-top: 1em
+  padding-top: 1em;
+}
+
+.profile-head {
+  display: flex;
 }

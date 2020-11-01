@@ -7,10 +7,43 @@ import { Form, Button, Container, Row, Image, Col } from "react-bootstrap";
 function User_Profile(props) {
   const id = parseInt(props.match.params.user);
   const [user, setUser] = useState(props.user);
+  const [profileEditState, setProfileEditState] = useState({
+    // bio: "",
+    // content: twist.content,
+    profile_picture: null,
+  });
 
   const [photo, setPhoto] = useState({
     file: null,
   });
+
+  const handleProfileEditChange = (event) => {
+    const eventValue = event.target.value;
+    setProfileEditState({
+      ...profileEditState,
+      [event.target.name]: eventValue,
+    });
+  };
+
+  const handleProfileEditSubmit = (event) => {
+    axios
+      .put(`/api/users/${user.id}`, {
+        profile_picture: profileEditState.profile_picture,
+        // recipe_id: twist,
+        // is_private: editState.private,
+      })
+      .then(() => {
+        axios
+          .get(`/api/users/${id}`)
+          .then((response) => {
+            setUser(response.data);
+          })
+          .catch((error) => {
+            console.log("Error: ", error);
+          });
+        event.preventDefault();
+      });
+  };
 
   const handlePhotoUpload = (event) => {
     setPhoto({
@@ -36,7 +69,7 @@ function User_Profile(props) {
 
   return (
     <Container className="emp-profile">
-      <Form method="post">
+      <Form onSubmit={handleProfileEditSubmit}>
         <Row>
           <Col className="md-4">
             <div className="profile-img">
@@ -55,6 +88,7 @@ function User_Profile(props) {
                       <input
                         type="file"
                         name="file"
+                        value={profileEditState.profile_picture}
                         onChange={handlePhotoUpload}
                       />
                     </Button>
@@ -135,7 +169,17 @@ function User_Profile(props) {
           </Col>
           <Col className="md-8">
             <div className="profile-head">
-              <h3>{props.user.name}</h3>
+              <h3 className="user-name">{props.user.name}</h3>
+              <div id="edit-profile">
+                <Button
+                  bsPrefix
+                  type="submit"
+                  className="gen-button file btn btn-lg btn-primary save"
+                  name="btnAddMore"
+                >
+                  Save Profile
+                </Button>
+              </div>
             </div>
             <div>
               <h5>My Bio</h5>
