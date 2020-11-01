@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import "./styles/App.scss";
+import "./styles/Button.scss";
+import "./styles/Card.scss";
 import axios from "axios";
 import NavbarNav from "./components/Nav";
 import Footer from "./components/Footer";

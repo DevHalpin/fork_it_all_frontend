@@ -48,70 +48,10 @@ body {
   z-index: 1
 }
 
-.gen-button {
-  padding: 8px 18px;
-  font-size: 14px;
-  border-radius: 10px;
-  display: inline-block;
-  text-align: center;
-  color: white;
-  border: 0;
-  font-weight: 400;
-  position: relative;
-  margin: 3px
-}
-
-.gen-button:hover {
-	top: 4px;	
-}
-
-.login-buttons {
-  background-color: #7fb1bf;
-  box-shadow: 0px 4px #74a3b0;
-}
-
-.login-buttons:hover {
-  box-shadow: 0 0 #74a3b0; 
-  background-color: #709CA8;
-}
-
-.logout-button {
-  background-color: #fa5a5a;
-  box-shadow:0px 4px 0px #E04342;
-}
-
-.logout-button:hover {
-  box-shadow: 0 0 #ff4c4b;
-  background-color: #ff4c4b;
-}
-
 .alert {
   text-align: center;
   font-weight: 500;
   background-color: #709CA8;
   border-radius: 20px;
   color: white
-}
-
-.card-link {
-  font-weight: 500;
-  color: white;
-  background-color: #fa5a5a;
-  box-shadow:0px 4px 0px #E04342;
-  text-transform: uppercase;
-  line-height: 1.6785;
-  font-family: georgia, serif;
-	padding: 8px 18px;
-  outline-offset: .5rem;
-  border-radius: 10px;
-}
-
-.card-link:hover {
-  box-shadow: 0 0 #ff4c4b;
-  background-color: #ff4c4b;
-  color: #356859;
-}
-
-.card-link:visited {
-  color: #356859;
 }

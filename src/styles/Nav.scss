@@ -7,10 +7,6 @@
   margin-bottom: -45px;
 }
 
-.burger-menu {
-  flex-grow: 0
-}
-
 .nav {
   overflow: hidden;
   position: static;
@@ -50,17 +46,6 @@
   z-index: 100;
   position: relative;
   margin-left: 1em
-}
-
-.search-button {
-  margin: 5px;
-  background-color: #9abf7f;
-  box-shadow: 0px 4px 0px #87a86f;
-}
-
-.search-button:active {
-  box-shadow: 0 0 #87a86f; 
-  background-color: #87a86f;
 }
 
 .menu { 

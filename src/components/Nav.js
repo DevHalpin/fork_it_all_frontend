@@ -13,6 +13,9 @@ function NavbarNav(props) {
     search: ""
   });
   const history = useHistory();
+  // Set modal state to false (closed)
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
@@ -43,10 +46,6 @@ function NavbarNav(props) {
         console.log("Logout Error ", error);
       });
   };
-
-  // Set modal state to false (closed)
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
-  const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
 
   // Toggle for modals
   const toggleLoginModal = () => {

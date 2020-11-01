@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/Profile.scss";
+import "../styles/User_Profile.scss";
 import axios from "axios";
-import { Form, Button, Container, Row, Image, Col } from "react-bootstrap";
+import {Form, Button, Container, Row, Image, Col} from "react-bootstrap";
 
 function User_Profile(props) {
   const id = parseInt(props.match.params.user);
@@ -28,15 +28,17 @@ function User_Profile(props) {
 
   const handleProfileEditSubmit = (event) => {
     event.preventDefault();
-    const patchObj = { user:{
-      email: "charla@oconnell.com",
-      profile_picture: "https://www.fillmurray.com/200/300",
-      name: "Everett Predovic",
-      handle: "Andaleeni",
-      password: "1234",
-      password_confirmation: "1234",
-      
-    }};
+    const patchObj = {
+      user: {
+        email: "charla@oconnell.com",
+        profile_picture: "https://www.fillmurray.com/200/300",
+        name: "Everett Predovic",
+        handle: "Andaleeni",
+        password: "1234",
+        password_confirmation: "1234",
+
+      }
+    };
     axios.patch(`/api/users/${props.user.id}`, patchObj);
   };
 
@@ -65,7 +67,7 @@ function User_Profile(props) {
   props.user.profile_picture !== null || imageSource !== null
     ? (imageSource = props.user.profile_picture)
     : (imageSource =
-        "https://www.flaticon.com/svg/static/icons/svg/817/817747.svg");
+      "https://www.flaticon.com/svg/static/icons/svg/817/817747.svg");
 
   return (
     <Container className="emp-profile">
@@ -100,15 +102,15 @@ function User_Profile(props) {
                       Edit Profile
                     </Button>
                   ) : (
-                    <Button
-                      bsPrefix
-                      type="submit"
-                      className="gen-button file btn btn-lg btn-primary"
-                      name="btnAddMore"
-                    >
-                      Follow User
-                    </Button>
-                  )}
+                      <Button
+                        bsPrefix
+                        type="submit"
+                        className="gen-button file btn btn-lg btn-primary"
+                        name="btnAddMore"
+                      >
+                        Follow User
+                      </Button>
+                    )}
                 </div>
               </Row>
             </div>
@@ -164,12 +166,12 @@ function User_Profile(props) {
           </Col>
           <Col className="md-8">
             <div className="profile-head">
-              <h3 className="user-name">{props.user.name}</h3>
+              <div><h3 className="user-name">{props.user.name}</h3></div>
               <div id="edit-profile">
                 <Button
                   bsPrefix
                   type="submit"
-                  className="gen-button file btn btn-lg btn-primary save"
+                  className="gen-button save-button"
                   name="btnAddMore"
                 >
                   Save Profile
