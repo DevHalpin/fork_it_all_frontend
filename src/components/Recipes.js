@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import {
   Card,
   CardDeck,
@@ -40,6 +40,9 @@ const Recipes = (props) => {
 
   // Twist display state
   const [showTwists, setShowTwists] = useState(true);
+
+  //Reducer test
+  const [state, dispatch] = useReducer(reducer, people);
 
   const checkFavorited = () => {
     if (favorites.includes(twist.id) && favorited === false) {
