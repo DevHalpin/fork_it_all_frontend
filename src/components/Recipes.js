@@ -9,12 +9,10 @@ import {
   Alert,
   NavDropdown
 } from "react-bootstrap";
-import {
-  TwistCreateModal,
-  TwistEditModal,
-  TwistDeleteModal,
-  TwistShareModal,
-} from "./Modal";
+import TwistDeleteModal from "./twist_modals/Delete_Modal";
+import TwistShareModal from "./twist_modals/Share_Modal";
+import TwistCreateModal from "./twist_modals/Create_Modal";
+import TwistEditModal from "./twist_modals/Edit_Modal";
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
@@ -23,6 +21,8 @@ const Recipes = (props) => {
   let id = props.match.params.recipe;
   let twistId = props.match.params.twist;
   const userHandle = props.user.handle;
+
+
   const [recipe, setRecipe] = useState({});
   const [twist, setTwist] = useState({});
   const [favorites, setFavorites] = useState([]);
