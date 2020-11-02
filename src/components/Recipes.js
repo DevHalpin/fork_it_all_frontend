@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import ReactPlayer from "react-player"
 import {
   Card,
   CardDeck,
@@ -132,7 +131,6 @@ const Recipes = (props) => {
   function matchKey(objectToSearch, keyToFind) {
     const result = []
     for (var k in objectToSearch) {
-      console.log(objectToSearch[k])
       if (objectToSearch[k] !== null && objectToSearch[k] !== ""){
         if ( k.toLowerCase().indexOf(keyToFind.toLowerCase()) !== -1) 
           result.push(objectToSearch[k]);
@@ -149,19 +147,27 @@ const Recipes = (props) => {
 
     for (let i = 0; i < ingredientArr.length; i++){
       ingredients.push({ingredient:ingredientArr[i],
-                        measure: measureArr[i]})
+                        measure: measureArr[i],
+                        key: i})
     }
     return ingredients
   }
 
   const ingredientList = buildIngredients().map((item) => {
     return (
-      <Card.Text>
+      <Card.Text key ={item.key}>
         {`${item.ingredient} : ${item.measure}`}
       </Card.Text>
     )
   })
 
+  let embedLink = ""
+  if (recipe.video_url !== undefined) {
+    embedLink = recipe.video_url.replace('watch?v=','embed/') 
+  }
+
+
+  
   // if (recipe) {
   return (
     <>
@@ -260,7 +266,11 @@ const Recipes = (props) => {
               <Card.Text className="recipe-text">
                 Recipe Video:<br />
               </Card.Text>
-                <ReactPlayer url={`${recipe.video_url}`} />
+              <iframe src={embedLink}
+                  frameBorder='0'
+                  allow='autoplay; encrypted-media'
+                  title='video'
+                />
                 <NavDropdown.Divider />
                 <Card.Text className="recipe-text">
                 Instructions:<br />{`${recipe.instructions}`}
@@ -385,9 +395,7 @@ const Recipes = (props) => {
                 <Card.Header as="h5" className="text-center ingredient-header">
                   Ingredients
               </Card.Header>
-                <Card.Text>
-                  {ingredientList}
-                </Card.Text>
+                {ingredientList}
               </Card.Body>
             </Card>
           </Col>
