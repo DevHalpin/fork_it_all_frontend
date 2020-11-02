@@ -10,7 +10,7 @@ const My_Twists = () => {
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     axios
-      .get(`/api/myTwists`)
+      .get(`https://stark-shelf-20245.herokuapp.com/api/myTwists`)
       .then((response) => {
         setTwists(response.data);
       })

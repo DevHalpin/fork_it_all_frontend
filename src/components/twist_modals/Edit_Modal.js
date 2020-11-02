@@ -26,7 +26,7 @@ const TwistEditModal = (props) => {
 
   const handleEditSubmit = (event) => {
     axios
-      .put(`/api/twists/${twist.id}`, {
+      .put(`https://stark-shelf-20245.herokuapp.com/api/twists/${twist.id}`, {
         content: editState.content,
         recipe_id: twist,
         is_private: editState.private,

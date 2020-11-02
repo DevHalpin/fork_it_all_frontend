@@ -22,7 +22,7 @@ export default function App() {
   });
   const checkLoginStatus = () => {
     axios
-      .get("/api/logged_in", {withCredentials: true})
+      .get("https://stark-shelf-20245.herokuapp.com/api/logged_in", {withCredentials: true})
       .then((response) => {
         if (
           response.data.logged_in &&

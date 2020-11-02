@@ -27,18 +27,18 @@ export default function Home(props) {
   //gets a recipe and sets recipe
   useEffect(() => {
     const fetchLiked = async () => {
-      const result = await axios.get("/api/recipes/20");
+      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/recipes/20");
       const recipe = result.data;
       setRecipe(recipe);
     };
     const fetchRandom = async () => {
-      const result = await axios.get("/api/twists?random=1");
+      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/twists?random=1");
       console.log(result);
       const recipe = result.data;
       setRandom(recipe);
     };
     const fetchThreeRecent = async () => {
-      const result = await axios.get("/api/recipes?three=1");
+      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/recipes?three=1");
       const recipe = result.data;
       setThree(recipe);
     };

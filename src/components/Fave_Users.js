@@ -21,7 +21,7 @@ const Fave_Users = (props) => {
   // Make a request for a user with a given ID
   useEffect(() => {
     axios
-      .get(`/api/users/${id}`)
+      .get(`https://stark-shelf-20245.herokuapp.com/api/users/${id}`)
       .then((response) => {
         setUser(response.data);
       })

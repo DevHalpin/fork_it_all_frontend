@@ -53,18 +53,18 @@ const Recipes = (props) => {
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     if (twistId !== undefined) {
-      axios.get(`/api/recipes/${id}?twist=${twistId}`).then((response) => {
+      axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?twist=${twistId}`).then((response) => {
         setTwist(response.data);
       });
     } else {
-      axios.get(`/api/recipes/${id}?random=1`).then((response) => {
+      axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?random=1`).then((response) => {
         setTwist(response.data);
       });
     }
-    axios.get(`/api/recipes/${id}`).then((response) => {
+    axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}`).then((response) => {
       setRecipe(response.data);
     });
-    axios.get("/api/faveTwists").then((response) => {
+    axios.get("https://stark-shelf-20245.herokuapp.com/api/faveTwists").then((response) => {
       const favoriteArr = [];
       response.data.forEach((favorite) => {
         favoriteArr.push(favorite.twist_id);
@@ -79,13 +79,13 @@ const Recipes = (props) => {
 
   // Find a random twist
   const randomTwist = () => {
-    axios.get(`/api/recipes/${id}?random=1`).then((response) => {
+    axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?random=1`).then((response) => {
       setTwist(response.data);
     });
   };
   //used for updating the edit twist content
   const specificTwist = (id, twist) => {
-    axios.get(`/api/recipes/${id}?twist=${twist}`).then((response) => {
+    axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?twist=${twist}`).then((response) => {
       setTwist(response.data);
     });
   };
@@ -112,7 +112,7 @@ const Recipes = (props) => {
   // add to favorites
   const handleFavorite = () => {
     axios
-      .put(`/api/twists/${twist.id}/favorite?type=favorite`, {
+      .put(`https://stark-shelf-20245.herokuapp.com/api/twists/${twist.id}/favorite?type=favorite`, {
         twist_id: `${twist.id}`,
       })
       .then(() => handleFavoriteAlert());

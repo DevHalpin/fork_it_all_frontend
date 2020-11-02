@@ -21,7 +21,7 @@ const LoginModal = (props) => {
   const handleSubmit = (event) => {
     axios
       .post(
-        "/api/sessions",
+        "https://stark-shelf-20245.herokuapp.com/api/sessions",
         {
           email: state.email,
           password: state.password,

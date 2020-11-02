@@ -9,7 +9,7 @@ const Fave_Twists = () => {
 
   useEffect(() => {
     axios
-      .get(`/api/faveTwists`)
+      .get(`https://stark-shelf-20245.herokuapp.com/api/faveTwists`)
       .then((response) => {
         setTwists(response.data);
       });

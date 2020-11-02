@@ -25,7 +25,7 @@ function User_Profile(props) {
 
       }
     };
-    axios.patch(`/api/users/${props.user.id}`, patchObj);
+    axios.patch(`https://stark-shelf-20245.herokuapp.com/api/users/${props.user.id}`, patchObj);
   };
 
   const handlePhotoUpload = (event) => {
@@ -40,7 +40,7 @@ function User_Profile(props) {
   };
 
   useEffect(() => {
-    axios.get(`/api/users/${id}`).then((response) => {
+    axios.get(`https://stark-shelf-20245.herokuapp.com/api/users/${id}`).then((response) => {
       setUser(response.data);
     });
   }, [id]);
