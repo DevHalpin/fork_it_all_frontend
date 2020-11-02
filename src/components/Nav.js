@@ -31,6 +31,7 @@ function NavbarNav(props) {
       .get(`/api/recipes?search=${state.search}`)
       .then((response) => {
         history.push(`/recipes/${response.data.id}`);
+        reset();
       })
       .catch((error) => {
         console.log("Error: ", error);
@@ -54,6 +55,11 @@ function NavbarNav(props) {
   };
   const toggleRegisterModal = () => {
     setRegisterModalOpen(!isRegisterModalOpen);
+  };
+
+  // Reset search field
+  const reset = (event) => {
+    setState("");
   };
 
   return (
@@ -95,7 +101,7 @@ function NavbarNav(props) {
           <FormControl
             type="text"
             name="search"
-            placeholder="Search here!"
+            placeholder="Search recipes"
             value={state.search}
             onChange={handleChange}
           />
