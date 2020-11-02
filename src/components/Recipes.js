@@ -297,7 +297,7 @@ const Recipes = (props) => {
                 {twist !== null ? (
                   <Button
                     className="twist-button-random gen-button login-buttons"
-                    onClick={() => buildIngredients()}
+                    onClick={() => randomTwist()}
                     bsPrefix
                   >
                     Randomize
