@@ -23,8 +23,7 @@ function User_Profile(props) {
         handle: "Andaleeni",
         password: "1234",
         password_confirmation: "1234",
-
-      }
+      },
     };
     axios.patch(`/api/users/${props.user.id}`, patchObj);
   };
@@ -35,8 +34,6 @@ function User_Profile(props) {
         preview: URL.createObjectURL(event.target.files[0]),
         raw: event.target.files[0],
       });
-      // console.log(photo.raw);
-      // console.log(photo.preview);
     }
   };
 
@@ -64,7 +61,7 @@ function User_Profile(props) {
               />
               <Row>
                 <div id="change-photo">
-                  {props.user.id === id ? (
+                  {props.user !== undefined && props.user.id === id ? (
                     <Button
                       bsPrefix
                       className="gen-button file btn btn-lg btn-primary"
@@ -75,7 +72,7 @@ function User_Profile(props) {
                   ) : null}
                 </div>
                 <div id="edit-profile">
-                  {props.user.id === id ? (
+                  {props.user !== undefined && props.user.id === id ? (
                     <Button
                       bsPrefix
                       type="submit"
@@ -84,7 +81,8 @@ function User_Profile(props) {
                     >
                       Edit Profile
                     </Button>
-                  ) : (
+                  ) : null }
+                  {props.user !== undefined && props.user.id !== id ? (
                       <Button
                         bsPrefix
                         type="submit"
@@ -93,7 +91,7 @@ function User_Profile(props) {
                       >
                         Follow User
                       </Button>
-                    )}
+                    ) : null}
                 </div>
               </Row>
             </div>
@@ -149,7 +147,9 @@ function User_Profile(props) {
           </Col>
           <Col className="md-8">
             <div className="profile-head">
-              <div><h3 className="user-name">{user.name}</h3></div>
+              <div>
+                <h3 className="user-name">{user.name}</h3>
+              </div>
               <div id="edit-profile">
               {props.user.id === id ? (
                 <Button
@@ -167,7 +167,7 @@ function User_Profile(props) {
               <h5>My Bio</h5>
               {user.bio !== null ? (
                 <p>{user.bio}</p>
-              ) :
+              ) :(
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu
@@ -179,13 +179,13 @@ function User_Profile(props) {
                 Odio tempor orci dapibus ultrices in iaculis nunc sed. Faucibus
                 purus in massa tempor nec feugiat nisl pretium.
               </p>
-              }
+              )}
             </div>
           </Col>
         </Row>
       </Form>
     </Container>
-  );
+  )
 }
 
 export default User_Profile;
