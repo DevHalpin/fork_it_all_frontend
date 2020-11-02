@@ -7,12 +7,6 @@ import {Form, Button, Container, Row, Image, Col} from "react-bootstrap";
 function User_Profile(props) {
   const id = parseInt(props.match.params.user);
   const [user, setUser] = useState(props.user);
-  const [profileEditState, setProfileEditState] = useState({
-    // bio: "",
-    // content: twist.content,
-    profile_picture: null,
-  });
-
   const [photo, setPhoto] = useState({
     preview: "",
     raw: "",
