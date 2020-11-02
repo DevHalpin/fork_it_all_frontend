@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardDeck,
@@ -7,7 +7,7 @@ import {
   Button,
   Form,
   Alert,
-  NavDropdown
+  NavDropdown,
 } from "react-bootstrap";
 import TwistDeleteModal from "./twist_modals/Delete_Modal";
 import TwistShareModal from "./twist_modals/Share_Modal";
@@ -105,8 +105,7 @@ const Recipes = (props) => {
   };
   // Favorite alert toggle
   const handleFavoriteAlert = () => {
-    if (favorited === true)
-      setShowFaveAlert(true);
+    if (favorited === true) setShowFaveAlert(true);
   };
 
   // add to favorites
@@ -161,14 +160,14 @@ const Recipes = (props) => {
 
   const buildIngredients = () => {
     let ingredients = [];
-    const ingredientArr = (matchKey(recipe, "ingredient"));
-    const measureArr = (matchKey(recipe, "measure"));
+    const ingredientArr = matchKey(recipe, "ingredient");
+    const measureArr = matchKey(recipe, "measure");
 
     for (let i = 0; i < ingredientArr.length; i++) {
       ingredients.push({
         ingredient: ingredientArr[i],
         measure: measureArr[i],
-        key: i
+        key: i,
       });
     }
     return ingredients;
@@ -184,7 +183,7 @@ const Recipes = (props) => {
 
   let embedLink = "";
   if (recipe.video_url !== undefined) {
-    embedLink = recipe.video_url.replace('watch?v=', 'embed/');
+    embedLink = recipe.video_url.replace("watch?v=", "embed/");
   }
 
   return (
@@ -284,25 +283,33 @@ const Recipes = (props) => {
                 {`${recipe.name}`}{" "}
               </Card.Header>
               <Card.Text className="recipe-text">
-                Region:<br />{`${recipe.region}`}
+                Region:
+                <br />
+                {`${recipe.region}`}
               </Card.Text>
               <NavDropdown.Divider />
               <Card.Text className="recipe-text">
-                Type:<br />{`${recipe.meal_type}`}
+                Type:
+                <br />
+                {`${recipe.meal_type}`}
               </Card.Text>
               <NavDropdown.Divider />
               <Card.Text className="recipe-text">
-                Recipe Video:<br />
+                Recipe Video:
+                <br />
               </Card.Text>
-              <iframe src={embedLink}
-                frameBorder='0'
-                allow='autoplay; encrypted-media'
-                title='video'
+              <iframe
+                src={embedLink}
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                title="video"
                 className="embedded-vid"
               />
               <NavDropdown.Divider />
               <Card.Text className="recipe-text">
-                Instructions:<br />{`${recipe.instructions}`}
+                Instructions:
+                <br />
+                {`${recipe.instructions}`}
               </Card.Text>
             </Card.Body>
           </Card>
@@ -347,7 +354,10 @@ const Recipes = (props) => {
                     Rate
                   </Button>
                 ) : null}
-                {userHandle && twist !== null && userHandle !== twist.handle && favorited === false ? (
+                {userHandle &&
+                twist !== null &&
+                userHandle !== twist.handle &&
+                favorited === false ? (
                   <Button
                     className="login-buttons gen-button"
                     bsPrefix
@@ -423,7 +433,7 @@ const Recipes = (props) => {
               <Card.Body className="ingredient-body">
                 <Card.Header as="h5" className="text-center ingredient-header">
                   Ingredients
-              </Card.Header>
+                </Card.Header>
                 <Card.Text className="ingredient-text">
                   {ingredientList}
                 </Card.Text>
