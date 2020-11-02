@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import ReactPlayer from "react-player"
 import {
   Card,
   CardDeck,
@@ -128,6 +129,39 @@ const Recipes = (props) => {
     toggleEditModal();
   };
 
+  function matchKey(objectToSearch, keyToFind) {
+    const result = []
+    for (var k in objectToSearch) {
+      console.log(objectToSearch[k])
+      if (objectToSearch[k] !== null && objectToSearch[k] !== ""){
+        if ( k.toLowerCase().indexOf(keyToFind.toLowerCase()) !== -1) 
+          result.push(objectToSearch[k]);
+      }
+    }
+    return result;
+  }
+
+  
+  const buildIngredients = () => {
+    let ingredients = []
+    const ingredientArr = (matchKey(recipe, "ingredient"))
+    const measureArr = (matchKey(recipe, "measure"))
+
+    for (let i = 0; i < ingredientArr.length; i++){
+      ingredients.push({ingredient:ingredientArr[i],
+                        measure: measureArr[i]})
+    }
+    return ingredients
+  }
+
+  const ingredientList = buildIngredients().map((item) => {
+    return (
+      <Card.Text>
+        {`${item.ingredient} : ${item.measure}`}
+      </Card.Text>
+    )
+  })
+
   // if (recipe) {
   return (
     <>
@@ -193,7 +227,7 @@ const Recipes = (props) => {
           <TwistShareModal
             show={isShareModalOpen}
             onHide={toggleShareModal}
-            url={`http://localhost:3000/twists/${twist.slug}`}
+            url={`/twists/${twist.slug}`}
           />
         ) : null}
 
@@ -217,13 +251,20 @@ const Recipes = (props) => {
               </Card.Header>
               <Card.Text className="recipe-text">
                 Region:<br />{`${recipe.region}`}
-                <NavDropdown.Divider />
-                Type:<br />{`${recipe.meal_type}`}
-                <NavDropdown.Divider />
-                Recipe Video:<br />{`${recipe.video_url}`}
-                <NavDropdown.Divider />
-                Instructions:<br />{`${recipe.instructions}`}
               </Card.Text>
+                <NavDropdown.Divider />
+              <Card.Text className="recipe-text">
+                Type:<br />{`${recipe.meal_type}`}
+              </Card.Text>
+                <NavDropdown.Divider />
+              <Card.Text className="recipe-text">
+                Recipe Video:<br />
+              </Card.Text>
+                <ReactPlayer url={`${recipe.video_url}`} />
+                <NavDropdown.Divider />
+                <Card.Text className="recipe-text">
+                Instructions:<br />{`${recipe.instructions}`}
+                </Card.Text>
             </Card.Body>
           </Card>
 
@@ -246,7 +287,7 @@ const Recipes = (props) => {
                 {twist !== null ? (
                   <Button
                     className="twist-button-random gen-button login-buttons"
-                    onClick={() => randomTwist()}
+                    onClick={() => buildIngredients()}
                     bsPrefix
                   >
                     Randomize
@@ -344,28 +385,8 @@ const Recipes = (props) => {
                 <Card.Header as="h5" className="text-center ingredient-header">
                   Ingredients
               </Card.Header>
-                <Card.Text className="ingredient-text text-center">
-                  {`${recipe.ingredient1}`} {`${recipe.measure1}`}<br />
-                  {`${recipe.ingredient2}`} {`${recipe.measure2}`}<br />
-                  {`${recipe.ingredient3}`} {`${recipe.measure3}`}<br />
-                  {`${recipe.ingredient4}`} {`${recipe.measure4}`}<br />
-                  {`${recipe.ingredient5}`} {`${recipe.measure5}`}<br />
-                  {`${recipe.ingredient6}`} {`${recipe.measure6}`}<br />
-                  {`${recipe.ingredient7}`} {`${recipe.measure7}`}<br />
-                  {`${recipe.ingredient8}`} {`${recipe.measure8}`}<br />
-                  {`${recipe.ingredient9}`} {`${recipe.measure9}`}<br />
-                  {`${recipe.ingredient10}`} {`${recipe.measure10}`}<br />
-                  {`${recipe.ingredient11}`} {`${recipe.measure11}`}<br />
-                  {`${recipe.ingredient12}`} {`${recipe.measure12}`}<br />
-                  {`${recipe.ingredient13}`} {`${recipe.measure13}`}<br />
-                  {`${recipe.ingredient14}`} {`${recipe.measure14}`}<br />
-                  {`${recipe.ingredient15}`} {`${recipe.measure15}`}<br />
-                  {`${recipe.ingredient15}`} {`${recipe.measure15}`}<br />
-                  {`${recipe.ingredient16}`} {`${recipe.measure16}`}<br />
-                  {`${recipe.ingredient17}`} {`${recipe.measure17}`}<br />
-                  {`${recipe.ingredient18}`} {`${recipe.measure18}`}<br />
-                  {`${recipe.ingredient19}`} {`${recipe.measure19}`}<br />
-                  {`${recipe.ingredient20}`} {`${recipe.measure20}`}<br />
+                <Card.Text>
+                  {ingredientList}
                 </Card.Text>
               </Card.Body>
             </Card>
