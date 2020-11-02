@@ -26,12 +26,13 @@ export default function Home(props) {
   //gets a recipe and sets recipe
   useEffect(() => {
     const fetchLiked = async () => {
-      const result = await axios.get("/api/recipes/1");
+      const result = await axios.get("/api/recipes/20");
       const recipe = result.data;
       setRecipe(recipe);
     };
     const fetchRandom = async () => {
       const result = await axios.get("/api/twists?random=1");
+      console.log(result);
       const recipe = result.data;
       setRandom(recipe);
     };
@@ -122,6 +123,7 @@ export default function Home(props) {
                 <Card.Img variant="top" src={random.meal_image} />
                 <Card.Body>
                   <Card.Title>{random.name}</Card.Title>
+                  <Card.Text>{random.content}</Card.Text>
                   <Card.Link href={`/recipes/${random.id}`} className="card-link">
                     View this twist
                   </Card.Link>
