@@ -1,29 +1,97 @@
 .recipe-card {
   margin-top: 1em;
-  min-height: 100%
+  min-height: 100%;
+}
+
+.recipe-body {
+  padding: 0;
+}
+
+.recipe-text {
+  padding: 1em;
+  padding-bottom: 0
+}
+
+.card-img {
+  object-fit: scale-down;
+  align-self: center;
+  transform: scale(0.9);
+  background-color: none;
+}
+
+.card-header {
+  background-color: #B9E4C9;
+  color: #FD5523;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.card-body {
+  background-color: #FFFBE6;
+  color: #356859;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: large
+}
+
+.twist-form {
+  background-color: #FFFBE6;
 }
 
 .recipe-dropdown {
-  margin-top: 0.5em
+  margin-top: 0.5em;
 }
 
 .twist-card {
   margin-left: auto;
   margin-right: auto;
   margin-top: 1em;
-  padding-left: 0.1em;
-  padding-right: 0.1em;
-  height: 50%
+  font-size: large;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: #356859;
+}
+
+.ingredient-body {
+ padding: 0
+}
+
+.ingredient-text {
+  padding: 1em
 }
 
 .recipe-columns {
-  min-height: 100%
+  min-height: 100%;
 }
 
 .twist-button-random {
-  margin-bottom: 1em
+  margin-bottom: 1em;
 }
 
 .twist-card-hide {
-  display: none
+  display: none;
+}
+
+.enable-button {
+  background-color: #7fb1bf;
+  box-shadow: 0px 4px #74a3b0;
+  border: none;
+}
+
+.enable-button:hover {
+  box-shadow: 0 0 #74a3b0;
+  background-color: #709ca8;
+}
+
+.embedded-vid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  height: 15em;
+  width: 25em
 }

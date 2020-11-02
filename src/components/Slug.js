@@ -8,12 +8,10 @@ import { Container, Row } from "react-bootstrap"
 function Slug(props) {
   const history = useHistory();
   let slug = props.match.params.slug
-  // const [state, setState] = useState(1);
 
   useEffect(() => {
     axios.get(`/api/slug?slug=${slug}`)
     .then((response) => {
-      // console.log(response.data.recipe_id);
       history.push(`/recipes/${response.data.recipe_id}/twists/${response.data.twist_id}`)
     });
   });

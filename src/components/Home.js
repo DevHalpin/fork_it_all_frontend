@@ -18,7 +18,6 @@ export default function Home(props) {
     setIndex(selectedIndex);
   };
 
-  // const [message, setMessage] = useState("Click to fetch data!")
   // a value has to be put in as an inisial state or the app breaks!
   const [recipe, setRecipe] = useState(null);
   const [random, setRandom] = useState(null);
@@ -27,21 +26,18 @@ export default function Home(props) {
   //gets a recipe and sets recipe
   useEffect(() => {
     const fetchLiked = async () => {
-      //this variable needs to be hard coded to the search bar?
       const result = await axios.get("/api/recipes/1");
-      const recipe = result.data.recipe;
+      const recipe = result.data;
       setRecipe(recipe);
     };
     const fetchRandom = async () => {
-      //this variable needs to be hard coded to the search bar?
       const result = await axios.get("/api/twists?random=1");
       const recipe = result.data;
       setRandom(recipe);
     };
     const fetchThreeRecent = async () => {
-      // this variable needs to be hard coded to the search bar?
       const result = await axios.get("/api/recipes?three=1");
-      const recipe = result.data.recipe;
+      const recipe = result.data;
       setThree(recipe);
     };
     fetchRandom();
@@ -52,7 +48,6 @@ export default function Home(props) {
   if (three && random && recipe) {
     return (
       <>
-        {/* Recipe carousel */}
         <Container fluid>
           <Carousel
             activeIndex={index}
@@ -61,7 +56,6 @@ export default function Home(props) {
           >
             <Carousel.Item>
               <img
-                // style={{height: "25em"}}
                 className="d-block w-100"
                 src={three[0].meal_image}
                 alt="Recipe"
@@ -74,7 +68,6 @@ export default function Home(props) {
             </Carousel.Item>
             <Carousel.Item>
               <img
-                // style={{height: "25em"}}
                 className="d-block w-100"
                 src={three[1].meal_image}
                 alt="Recipe"
@@ -87,7 +80,6 @@ export default function Home(props) {
             </Carousel.Item>
             <Carousel.Item>
               <img
-                // style={{height: "25em"}}
                 className="d-block w-100"
                 src={three[2].meal_image}
                 alt="Recipe"
@@ -112,7 +104,7 @@ export default function Home(props) {
                 <Card.Img variant="top" src={recipe.meal_image} />
                 <Card.Body>
                   <Card.Title>{recipe.name}</Card.Title>
-                  <Card.Link href={`/recipes/${recipe.id}`} variant="primary">
+                  <Card.Link href={`/recipes/${recipe.id}`} className="card-link">
                     View this recipe
                   </Card.Link>
                 </Card.Body>
@@ -130,7 +122,7 @@ export default function Home(props) {
                 <Card.Img variant="top" src={random.meal_image} />
                 <Card.Body>
                   <Card.Title>{random.name}</Card.Title>
-                  <Card.Link href={`/recipes/${random.id}`} variant="primary">
+                  <Card.Link href={`/recipes/${random.id}`} className="card-link">
                     View this twist
                   </Card.Link>
                 </Card.Body>

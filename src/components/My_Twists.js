@@ -12,16 +12,13 @@ const My_Twists = () => {
     axios
       .get(`/api/myTwists`)
       .then((response) => {
-        console.log(response.data);
-        // let parsedResponse = JSON.parse(response.data.message);
-        // console.log(parsedResponse);
         setTwists(response.data);
       })
       .catch(function(error) {
         console.log(error);
       });
   }, []);
-  
+
   const twistsCard = twists.map(twist => (
     <Card key={twist.twist_id} style={{width: "15rem"}}>
       <Card.Img src={`${twist.meal_image}`} variant="top" alt="Card image" />
@@ -30,10 +27,10 @@ const My_Twists = () => {
         <Card.Text>
           {`${twist.content}`}
         </Card.Text>
-        <Card.Link href={`/recipes/${twist.recipe_id}/twists/${twist.twist_id}`} variant="primary">View this recipe</Card.Link>
+        <Card.Link href={`/recipes/${twist.recipe_id}/twists/${twist.twist_id}`} className="card-link">View this recipe</Card.Link>
       </Card.Body>
     </Card>
-  ))
+  ));
 
   return (
     <Container className="d-flex">

@@ -3,15 +3,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Nav.scss";
 import {Link, useHistory} from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
-import {Nav, Navbar, Form, FormControl, Button, Container, Row} from "react-bootstrap";
+import {Nav, Navbar, Form, FormControl, Button, Container, Row, Dropdown} from "react-bootstrap";
 import axios from "axios";
-import {LoginModal, RegisterModal} from "./Modal";
+import RegisterModal from "./user_modals/Register_Modal";
+import LoginModal from "./user_modals/Login_Modal";
 
 function NavbarNav(props) {
+  const [navOpen, setNavOpen] = useState(false);
   const [state, setState] = useState({
     search: ""
   });
   const history = useHistory();
+  // Set modal state to false (closed)
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
@@ -23,9 +28,9 @@ function NavbarNav(props) {
 
   const handleSubmit = (event) => {
     axios
-      .get(`http://localhost:3001/api/recipes?search=${state.search}`)
+      .get(`/api/recipes?search=${state.search}`)
       .then((response) => {
-        history.push(`/recipes/${response.data.recipe.id}`);
+        history.push(`/recipes/${response.data.id}`);
       })
       .catch((error) => {
         console.log("Error: ", error);
@@ -43,10 +48,6 @@ function NavbarNav(props) {
       });
   };
 
-  // Set modal state to false (closed)
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
-  const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
-
   // Toggle for modals
   const toggleLoginModal = () => {
     setLoginModalOpen(!isLoginModalOpen);
@@ -56,32 +57,35 @@ function NavbarNav(props) {
   };
 
   return (
-    <Navbar bg="dark" expand="xxl" sticky="top" className="nav">
+    <Navbar expanded={navOpen} bg="dark" expand="xxl" sticky="top" className="nav">
       <Container fluid>
         <LoginModal handleLogin={props.handleLogin} id="login-modal" show={isLoginModalOpen} onHide={toggleLoginModal} toggleRegisterModal />
         <RegisterModal handleLogin={props.handleLogin} id="register-modal" show={isRegisterModalOpen} onHide={toggleRegisterModal} toggleLoginModal />
         <Row>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle onClick={() => setNavOpen(navOpen ? false : "expanded")} aria-controls="basic-navbar-nav"><i className="material-icons menu">menu</i></Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav>
-              <Link to="/user_profile/48">Profile</Link>
-              <Link to="/recipes/43">
-                Recipes
-                </Link>
-              <Link to="/my_twists/41">
-                My Twists
-                </Link>
-              <Link to="/fave_twists/85">
-                Fave Twists
+            <Nav className="dropdown-menu">
+              <Link onClick={() => setNavOpen(false)} role="menuitem" to="/recipes/43" id="nav-link">
+                Recipes  <i className="material-icons menu-links md-24">food_bank</i>
               </Link>
-              <Link to="/fave_users/19">
-                Fave Users
+              <Dropdown.Divider />
+              <Link onClick={() => setNavOpen(false)} role="menuitem" to={`/user_profile/${props.user.id}`} id="nav-link">Profile  <i className="material-icons menu-links md-24">account_box</i></Link>
+              <Dropdown.Divider />
+              <Link onClick={() => setNavOpen(false)} role="menuitem" to="/my_twists/" id="nav-link">
+                My Twists  <i className="material-icons menu-links md-24">menu_book</i>
               </Link>
+              <Dropdown.Divider />
+              <Link onClick={() => setNavOpen(false)} role="menuitem" to="/fave_twists/" id="nav-link">
+                Fave Twists  <i className="material-icons menu-links md-24">favorite</i>
+              </Link>
+              <Dropdown.Divider />
+              <Link onClick={() => setNavOpen(false)} role="menuitem" to="/fave_users/" id="nav-link">Fave Users  <i className="material-icons menu-links md-18">group_add</i></Link>
             </Nav>
           </Navbar.Collapse>
         </Row>
         <Link to="/">
           <img
+            onClick={() => setNavOpen(false)}
             src={Logo}
             alt="logo"
             className="img-responsive rounded mx-auto d-block"
@@ -96,7 +100,7 @@ function NavbarNav(props) {
             onChange={handleChange}
           />
           <Button bsPrefix type="submit" className="mr-sm-2 search-button gen-button">
-            Search
+            <i className="material-icons md-18">search</i>  Search
           </Button>
         </Form>
         <Row>
