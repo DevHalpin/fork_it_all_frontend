@@ -10,6 +10,7 @@ import {
   Card,
   Jumbotron,
 } from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 export default function Home(props) {
   const [index, setIndex] = useState(0);
@@ -62,9 +63,11 @@ export default function Home(props) {
                 alt="Recipe"
               />
               <Carousel.Caption className="carousel-caption">
-                <h3>{three[0].name}</h3>
-                <h6>Meal region: {three[0].region}</h6>
-                <h6>Meal type: {three[0].meal_type}</h6>
+                <Link to={`/recipes/${three[0].id}`} id="carousel-link">
+                  <h3>{three[0].name}</h3>
+                  <h6>Meal region: {three[0].region}</h6>
+                  <h6>Meal type: {three[0].meal_type}</h6>
+                </Link>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -74,9 +77,11 @@ export default function Home(props) {
                 alt="Recipe"
               />
               <Carousel.Caption>
-                <h3>{three[1].name}</h3>
-                <h6>Meal region: {recipe.region}</h6>
-                <h6>Meal type: {recipe.meal_type}</h6>
+                <Link to={`/recipes/${three[1].id}`} id="carousel-link">
+                  <h3>{three[1].name}</h3>
+                  <h6>Meal region: {recipe.region}</h6>
+                  <h6>Meal type: {recipe.meal_type}</h6>
+                </Link>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -86,9 +91,11 @@ export default function Home(props) {
                 alt="Recipe"
               />
               <Carousel.Caption>
-                <h3>{three[2].name}</h3>
-                <h6>Meal region: {three[2].region}</h6>
-                <h6>Meal type: {three[2].meal_type}</h6>
+                <Link to={`/recipes/${three[2].id}`} id="carousel-link">
+                  <h3>{three[2].name}</h3>
+                  <h6>Meal region: {three[2].region}</h6>
+                  <h6>Meal type: {three[2].meal_type}</h6>
+                </Link>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
