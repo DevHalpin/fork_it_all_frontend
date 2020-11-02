@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import ReactPlayer from "react-player"
+import ReactPlayer from "react-player";
 import {
   Card,
   CardDeck,
@@ -22,7 +22,6 @@ const Recipes = (props) => {
   let id = props.match.params.recipe;
   let twistId = props.match.params.twist;
   const userHandle = props.user.handle;
-
 
   const [recipe, setRecipe] = useState({});
   const [twist, setTwist] = useState({});
@@ -102,15 +101,15 @@ const Recipes = (props) => {
   const toggleDeleteModal = () => {
     setDeleteModalOpen(!isDeleteModalOpen);
   };
-
   const toggleShareModal = () => {
     setShareModalOpen(!isShareModalOpen);
   };
-
+  // Favorite alert toggle
   const handleFavoriteAlert = () => {
     setShowFaveAlert(true);
   };
 
+  // add to favorites
   const handleFavorite = () => {
     axios
       .put(`/api/twists/${twist.id}/favorite?type=favorite`, {
@@ -119,50 +118,53 @@ const Recipes = (props) => {
       .then(() => handleFavoriteAlert());
   };
 
+  // Create alert toggle
   const handleCreateAlert = () => {
     setShowCreateAlert(true);
     toggleCreateModal();
   };
 
+  // Edit alert toggle
   const handleEditAlert = () => {
     setShowEditAlert(true);
     toggleEditModal();
   };
 
   function matchKey(objectToSearch, keyToFind) {
-    const result = []
+    const result = [];
     for (var k in objectToSearch) {
-      console.log(objectToSearch[k])
-      if (objectToSearch[k] !== null && objectToSearch[k] !== ""){
-        if ( k.toLowerCase().indexOf(keyToFind.toLowerCase()) !== -1) 
+      console.log(objectToSearch[k]);
+      if (objectToSearch[k] !== null && objectToSearch[k] !== "") {
+        if (k.toLowerCase().indexOf(keyToFind.toLowerCase()) !== -1)
           result.push(objectToSearch[k]);
       }
     }
     return result;
   }
 
-  
-  const buildIngredients = () => {
-    let ingredients = []
-    const ingredientArr = (matchKey(recipe, "ingredient"))
-    const measureArr = (matchKey(recipe, "measure"))
 
-    for (let i = 0; i < ingredientArr.length; i++){
-      ingredients.push({ingredient:ingredientArr[i],
-                        measure: measureArr[i]})
+  const buildIngredients = () => {
+    let ingredients = [];
+    const ingredientArr = (matchKey(recipe, "ingredient"));
+    const measureArr = (matchKey(recipe, "measure"));
+
+    for (let i = 0; i < ingredientArr.length; i++) {
+      ingredients.push({
+        ingredient: ingredientArr[i],
+        measure: measureArr[i]
+      });
     }
-    return ingredients
-  }
+    return ingredients;
+  };
 
   const ingredientList = buildIngredients().map((item) => {
     return (
       <Card.Text>
-        {`${item.ingredient} : ${item.measure}`}
+        {`${item.ingredient}: ${item.measure}`}
       </Card.Text>
-    )
-  })
+    );
+  });
 
-  // if (recipe) {
   return (
     <>
       <Container fluid>
@@ -252,19 +254,19 @@ const Recipes = (props) => {
               <Card.Text className="recipe-text">
                 Region:<br />{`${recipe.region}`}
               </Card.Text>
-                <NavDropdown.Divider />
+              <NavDropdown.Divider />
               <Card.Text className="recipe-text">
                 Type:<br />{`${recipe.meal_type}`}
               </Card.Text>
-                <NavDropdown.Divider />
+              <NavDropdown.Divider />
               <Card.Text className="recipe-text">
                 Recipe Video:<br />
               </Card.Text>
-                <ReactPlayer url={`${recipe.video_url}`} />
-                <NavDropdown.Divider />
-                <Card.Text className="recipe-text">
+              <ReactPlayer url={`${recipe.video_url}`} />
+              <NavDropdown.Divider />
+              <Card.Text className="recipe-text">
                 Instructions:<br />{`${recipe.instructions}`}
-                </Card.Text>
+              </Card.Text>
             </Card.Body>
           </Card>
 
@@ -385,7 +387,7 @@ const Recipes = (props) => {
                 <Card.Header as="h5" className="text-center ingredient-header">
                   Ingredients
               </Card.Header>
-                <Card.Text>
+                <Card.Text className="ingredient-text">
                   {ingredientList}
                 </Card.Text>
               </Card.Body>
@@ -395,8 +397,6 @@ const Recipes = (props) => {
       </Container>
     </>
   );
-  // }
-  // return <h3>Loading</h3>;
 };
 
 export default Recipes;
