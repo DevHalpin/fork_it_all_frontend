@@ -5,7 +5,8 @@ import {Link, useHistory} from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
 import {Nav, Navbar, Form, FormControl, Button, Container, Row, Dropdown} from "react-bootstrap";
 import axios from "axios";
-import {LoginModal, RegisterModal} from "./Modal";
+import RegisterModal from "./user_modals/Register_Modal";
+import LoginModal from "./user_modals/Login_Modal";
 
 function NavbarNav(props) {
   const [navOpen, setNavOpen] = useState(false);
