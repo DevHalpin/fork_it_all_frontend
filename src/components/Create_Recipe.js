@@ -11,12 +11,7 @@ import {
   FormGroup,
   FormControl,
 } from "react-bootstrap";
-import {
-  TwistCreateModal,
-  TwistEditModal,
-  TwistDeleteModal,
-  TwistShareModal,
-} from "./Modal";
+
 import axios from "axios";
 import "../styles/Recipes.scss";
 import "../styles/App.scss";
