@@ -31,6 +31,7 @@ const Recipes = (props) => {
   const [showFaveAlert, setShowFaveAlert] = useState(false);
   const [showCreateAlert, setShowCreateAlert] = useState(false);
   const [showEditAlert, setShowEditAlert] = useState(false);
+  const [showDeleteAlert, setDeleteAlert] = useState(false);
 
   // Modal state
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
@@ -61,7 +62,6 @@ const Recipes = (props) => {
       });
     }
     axios.get(`/api/recipes/${id}`).then((response) => {
-      console.log(response);
       setRecipe(response.data);
     });
     axios.get("/api/faveTwists").then((response) => {
@@ -105,7 +105,8 @@ const Recipes = (props) => {
   };
   // Favorite alert toggle
   const handleFavoriteAlert = () => {
-    setShowFaveAlert(true);
+    if (favorited === true)
+      setShowFaveAlert(true);
   };
 
   // add to favorites
@@ -118,15 +119,33 @@ const Recipes = (props) => {
   };
 
   // Create alert toggle
-  const handleCreateAlert = () => {
-    setShowCreateAlert(true);
+  const handleCreateAlert = (event) => {
+    if (event) {
+      if (event.target.type === "submit") {
+        setShowCreateAlert(true);
+      }
+    }
     toggleCreateModal();
   };
 
   // Edit alert toggle
-  const handleEditAlert = () => {
-    setShowEditAlert(true);
+  const handleEditAlert = (event) => {
+    if (event) {
+      if (event.target.type === "submit") {
+        setShowEditAlert(true);
+      }
+    }
     toggleEditModal();
+  };
+
+  const handleDeleteAlert = (event) => {
+    if (event) {
+      console.log(event);
+      if (event.target.type === "submit") {
+        setDeleteAlert(true);
+      }
+    }
+    toggleDeleteModal();
   };
 
   function matchKey(objectToSearch, keyToFind) {
@@ -201,6 +220,16 @@ const Recipes = (props) => {
             Updated twist has been saved!
           </Alert>
         )}
+        {showDeleteAlert && (
+          <Alert
+            onClose={() => setDeleteAlert(false)}
+            dismissible
+            bsPrefix
+            className="delete-alert"
+          >
+            Twist deleted successfully.
+          </Alert>
+        )}
 
         {/* Twist modals */}
         <TwistCreateModal
@@ -222,7 +251,7 @@ const Recipes = (props) => {
         />
         <TwistDeleteModal
           show={isDeleteModalOpen}
-          onHide={toggleDeleteModal}
+          onHide={handleDeleteAlert}
           twist={twist ? twist : undefined}
           random={() => {
             randomTwist();
