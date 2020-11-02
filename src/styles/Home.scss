@@ -16,3 +16,11 @@
   text-align: center;
   padding: 1em
 }
+
+#carousel-link {
+  color: white;
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

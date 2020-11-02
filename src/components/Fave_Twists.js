@@ -17,7 +17,7 @@ const Fave_Twists = () => {
 
   const twistsCard = twists.map((twist) => {
     return (
-      <Card key={twist.twist_id} style={{width: "15rem"}}>
+      <Card key={twist.twist_id} className="user-saved">
         <Card.Img src={`${twist.meal_image}`} variant="top" alt="Card image" />
         <Card.Body>
           <Card.Title>{`${twist.name}`}</Card.Title>

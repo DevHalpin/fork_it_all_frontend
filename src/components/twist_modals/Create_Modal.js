@@ -49,7 +49,7 @@ const TwistCreateModal = (props) => {
             <Modal.Title>Create a New Twist</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} {...state}>
               <Form.Group>
                 <Form.Label>
                   Do you have an idea to make this recipe better? Enter your

@@ -56,6 +56,15 @@ body {
   color: white
 }
 
+.delete-alert {
+  text-align: center;
+  font-weight: 500;
+  border-radius: 5px;
+  color: white;
+  background-color: #fa5a5a;
+  padding: 0.5em
+}
+
 .modal-wrapper {
   position: fixed;
   left: 0;
