@@ -18,14 +18,6 @@ function User_Profile(props) {
     raw: "",
   });
 
-  const handleProfileEditChange = (event) => {
-    const eventValue = event.target.value;
-    setProfileEditState({
-      ...profileEditState,
-      [event.target.name]: eventValue,
-    });
-  };
-
   const handleProfileEditSubmit = (event) => {
     event.preventDefault();
     const patchObj = {
@@ -58,10 +50,6 @@ function User_Profile(props) {
       setUser(response.data);
     });
   }, [id]);
-
-  const editUser = (data) => {
-    axios.put(`api/users/${props.user.id}`, data);
-  };
 
   let imageSource = props.user.profile_picture;
   props.user.profile_picture !== null || imageSource !== null
