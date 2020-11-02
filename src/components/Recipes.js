@@ -158,7 +158,7 @@ const Recipes = (props) => {
   const ingredientList = buildIngredients().map((item) => {
     return (
       <Card.Text key={item.key}>
-        {`${item.ingredient} : ${item.measure}`}
+        {`${item.ingredient}: ${item.measure}`}
       </Card.Text>
     );
   });
