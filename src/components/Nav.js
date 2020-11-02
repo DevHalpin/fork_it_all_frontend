@@ -85,6 +85,7 @@ function NavbarNav(props) {
         </Row>
         <Link to="/">
           <img
+            onClick={() => setNavOpen(false)}
             src={Logo}
             alt="logo"
             className="img-responsive rounded mx-auto d-block"

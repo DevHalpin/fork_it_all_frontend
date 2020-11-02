@@ -140,7 +140,6 @@ const Recipes = (props) => {
     return result;
   }
 
-
   const buildIngredients = () => {
     let ingredients = [];
     const ingredientArr = (matchKey(recipe, "ingredient"));
@@ -159,7 +158,7 @@ const Recipes = (props) => {
   const ingredientList = buildIngredients().map((item) => {
     return (
       <Card.Text key={item.key}>
-        {`${item.ingredient} : ${item.measure}`}
+        {`${item.ingredient}: ${item.measure}`}
       </Card.Text>
     );
   });
@@ -169,9 +168,6 @@ const Recipes = (props) => {
     embedLink = recipe.video_url.replace('watch?v=', 'embed/');
   }
 
-
-
-  // if (recipe) {
   return (
     <>
       <Container fluid>
@@ -273,6 +269,7 @@ const Recipes = (props) => {
                 frameBorder='0'
                 allow='autoplay; encrypted-media'
                 title='video'
+                className="embedded-vid"
               />
               <NavDropdown.Divider />
               <Card.Text className="recipe-text">
