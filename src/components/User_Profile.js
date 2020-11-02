@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/User_Profile.scss";
 import axios from "axios";
-import {Form, Button, Container, Row, Image, Col} from "react-bootstrap";
+import { Form, Button, Container, Row, Image, Col } from "react-bootstrap";
 
 function User_Profile(props) {
   const id = parseInt(props.match.params.user);
@@ -28,8 +28,7 @@ function User_Profile(props) {
         handle: "Andaleeni",
         password: "1234",
         password_confirmation: "1234",
-
-      }
+      },
     };
     axios.patch(`/api/users/${props.user.id}`, patchObj);
   };
@@ -48,6 +47,7 @@ function User_Profile(props) {
   useEffect(() => {
     axios.get(`/api/users/${id}`).then((response) => {
       setUser(response.data);
+      console.log(props.user.id);
     });
   }, [id]);
 
@@ -55,7 +55,7 @@ function User_Profile(props) {
   props.user.profile_picture !== null || imageSource !== null
     ? (imageSource = props.user.profile_picture)
     : (imageSource =
-      "https://www.flaticon.com/svg/static/icons/svg/817/817747.svg");
+        "https://www.flaticon.com/svg/static/icons/svg/817/817747.svg");
 
   return (
     <Container className="emp-profile">
@@ -69,7 +69,7 @@ function User_Profile(props) {
               />
               <Row>
                 <div id="change-photo">
-                  {user.id === id ? (
+                  {props.user !== undefined && props.user.id === id ? (
                     <Button
                       bsPrefix
                       className="gen-button file btn btn-lg btn-primary"
@@ -90,15 +90,15 @@ function User_Profile(props) {
                       Edit Profile
                     </Button>
                   ) : (
-                      <Button
-                        bsPrefix
-                        type="submit"
-                        className="gen-button file btn btn-lg btn-primary"
-                        name="btnAddMore"
-                      >
-                        Follow User
-                      </Button>
-                    )}
+                    <Button
+                      bsPrefix
+                      type="submit"
+                      className="gen-button file btn btn-lg btn-primary"
+                      name="btnAddMore"
+                    >
+                      Follow User
+                    </Button>
+                  )}
                 </div>
               </Row>
             </div>
@@ -154,7 +154,9 @@ function User_Profile(props) {
           </Col>
           <Col className="md-8">
             <div className="profile-head">
-              <div><h3 className="user-name">{props.user.name}</h3></div>
+              <div>
+                <h3 className="user-name">{props.user.name}</h3>
+              </div>
               <div id="edit-profile">
                 <Button
                   bsPrefix
