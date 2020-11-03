@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardDeck,
@@ -198,8 +198,6 @@ const Recipes = (props) => {
     embedLink = recipe.video_url.replace("watch?v=", "embed/");
   }
 
-
-
   return (
     <>
       <Container fluid>
@@ -338,9 +336,14 @@ const Recipes = (props) => {
               <Card.Header as="h5">User Twists</Card.Header>
               <Card.Body>
                 <Card.Title>
-                  {twist !== null
-                    ? `${twist.handle} suggests including the following twist:`
-                    : "No twists exist for this recipe"}
+                  {twist !== null ? (
+                    <p>
+                      <span id="handle">{twist.handle}</span> suggests including
+                      the following twist:
+                    </p>
+                  ) : (
+                    "No twists exist for this recipe"
+                  )}
                 </Card.Title>
                 <Card.Text>{twist !== null ? twist.content : null}</Card.Text>
                 {/* Twist randomize and social options */}
@@ -369,19 +372,19 @@ const Recipes = (props) => {
                   </Button>
                 ) : null}
                 {userHandle &&
-                  twist !== null &&
-                  userHandle !== twist.handle &&
-                  favorited === false ? (
-                    <Button
-                      className="login-buttons gen-button"
-                      bsPrefix
-                      onClick={() => {
-                        handleFavorite();
-                      }}
-                    >
-                      Favorite
-                    </Button>
-                  ) : null}
+                twist !== null &&
+                userHandle !== twist.handle &&
+                favorited === false ? (
+                  <Button
+                    className="login-buttons gen-button"
+                    bsPrefix
+                    onClick={() => {
+                      handleFavorite();
+                    }}
+                  >
+                    Favorite
+                  </Button>
+                ) : null}
                 {twist !== null && userHandle === twist.handle ? (
                   <Button
                     className="login-buttons gen-button"
