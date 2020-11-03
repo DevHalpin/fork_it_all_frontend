@@ -15,16 +15,17 @@
   background-image: url(https://xtemos.com/wp-content/uploads/2017/07/new-main-slider-bg-2.jpg);
   color: white;
   text-align: center;
-  padding: 1em
+  padding: 1em;
 }
 
 #carousel-link {
   color: white;
-  background-image: linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%);
-  display: flex;
+  background-image: linear-gradient(
+    rgba(58, 57, 57, 0.5) 100%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
   justify-content: center;
   flex-direction: column;
-  border-radius: 1em;
 }
 
 .carousel-control-prev {
@@ -32,9 +33,9 @@
 }
 
 .carousel-control-next {
-  height: 15em
+  height: 15em;
 }
 
 .carousel-inner {
-  height: 26em
+  height: 26em;
 }
