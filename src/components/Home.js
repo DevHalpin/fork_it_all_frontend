@@ -27,13 +27,12 @@ export default function Home(props) {
   //gets a recipe and sets recipe
   useEffect(() => {
     const fetchLiked = async () => {
-      const result = await axios.get("/api/recipes/20");
+      const result = await axios.get("/api/recipes/6");
       const recipe = result.data;
       setRecipe(recipe);
     };
     const fetchRandom = async () => {
       const result = await axios.get("/api/twists?random=1");
-      console.log(result);
       const recipe = result.data;
       setRandom(recipe);
     };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   Card,
   CardDeck,
@@ -105,7 +105,10 @@ const Recipes = (props) => {
   };
   // Favorite alert toggle
   const handleFavoriteAlert = () => {
-    if (favorited === true) setShowFaveAlert(true);
+    setShowFaveAlert(true);
+    setTimeout(() => {
+      setShowFaveAlert(false);
+    }, 5000);
   };
 
   // add to favorites
@@ -122,6 +125,9 @@ const Recipes = (props) => {
     if (event) {
       if (event.target.type === "submit") {
         setShowCreateAlert(true);
+        setTimeout(() => {
+          setShowCreateAlert(false);
+        }, 5000);
       }
     }
     toggleCreateModal();
@@ -132,6 +138,9 @@ const Recipes = (props) => {
     if (event) {
       if (event.target.type === "submit") {
         setShowEditAlert(true);
+        setTimeout(() => {
+          setShowEditAlert(false);
+        }, 5000);
       }
     }
     toggleEditModal();
@@ -142,6 +151,9 @@ const Recipes = (props) => {
       console.log(event);
       if (event.target.type === "submit") {
         setDeleteAlert(true);
+        setTimeout(() => {
+          setDeleteAlert(false);
+        }, 5000);
       }
     }
     toggleDeleteModal();
@@ -185,6 +197,8 @@ const Recipes = (props) => {
   if (recipe.video_url !== undefined) {
     embedLink = recipe.video_url.replace("watch?v=", "embed/");
   }
+
+
 
   return (
     <>
@@ -355,19 +369,19 @@ const Recipes = (props) => {
                   </Button>
                 ) : null}
                 {userHandle &&
-                twist !== null &&
-                userHandle !== twist.handle &&
-                favorited === false ? (
-                  <Button
-                    className="login-buttons gen-button"
-                    bsPrefix
-                    onClick={() => {
-                      handleFavorite();
-                    }}
-                  >
-                    Favorite
-                  </Button>
-                ) : null}
+                  twist !== null &&
+                  userHandle !== twist.handle &&
+                  favorited === false ? (
+                    <Button
+                      className="login-buttons gen-button"
+                      bsPrefix
+                      onClick={() => {
+                        handleFavorite();
+                      }}
+                    >
+                      Favorite
+                    </Button>
+                  ) : null}
                 {twist !== null && userHandle === twist.handle ? (
                   <Button
                     className="login-buttons gen-button"

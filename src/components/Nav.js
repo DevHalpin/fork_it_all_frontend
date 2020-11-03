@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Nav.scss";
-import { Link, useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
 import {
   Nav,
@@ -50,7 +50,7 @@ function NavbarNav(props) {
 
   const handleLogOutClick = () => {
     axios
-      .delete("/api/logout", { withCredentials: true })
+      .delete("/api/logout", {withCredentials: true})
       .then(() => {
         props.handleLogout();
       })
@@ -177,7 +177,7 @@ function NavbarNav(props) {
             type="submit"
             className="mr-sm-2 search-button gen-button"
           >
-            <i className="material-icons md-18">search</i> Search
+            <i className="material-icons search-icon">search</i> Search
           </Button>
         </Form>
         <Row>
@@ -201,17 +201,17 @@ function NavbarNav(props) {
               </Button>
             </>
           ) : (
-            <>
-              <div className="user-handle">User: {props.user.handle} </div>
-              <Button
-                onClick={handleLogOutClick}
-                bsPrefix
-                className="mr-sm-2 logout-button gen-button"
-              >
-                Log out
+              <>
+                <div className="user-handle">User: {props.user.handle} </div>
+                <Button
+                  onClick={handleLogOutClick}
+                  bsPrefix
+                  className="mr-sm-2 logout-button gen-button"
+                >
+                  Log out
               </Button>
-            </>
-          )}
+              </>
+            )}
         </Row>
       </Container>
     </Navbar>
