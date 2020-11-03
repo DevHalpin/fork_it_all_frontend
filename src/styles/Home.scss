@@ -6,7 +6,6 @@
     object-fit: cover;
     height: 25em;
     width: 100%;
-    // position: relative
   }
 }
 
@@ -25,16 +24,4 @@
   justify-content: center;
   flex-direction: column;
   border-radius: 1em;
-}
-
-.carousel-control-prev {
-  height: 15em;
-}
-
-.carousel-control-next {
-  height: 15em
-}
-
-.carousel-inner {
-  height: 26em
 }
