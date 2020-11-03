@@ -14,13 +14,14 @@
   background-image: url(https://xtemos.com/wp-content/uploads/2017/07/new-main-slider-bg-2.jpg);
   color: white;
   text-align: center;
-  padding: 1em
+  padding: 1em;
 }
 
 #carousel-link {
   color: white;
-  background-image: linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%);
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  background-image: linear-gradient(
+    rgba(0, 0, 0, 0.5) 100%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  border-radius: 1em;
 }
