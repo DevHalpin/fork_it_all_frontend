@@ -6,7 +6,6 @@ import axios from "axios";
 const My_Twists = (props) => {
   const [twists, setTwists] = useState([]);
   const user = props.user;
-  console.log(user);
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     axios
