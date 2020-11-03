@@ -25,15 +25,16 @@
   justify-content: center;
   flex-direction: column;
   border-radius: 1em;
+  z-index: 100
 }
 
-.carousel-control-prev {
-  height: 15em;
-}
+// .carousel-control-prev {
+//   height: 15em;
+// }
 
-.carousel-control-next {
-  height: 15em
-}
+// .carousel-control-next {
+//   height: 15em
+// }
 
 // .carousel-inner {
 //   height: 26em
