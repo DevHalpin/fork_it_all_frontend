@@ -215,7 +215,7 @@ const Recipes = (props) => {
 
   const ingredientList = buildIngredients().map((item) => {
     return (
-      <Card.Text key={item.key}>
+      <Card.Text className="ingredient-text" key={item.key}>
         {`${item.ingredient}: ${item.measure}`}
       </Card.Text>
     );
@@ -458,7 +458,7 @@ const Recipes = (props) => {
                 <Card.Header as="h5" className="text-center ingredient-header">
                   Ingredients
                 </Card.Header>
-                  {ingredientList}
+                {ingredientList}
               </Card.Body>
             </Card>
           </Col>
