@@ -7,7 +7,7 @@ const FaveTwists = (props) => {
   const [twists, setTwists] = useState([]);
   useEffect(() => {
     axios
-      .get("//api/faveTwists", {
+      .get("/api/faveTwists", {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
