@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Fork It All
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<b>[This website is live on Heroku!](https://fork-it-all.herokuapp.com/)<br/>
 
-## Available Scripts
+Have you ever followed a recipe and thought this could do with another pinch of ____? Have you ever found the perfect recipe… almost? Fork It All allows you to create your own twist on recipes. You will be able to see a list of user shared twists to recipes too. Twist cuts out the life stories so you can get straight to business in your kitchen! <br/>
+[Find the backend repository here](https://github.com/kelsi2/fork_it_all_backend)
 
-In the project directory, you can run:
+## Table of Contents
+  * [Tech Stack](#tech-stack)
+  * [User Stories](#user-stories)
+  * [Screenshots](#screenshots)
+  * [Development](#development)
+    * [Dependencies](#dependencies)
+    * [Fork It All Setup](#fork-it-all-setup)
+    * [Running the Server](#running-the-server)
 
-### `yarn start`
+## Tech Stack
+  * React
+  * React Router
+  * React Bootstrap
+  * Sass
+  * Deployment: Heroku
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## User Stories
+  * As a user, I want to be able to access clear and concise existing recipes and other users' associated twists on them.
+  * Users should have the ability to see a list of publicly available twists on the home page
+  * As a user I want to be able to create a twist on a recipe
+  * Users should be able to make twists private
+  * Users should have the option to categorize their twists associated with a recipe
+  * Users should have the ability to pin/save/favourite other users' twists
+  * Users who have created their twists should be able to delete only their twists
+  * As a user I want to be able to edit an existing twist I have made
+  * As a user I want to be able to share my twists on existing recipes
+  * As a user I should be able to share a link to a twist I create
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Screenshots
 
-### `yarn test`
+## Development
+### Dependencies
+  * Axios
+  * Bootstrap
+  * Copy-to-clipboard
+  * Create React App
+  * Faker
+  * Node-Sass
+  * React Bootstrap
+  * React Dom
+  * React Router Dom
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Fork It All Setup
+```
+cd <project-directory>
+git clone https://github.com/DevHalpin/fork_it_all_frontend
+cd fork_it_all_frontend
+npm i
+```
+* Be sure to run the [backend](https://github.com/kelsi2/fork_it_all_backend) install as well.
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Running the server
+* The server must be run from the backend using Foreman. Run bin/rails start to run both front and back end servers.
