@@ -14,7 +14,8 @@
   background-image: url(https://xtemos.com/wp-content/uploads/2017/07/new-main-slider-bg-2.jpg);
   color: white;
   text-align: center;
-  padding: 1em
+  padding: 1em;
+  margin-bottom: 0.4em
 }
 
 #carousel-link {
@@ -24,4 +25,10 @@
   justify-content: center;
   flex-direction: column;
   border-radius: 1em;
+}
+
+.front-image {
+  height: 13em;
+  object-fit: cover;
+  width: 100%
 }
