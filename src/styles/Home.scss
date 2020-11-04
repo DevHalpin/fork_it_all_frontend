@@ -15,13 +15,15 @@
   color: white;
   text-align: center;
   padding: 1em;
-  margin-bottom: 0.4em
+  margin-bottom: 0.4em;
 }
 
 #carousel-link {
   color: white;
-  background-image: linear-gradient( rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.5)100%);
-  display: flex;
+  background-image: linear-gradient(
+    rgba(58, 57, 57, 0.5) 100%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
   justify-content: center;
   flex-direction: column;
   border-radius: 1em;
@@ -30,5 +32,5 @@
 .front-image {
   height: 13em;
   object-fit: cover;
-  width: 100%
+  width: 100%;
 }
