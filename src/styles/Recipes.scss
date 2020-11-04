@@ -9,7 +9,7 @@
 
 .recipe-text {
   padding: 1em;
-  padding-bottom: 0
+  padding-bottom: 0;
 }
 
 .card-img {
@@ -20,8 +20,8 @@
 }
 
 .card-header {
-  background-color: #B9E4C9;
-  color: #FD5523;
+  background-color: #b9e4c9;
+  color: #fd5523;
   font-size: x-large;
   font-weight: bold;
 }
@@ -31,15 +31,15 @@
 }
 
 .card-body {
-  background-color: #FFFBE6;
+  background-color: #fffbe6;
   color: #356859;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  font-size: large
+  font-size: large;
 }
 
 .twist-form {
-  background-color: #FFFBE6;
+  background-color: #fffbe6;
 }
 
 .recipe-dropdown {
@@ -51,18 +51,18 @@
   margin-right: auto;
   margin-top: 1em;
   font-size: large;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-weight: bold;
   color: #356859;
 }
 
 .ingredient-body {
- padding: 0
+  padding: 0;
 }
 
 .ingredient-text {
   padding: 1em;
-  text-align: center
+  text-align: center;
 }
 
 .recipe-columns {
@@ -94,5 +94,10 @@
   align-items: center;
   margin: auto;
   height: 15em;
-  width: 25em
+  width: 25em;
+}
+
+#handle {
+  color: #fd5523;
+  font-style: italic;
 }
