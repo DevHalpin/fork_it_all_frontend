@@ -56,7 +56,7 @@ export default function Home(props) {
       });
     };
     const fetchThreeRecent = () => {
-      axios.get("/api/recipes?three=1", {
+      axios.get("https://stark-shelf-20245.herokuapp.com/api/recipes?three=1", {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
