@@ -48,6 +48,9 @@ function User_Profile(props) {
       },
     }).then((response) => {
       setUser(response.data);
+    })
+    .catch(function(error) {
+      console.log(error);
     });
   }, [id]);
 

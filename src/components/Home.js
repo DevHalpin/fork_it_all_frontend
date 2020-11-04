@@ -27,32 +27,47 @@ export default function Home(props) {
 
   //gets a recipe and sets recipe
   useEffect(() => {
-    const fetchLiked = async () => {
-      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/recipes/4", {
+    const fetchLiked = () => {
+      axios.get("https://stark-shelf-20245.herokuapp.com/api/recipes/4", {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
+      })
+      .then((result) => {
+        const recipe = result.data;
+        setRecipe(recipe);
+      })
+      .catch(function(error) {
+        console.log(error);
       });
-      const recipe = result.data;
-      setRecipe(recipe);
     };
-    const fetchRandom = async () => {
-      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/twists?random=1", {
+    const fetchRandom = () => {
+      axios.get("https://stark-shelf-20245.herokuapp.com/api/twists?random=1", {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
+      })
+      .then((result) =>{
+        const recipe = result.data;
+        setRandom(recipe);
+      })
+      .catch(function(error) {
+        console.log(error);
       });
-      const recipe = result.data;
-      setRandom(recipe);
     };
-    const fetchThreeRecent = async () => {
-      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/recipes?three=1", {
+    const fetchThreeRecent = () => {
+      axios.get("/api/recipes?three=1", {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
+      })
+      .then((result) => {
+        const recipe = result.data;
+        setThree(recipe);
+      })
+      .catch(function(error) {
+        console.log(error);
       });
-      const recipe = result.data;
-      setThree(recipe);
     };
     fetchRandom();
     fetchLiked();

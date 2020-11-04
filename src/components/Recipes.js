@@ -101,6 +101,9 @@ const Recipes = (props) => {
       },
     }).then((response) => {
       setTwist(response.data);
+    })
+    .catch(function(error) {
+      console.log(error);
     });
   };
   //used for updating the edit twist content
@@ -111,6 +114,9 @@ const Recipes = (props) => {
       },
     }).then((response) => {
       setTwist(response.data);
+    })
+    .catch(function(error) {
+      console.log(error);
     });
   };
 
@@ -145,7 +151,10 @@ const Recipes = (props) => {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
       })
-      .then(() => handleFavoriteAlert());
+      .then(() => handleFavoriteAlert())
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   // Create alert toggle

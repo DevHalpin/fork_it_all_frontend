@@ -14,6 +14,9 @@ const FaveTwists = (props) => {
       })
       .then((response) => {
         setTwists(response.data);
+      })
+      .catch(function(error) {
+        console.log(error);
       });
   }, []);
 

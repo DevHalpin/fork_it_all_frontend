@@ -17,6 +17,9 @@ function Slug(props) {
     })
     .then((response) => {
       history.push(`/recipes/${response.data.recipe_id}/twists/${response.data.twist_id}`)
+    })
+    .catch(function(error) {
+      console.log(error);
     });
   });
 
