@@ -57,4 +57,4 @@ npm i
 * Be sure to run the [backend](https://github.com/kelsi2/fork_it_all_backend) install as well.
 
 ### Running the server
-Run ```npm start``` in a termainal to start front end
+Run ```npm start``` in a terminal to start front end
