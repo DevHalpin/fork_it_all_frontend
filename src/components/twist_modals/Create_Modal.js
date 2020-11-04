@@ -31,6 +31,10 @@ const TwistCreateModal = (props) => {
         slug: faker.lorem.slug(1),
         is_private: state.private,
         sort_order: 1,
+      }, {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
       })
       .then(() => {
         random();

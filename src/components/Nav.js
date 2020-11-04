@@ -3,7 +3,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Nav.scss";
 import {Link, useHistory} from "react-router-dom";
 import Logo from "./images/ForkItAll.png";
-import {Nav, Navbar, Form, FormControl, Button, Container, Row, Dropdown} from "react-bootstrap";
+import {
+  Nav,
+  Navbar,
+  Form,
+  FormControl,
+  Button,
+  Container,
+  Row,
+  Dropdown,
+} from "react-bootstrap";
 import axios from "axios";
 import RegisterModal from "./user_modals/Register_Modal";
 import LoginModal from "./user_modals/Login_Modal";
@@ -11,7 +20,7 @@ import LoginModal from "./user_modals/Login_Modal";
 function NavbarNav(props) {
   const [navOpen, setNavOpen] = useState(false);
   const [state, setState] = useState({
-    search: ""
+    search: "",
   });
   const history = useHistory();
   // Set modal state to false (closed)
@@ -22,15 +31,20 @@ function NavbarNav(props) {
     const eventValue = event.target.value;
     setState({
       ...state,
-      [event.target.name]: eventValue
+      [event.target.name]: eventValue,
     });
   };
 
   const handleSubmit = (event) => {
     axios
-      .get(`https://stark-shelf-20245.herokuapp.com/api/recipes?search=${state.search}`)
+      .get(`https://stark-shelf-20245.herokuapp.com/api/recipes?search=${state.search}`, {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      })
       .then((response) => {
         history.push(`/recipes/${response.data.id}`);
+        reset();
       })
       .catch((error) => {
         console.log("Error: ", error);
@@ -39,11 +53,15 @@ function NavbarNav(props) {
   };
 
   const handleLogOutClick = () => {
-    axios.delete("https://stark-shelf-20245.herokuapp.com/api/logout", {withCredentials: true})
+    axios
+      .delete("https://stark-shelf-20245.herokuapp.com/api/logout", {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        }, withCredentials: true})
       .then(() => {
         props.handleLogout();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Logout Error ", error);
       });
   };
@@ -56,30 +74,92 @@ function NavbarNav(props) {
     setRegisterModalOpen(!isRegisterModalOpen);
   };
 
+  // Reset search field
+  const reset = (event) => {
+    setState("");
+  };
+
   return (
-    <Navbar expanded={navOpen} bg="dark" expand="xxl" sticky="top" className="nav">
+    <Navbar
+      expanded={navOpen}
+      bg="dark"
+      expand="xxl"
+      sticky="top"
+      className="nav"
+    >
       <Container fluid>
-        <LoginModal handleLogin={props.handleLogin} id="login-modal" show={isLoginModalOpen} onHide={toggleLoginModal} toggleRegisterModal />
-        <RegisterModal handleLogin={props.handleLogin} id="register-modal" show={isRegisterModalOpen} onHide={toggleRegisterModal} toggleLoginModal />
+        <LoginModal
+          handleLogin={props.handleLogin}
+          id="login-modal"
+          show={isLoginModalOpen}
+          onHide={toggleLoginModal}
+          toggleRegisterModal
+        />
+        <RegisterModal
+          handleLogin={props.handleLogin}
+          id="register-modal"
+          show={isRegisterModalOpen}
+          onHide={toggleRegisterModal}
+          toggleLoginModal
+        />
         <Row>
-          <Navbar.Toggle onClick={() => setNavOpen(navOpen ? false : "expanded")} aria-controls="basic-navbar-nav"><i className="material-icons menu">menu</i></Navbar.Toggle>
+          <Navbar.Toggle
+            onClick={() => setNavOpen(navOpen ? false : "expanded")}
+            aria-controls="basic-navbar-nav"
+          >
+            <i className="material-icons menu">menu</i>
+          </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="dropdown-menu">
-              <Link onClick={() => setNavOpen(false)} role="menuitem" to="/recipes/43" id="nav-link">
-                Recipes  <i className="material-icons menu-links md-24">food_bank</i>
+              <Link
+                onClick={() => setNavOpen(false)}
+                role="menuitem"
+                to="/recipes/43"
+                id="nav-link"
+              >
+                Recipes{" "}
+                <i className="material-icons menu-links md-24">food_bank</i>
               </Link>
               <Dropdown.Divider />
-              <Link onClick={() => setNavOpen(false)} role="menuitem" to={`/user_profile/${props.user.id}`} id="nav-link">Profile  <i className="material-icons menu-links md-24">account_box</i></Link>
-              <Dropdown.Divider />
-              <Link onClick={() => setNavOpen(false)} role="menuitem" to="/my_twists/" id="nav-link">
-                My Twists  <i className="material-icons menu-links md-24">menu_book</i>
+              <Link
+                onClick={() => setNavOpen(false)}
+                role="menuitem"
+                to={`/user_profile/${props.user.id}`}
+                id="nav-link"
+              >
+                Profile{" "}
+                <i className="material-icons menu-links md-24">account_box</i>
               </Link>
               <Dropdown.Divider />
-              <Link onClick={() => setNavOpen(false)} role="menuitem" to="/fave_twists/" id="nav-link">
-                Fave Twists  <i className="material-icons menu-links md-24">favorite</i>
+              <Link
+                onClick={() => setNavOpen(false)}
+                role="menuitem"
+                to="/my_twists/"
+                id="nav-link"
+              >
+                My Twists{" "}
+                <i className="material-icons menu-links md-24">menu_book</i>
               </Link>
               <Dropdown.Divider />
-              <Link onClick={() => setNavOpen(false)} role="menuitem" to="/fave_users/" id="nav-link">Fave Users  <i className="material-icons menu-links md-18">group_add</i></Link>
+              <Link
+                onClick={() => setNavOpen(false)}
+                role="menuitem"
+                to="/fave_twists/"
+                id="nav-link"
+              >
+                Fave Twists{" "}
+                <i className="material-icons menu-links md-24">favorite</i>
+              </Link>
+              <Dropdown.Divider />
+              <Link
+                onClick={() => setNavOpen(false)}
+                role="menuitem"
+                to="/fave_users/"
+                id="nav-link"
+              >
+                Fave Users{" "}
+                <i className="material-icons menu-links md-18">group_add</i>
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Row>
@@ -95,33 +175,53 @@ function NavbarNav(props) {
           <FormControl
             type="text"
             name="search"
-            placeholder="Search here!"
+            placeholder="Search recipes"
             value={state.search}
             onChange={handleChange}
           />
-          <Button bsPrefix type="submit" className="mr-sm-2 search-button gen-button">
-            <i className="material-icons md-18">search</i>  Search
+          <Button
+            bsPrefix
+            type="submit"
+            className="mr-sm-2 search-button gen-button"
+          >
+            <i className="material-icons search-icon">search</i> Search
           </Button>
         </Form>
         <Row>
-          {props.loggedInStatus === "NOT_LOGGED_IN" ?
-            (<>
-              <Button id="login-modal" onClick={toggleLoginModal} bsPrefix className="mr-sm-2 login-buttons gen-button">
+          {props.loggedInStatus === "NOT_LOGGED_IN" ? (
+            <>
+              <Button
+                id="login-modal"
+                onClick={toggleLoginModal}
+                bsPrefix
+                className="mr-sm-2 login-buttons gen-button"
+              >
                 Login
-            </Button>  <Button id="register-modal" onClick={toggleRegisterModal} bsPrefix className="mr-sm-2 login-buttons gen-button">
+              </Button>{" "}
+              <Button
+                id="register-modal"
+                onClick={toggleRegisterModal}
+                bsPrefix
+                className="mr-sm-2 login-buttons gen-button"
+              >
                 Register
-            </Button>
-            </>)
-            : <>
-              <div className="user-handle">User: {props.user.handle} </div>
-              <Button onClick={handleLogOutClick} bsPrefix className="mr-sm-2 logout-button gen-button">
-                Log out
-          </Button>
+              </Button>
             </>
-          }
+          ) : (
+              <>
+                <div className="user-handle">User: {props.user.handle} </div>
+                <Button
+                  onClick={handleLogOutClick}
+                  bsPrefix
+                  className="mr-sm-2 logout-button gen-button"
+                >
+                  Log out
+              </Button>
+              </>
+            )}
         </Row>
       </Container>
-    </Navbar >
+    </Navbar>
   );
 }
 

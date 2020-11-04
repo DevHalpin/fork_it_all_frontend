@@ -1,11 +1,11 @@
-import React, {useState} from "react";
-import {Modal, Button, Form} from "react-bootstrap";
-import {useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const LoginModal = (props) => {
   const history = useHistory();
-  const {show, onHide, handleLogin} = props;
+  const { show, onHide, handleLogin } = props;
 
   const [state, setState] = useState({
     email: "",
@@ -25,8 +25,12 @@ const LoginModal = (props) => {
         {
           email: state.email,
           password: state.password,
+        }, {
+          headers: {
+            authorization: `Token token=${localStorage.getItem('access_token')}`,
+          },
         },
-        {withCredentials: true}
+        { withCredentials: true }
       )
       .then((response) => {
         if (response.data.logged_in) {
@@ -41,7 +45,7 @@ const LoginModal = (props) => {
 
   const handleChange = (event) => {
     const eventValue = event.target.value;
-    setState({...state, [event.target.name]: eventValue});
+    setState({ ...state, [event.target.name]: eventValue });
   };
 
   return (

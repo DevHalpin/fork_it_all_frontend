@@ -42,9 +42,11 @@ body {
 }
 
 .carousel-caption {
-  top: auto;
   display: flex;
   flex-direction: column;
+  top: auto;
+  bottom: 0;
+  z-index: 1;
 }
 
 .alert {

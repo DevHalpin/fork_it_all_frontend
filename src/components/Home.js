@@ -28,18 +28,29 @@ export default function Home(props) {
   //gets a recipe and sets recipe
   useEffect(() => {
     const fetchLiked = async () => {
-      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/recipes/20");
+      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/recipes/4", {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      });
       const recipe = result.data;
       setRecipe(recipe);
     };
     const fetchRandom = async () => {
-      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/twists?random=1");
-      console.log(result);
+      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/twists?random=1", {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      });
       const recipe = result.data;
       setRandom(recipe);
     };
     const fetchThreeRecent = async () => {
-      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/recipes?three=1");
+      const result = await axios.get("https://stark-shelf-20245.herokuapp.com/api/recipes?three=1", {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      });
       const recipe = result.data;
       setThree(recipe);
     };
@@ -110,7 +121,7 @@ export default function Home(props) {
                 </Container>
               </Jumbotron>
               <Card>
-                <Card.Img variant="top" src={recipe.meal_image} />
+                <Card.Img className="front-image" variant="top" src={recipe.meal_image} />
                 <Card.Body>
                   <Card.Title>{recipe.name}</Card.Title>
                   <Card.Link href={`/recipes/${recipe.id}`} className="card-link">
@@ -128,7 +139,7 @@ export default function Home(props) {
                 </Container>
               </Jumbotron>
               <Card>
-                <Card.Img variant="top" src={random.meal_image} />
+                <Card.Img className="front-image" variant="top" src={random.meal_image} />
                 <Card.Body>
                   <Card.Title>{random.name}</Card.Title>
                   <Card.Text>{random.content}</Card.Text>

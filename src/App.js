@@ -11,8 +11,8 @@ import Home from "./components/Home";
 import Error from "./components/Error";
 import UserProfile from "./components/User_Profile";
 import Recipes from "./components/Recipes";
-import My_Twists from "./components/My_Twists";
-import Fave_Twists from "./components/Fave_Twists";
+import MyTwists from "./components/My_Twists";
+import FaveTwists from "./components/Fave_Twists";
 import Fave_Users from "./components/Fave_Users";
 import Slug from "./components/Slug";
 
@@ -23,7 +23,10 @@ export default function App() {
   });
   const checkLoginStatus = () => {
     axios
-      .get("https://stark-shelf-20245.herokuapp.com/api/logged_in", {withCredentials: true})
+      .get("https://stark-shelf-20245.herokuapp.com/api/logged_in",{
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        }, withCredentials: true})
       .then((response) => {
         if (
           response.data.logged_in &&
@@ -51,6 +54,7 @@ export default function App() {
     checkLoginStatus();
   });
   const handleLogin = (data) => {
+    localStorage.setItem('access_token', data.user.access_token)
     setState({
       loggedInStatus: "LOGGED_IN",
       user: data.user,
@@ -87,8 +91,14 @@ export default function App() {
           path="/recipes/:recipe/:twists?/:twist?"
           render={(props) => <Recipes {...props} user={state.user} />}
         />
-        <Route path="/my_twists/" component={My_Twists} />
-        <Route path="/fave_twists/" component={Fave_Twists} />
+        <Route
+          path="/my_twists/"
+          render={(props) => <MyTwists {...props} user={state.user} />}
+        />
+        <Route
+          path="/fave_twists/"
+          render={(props) => <FaveTwists {...props} user={state.user} />}
+        />
         <Route path="/fave_users/" component={Fave_Users} />
         <Route path="/twists/:slug" component={Slug} />
         <Route component={Error} />

@@ -30,6 +30,10 @@ const RegisterModal = (props) => {
           password_confirmation: state.password_confirmation,
           handle: state.handle,
           name: state.name,
+        }, {
+          headers: {
+            authorization: `Token token=${localStorage.getItem('access_token')}`,
+          },
         },
         {withCredentials: true}
       )

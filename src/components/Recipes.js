@@ -7,7 +7,7 @@ import {
   Button,
   Form,
   Alert,
-  NavDropdown
+  NavDropdown,
 } from "react-bootstrap";
 import TwistDeleteModal from "./twist_modals/Delete_Modal";
 import TwistShareModal from "./twist_modals/Share_Modal";
@@ -53,18 +53,34 @@ const Recipes = (props) => {
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     if (twistId !== undefined) {
-      axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?twist=${twistId}`).then((response) => {
+      axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?twist=${twistId}`, {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      }).then((response) => {
         setTwist(response.data);
       });
     } else {
-      axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?random=1`).then((response) => {
+      axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?random=1`, {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      }).then((response) => {
         setTwist(response.data);
       });
     }
-    axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}`).then((response) => {
+    axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}`, {
+      headers: {
+        authorization: `Token token=${localStorage.getItem('access_token')}`,
+      },
+    }).then((response) => {
       setRecipe(response.data);
     });
-    axios.get("https://stark-shelf-20245.herokuapp.com/api/faveTwists").then((response) => {
+    axios.get("https://stark-shelf-20245.herokuapp.com/api/faveTwists", {
+      headers: {
+        authorization: `Token token=${localStorage.getItem('access_token')}`,
+      },
+    }).then((response) => {
       const favoriteArr = [];
       response.data.forEach((favorite) => {
         favoriteArr.push(favorite.twist_id);
@@ -79,13 +95,21 @@ const Recipes = (props) => {
 
   // Find a random twist
   const randomTwist = () => {
-    axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?random=1`).then((response) => {
+    axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?random=1`, {
+      headers: {
+        authorization: `Token token=${localStorage.getItem('access_token')}`,
+      },
+    }).then((response) => {
       setTwist(response.data);
     });
   };
   //used for updating the edit twist content
   const specificTwist = (id, twist) => {
-    axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?twist=${twist}`).then((response) => {
+    axios.get(`https://stark-shelf-20245.herokuapp.com/api/recipes/${id}?twist=${twist}`, {
+      headers: {
+        authorization: `Token token=${localStorage.getItem('access_token')}`,
+      },
+    }).then((response) => {
       setTwist(response.data);
     });
   };
@@ -105,8 +129,10 @@ const Recipes = (props) => {
   };
   // Favorite alert toggle
   const handleFavoriteAlert = () => {
-    if (favorited === true)
-      setShowFaveAlert(true);
+    setShowFaveAlert(true);
+    setTimeout(() => {
+      setShowFaveAlert(false);
+    }, 5000);
   };
 
   // add to favorites
@@ -114,6 +140,10 @@ const Recipes = (props) => {
     axios
       .put(`https://stark-shelf-20245.herokuapp.com/api/twists/${twist.id}/favorite?type=favorite`, {
         twist_id: `${twist.id}`,
+      }, {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
       })
       .then(() => handleFavoriteAlert());
   };
@@ -123,6 +153,9 @@ const Recipes = (props) => {
     if (event) {
       if (event.target.type === "submit") {
         setShowCreateAlert(true);
+        setTimeout(() => {
+          setShowCreateAlert(false);
+        }, 5000);
       }
     }
     toggleCreateModal();
@@ -133,6 +166,9 @@ const Recipes = (props) => {
     if (event) {
       if (event.target.type === "submit") {
         setShowEditAlert(true);
+        setTimeout(() => {
+          setShowEditAlert(false);
+        }, 5000);
       }
     }
     toggleEditModal();
@@ -143,6 +179,9 @@ const Recipes = (props) => {
       console.log(event);
       if (event.target.type === "submit") {
         setDeleteAlert(true);
+        setTimeout(() => {
+          setDeleteAlert(false);
+        }, 5000);
       }
     }
     toggleDeleteModal();
@@ -161,14 +200,14 @@ const Recipes = (props) => {
 
   const buildIngredients = () => {
     let ingredients = [];
-    const ingredientArr = (matchKey(recipe, "ingredient"));
-    const measureArr = (matchKey(recipe, "measure"));
+    const ingredientArr = matchKey(recipe, "ingredient");
+    const measureArr = matchKey(recipe, "measure");
 
     for (let i = 0; i < ingredientArr.length; i++) {
       ingredients.push({
         ingredient: ingredientArr[i],
         measure: measureArr[i],
-        key: i
+        key: i,
       });
     }
     return ingredients;
@@ -176,7 +215,7 @@ const Recipes = (props) => {
 
   const ingredientList = buildIngredients().map((item) => {
     return (
-      <Card.Text key={item.key}>
+      <Card.Text className="ingredient-text" key={item.key}>
         {`${item.ingredient}: ${item.measure}`}
       </Card.Text>
     );
@@ -184,7 +223,7 @@ const Recipes = (props) => {
 
   let embedLink = "";
   if (recipe.video_url !== undefined) {
-    embedLink = recipe.video_url.replace('watch?v=', 'embed/');
+    embedLink = recipe.video_url.replace("watch?v=", "embed/");
   }
 
   return (
@@ -284,25 +323,33 @@ const Recipes = (props) => {
                 {`${recipe.name}`}{" "}
               </Card.Header>
               <Card.Text className="recipe-text">
-                Region:<br />{`${recipe.region}`}
+                Region:
+                <br />
+                {`${recipe.region}`}
               </Card.Text>
               <NavDropdown.Divider />
               <Card.Text className="recipe-text">
-                Type:<br />{`${recipe.meal_type}`}
+                Type:
+                <br />
+                {`${recipe.meal_type}`}
               </Card.Text>
               <NavDropdown.Divider />
               <Card.Text className="recipe-text">
-                Recipe Video:<br />
+                Recipe Video:
+                <br />
               </Card.Text>
-              <iframe src={embedLink}
-                frameBorder='0'
-                allow='autoplay; encrypted-media'
-                title='video'
+              <iframe
+                src={embedLink}
+                frameBorder="0"
+                allow="autoplay; encrypted-media"
+                title="video"
                 className="embedded-vid"
               />
               <NavDropdown.Divider />
               <Card.Text className="recipe-text">
-                Instructions:<br />{`${recipe.instructions}`}
+                Instructions:
+                <br />
+                {`${recipe.instructions}`}
               </Card.Text>
             </Card.Body>
           </Card>
@@ -317,9 +364,14 @@ const Recipes = (props) => {
               <Card.Header as="h5">User Twists</Card.Header>
               <Card.Body>
                 <Card.Title>
-                  {twist !== null
-                    ? `${twist.handle} suggests including the following twist:`
-                    : "No twists exist for this recipe"}
+                  {twist !== null ? (
+                    <p>
+                      <span id="handle">{twist.handle}</span> suggests including
+                      the following twist:
+                    </p>
+                  ) : (
+                      "No twists exist for this recipe"
+                    )}
                 </Card.Title>
                 <Card.Text>{twist !== null ? twist.content : null}</Card.Text>
                 {/* Twist randomize and social options */}
@@ -347,17 +399,20 @@ const Recipes = (props) => {
                     Rate
                   </Button>
                 ) : null}
-                {userHandle && twist !== null && userHandle !== twist.handle && favorited === false ? (
-                  <Button
-                    className="login-buttons gen-button"
-                    bsPrefix
-                    onClick={() => {
-                      handleFavorite();
-                    }}
-                  >
-                    Favorite
-                  </Button>
-                ) : null}
+                {userHandle &&
+                  twist !== null &&
+                  userHandle !== twist.handle &&
+                  favorited === false ? (
+                    <Button
+                      className="login-buttons gen-button"
+                      bsPrefix
+                      onClick={() => {
+                        handleFavorite();
+                      }}
+                    >
+                      Favorite
+                    </Button>
+                  ) : null}
                 {twist !== null && userHandle === twist.handle ? (
                   <Button
                     className="login-buttons gen-button"
@@ -387,27 +442,6 @@ const Recipes = (props) => {
                 ) : null}
               </Card.Body>
               <Form className="twist-form">
-                <Form.Group as={Col}>
-                  <Form.Label>Find Twists by User</Form.Label>
-                  <Form.Control
-                    size="md"
-                    type="text"
-                    placeholder="Enter a user handle"
-                  />
-                </Form.Group>
-
-                <Form.Group as={Col}>
-                  <Form.Label>Search by Twist Type</Form.Label>
-                  <Form.Control as="select" id="inlineFormCustomSelect" custom>
-                    <option value="0">Select an option</option>
-                    <option value="1">Ingredient Replacement</option>
-                    <option value="2">Cooking Time</option>
-                    <option value="3">Healthy Options</option>
-                    <option value="4">Add Something Extra</option>
-                    <option value="5">Take Something Out</option>
-                  </Form.Control>
-                </Form.Group>
-
                 <Form.Group controlId="formBasicCheckbox">
                   <Form.Check
                     onClick={() => setShowTwists(false)}
@@ -423,10 +457,8 @@ const Recipes = (props) => {
               <Card.Body className="ingredient-body">
                 <Card.Header as="h5" className="text-center ingredient-header">
                   Ingredients
-              </Card.Header>
-                <Card.Text className="ingredient-text">
-                  {ingredientList}
-                </Card.Text>
+                </Card.Header>
+                {ingredientList}
               </Card.Body>
             </Card>
           </Col>

@@ -10,7 +10,11 @@ function Slug(props) {
   let slug = props.match.params.slug
 
   useEffect(() => {
-    axios.get(`https://stark-shelf-20245.herokuapp.com/api/slug?slug=${slug}`)
+    axios.get(`https://stark-shelf-20245.herokuapp.com/api/slug?slug=${slug}`, {
+      headers: {
+        authorization: `Token token=${localStorage.getItem('access_token')}`,
+      },
+    })
     .then((response) => {
       history.push(`/recipes/${response.data.recipe_id}/twists/${response.data.twist_id}`)
     });
