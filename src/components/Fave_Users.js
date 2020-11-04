@@ -1,8 +1,8 @@
 import React from "react";
-import {Container, Card, CardDeck, Row} from "react-bootstrap";
+import { Container, Card, CardDeck, Row } from "react-bootstrap";
 import "../styles/App.scss";
 
-const Fave_Users = (props) => {
+const FaveUsers = (props) => {
   const fakeUser1 = {
     id: 101,
     email: "charla@oconnell.com",
@@ -99,7 +99,7 @@ const Fave_Users = (props) => {
 
   return (
     <Container>
-      <Row style={{flex: 1}}>
+      <Row style={{ flex: 1 }}>
         <CardDeck className="mt-3">
           <Card>
             <Card.Img variant="top" src={`${fakeUser1.profile_picture}`} />
@@ -159,4 +159,4 @@ const Fave_Users = (props) => {
   );
 };
 
-export default Fave_Users;
+export default FaveUsers;
