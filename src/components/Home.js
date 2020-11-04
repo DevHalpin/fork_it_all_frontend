@@ -27,17 +27,29 @@ export default function Home(props) {
   //gets a recipe and sets recipe
   useEffect(() => {
     const fetchLiked = async () => {
-      const result = await axios.get("/api/recipes/6");
+      const result = await axios.get("/api/recipes/6", {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      });
       const recipe = result.data;
       setRecipe(recipe);
     };
     const fetchRandom = async () => {
-      const result = await axios.get("/api/twists?random=1");
+      const result = await axios.get("/api/twists?random=1", {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      });
       const recipe = result.data;
       setRandom(recipe);
     };
     const fetchThreeRecent = async () => {
-      const result = await axios.get("/api/recipes?three=1");
+      const result = await axios.get("/api/recipes?three=1", {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      });
       const recipe = result.data;
       setThree(recipe);
     };

@@ -10,7 +10,7 @@ const FaveTwists = (props) => {
     axios
       .get(`/api/faveTwists`, {
         headers: {
-          authorization: `Token token=${user.access_token}`,
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
       })
       .then((response) => {

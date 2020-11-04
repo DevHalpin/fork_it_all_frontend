@@ -22,7 +22,10 @@ export default function App() {
   });
   const checkLoginStatus = () => {
     axios
-      .get("/api/logged_in", {withCredentials: true})
+      .get("/api/logged_in",{
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        }, withCredentials: true})
       .then((response) => {
         if (
           response.data.logged_in &&
@@ -50,6 +53,7 @@ export default function App() {
     checkLoginStatus();
   });
   const handleLogin = (data) => {
+    localStorage.setItem('access_token', data.user.access_token)
     setState({
       loggedInStatus: "LOGGED_IN",
       user: data.user,

@@ -30,6 +30,10 @@ const TwistEditModal = (props) => {
         content: editState.content,
         recipe_id: twist,
         is_private: editState.private,
+      }, {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
       })
       .then(() => {
         getSpecifcTwist();

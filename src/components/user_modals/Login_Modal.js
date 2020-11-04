@@ -25,6 +25,10 @@ const LoginModal = (props) => {
         {
           email: state.email,
           password: state.password,
+        }, {
+          headers: {
+            authorization: `Token token=${localStorage.getItem('access_token')}`,
+          },
         },
         { withCredentials: true }
       )

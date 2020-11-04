@@ -53,18 +53,34 @@ const Recipes = (props) => {
   // Make a request for a recipe, random twist, and user given a recipe id
   useEffect(() => {
     if (twistId !== undefined) {
-      axios.get(`/api/recipes/${id}?twist=${twistId}`).then((response) => {
+      axios.get(`/api/recipes/${id}?twist=${twistId}`, {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      }).then((response) => {
         setTwist(response.data);
       });
     } else {
-      axios.get(`/api/recipes/${id}?random=1`).then((response) => {
+      axios.get(`/api/recipes/${id}?random=1`, {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
+      }).then((response) => {
         setTwist(response.data);
       });
     }
-    axios.get(`/api/recipes/${id}`).then((response) => {
+    axios.get(`/api/recipes/${id}`, {
+      headers: {
+        authorization: `Token token=${localStorage.getItem('access_token')}`,
+      },
+    }).then((response) => {
       setRecipe(response.data);
     });
-    axios.get("/api/faveTwists").then((response) => {
+    axios.get("/api/faveTwists", {
+      headers: {
+        authorization: `Token token=${localStorage.getItem('access_token')}`,
+      },
+    }).then((response) => {
       const favoriteArr = [];
       response.data.forEach((favorite) => {
         favoriteArr.push(favorite.twist_id);
@@ -79,13 +95,21 @@ const Recipes = (props) => {
 
   // Find a random twist
   const randomTwist = () => {
-    axios.get(`/api/recipes/${id}?random=1`).then((response) => {
+    axios.get(`/api/recipes/${id}?random=1`, {
+      headers: {
+        authorization: `Token token=${localStorage.getItem('access_token')}`,
+      },
+    }).then((response) => {
       setTwist(response.data);
     });
   };
   //used for updating the edit twist content
   const specificTwist = (id, twist) => {
-    axios.get(`/api/recipes/${id}?twist=${twist}`).then((response) => {
+    axios.get(`/api/recipes/${id}?twist=${twist}`, {
+      headers: {
+        authorization: `Token token=${localStorage.getItem('access_token')}`,
+      },
+    }).then((response) => {
       setTwist(response.data);
     });
   };
@@ -116,6 +140,10 @@ const Recipes = (props) => {
     axios
       .put(`/api/twists/${twist.id}/favorite?type=favorite`, {
         twist_id: `${twist.id}`,
+      }, {
+        headers: {
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
+        },
       })
       .then(() => handleFavoriteAlert());
   };
@@ -430,9 +458,7 @@ const Recipes = (props) => {
                 <Card.Header as="h5" className="text-center ingredient-header">
                   Ingredients
                 </Card.Header>
-                <Card.Text className="ingredient-text">
                   {ingredientList}
-                </Card.Text>
               </Card.Body>
             </Card>
           </Col>

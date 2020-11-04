@@ -25,7 +25,11 @@ function User_Profile(props) {
         password_confirmation: "1234",
       },
     };
-    axios.patch(`/api/users/${props.user.id}`, patchObj);
+    axios.patch(`/api/users/${props.user.id}`, patchObj, {
+      headers: {
+        authorization: `Token token=${localStorage.getItem('access_token')}`,
+      },
+    });
   };
 
   const handlePhotoUpload = (event) => {
@@ -38,7 +42,11 @@ function User_Profile(props) {
   };
 
   useEffect(() => {
-    axios.get(`/api/users/${id}`).then((response) => {
+    axios.get(`/api/users/${id}`, {
+      headers: {
+        authorization: `Token token=${localStorage.getItem('access_token')}`,
+      },
+    }).then((response) => {
       setUser(response.data);
     });
   }, [id]);

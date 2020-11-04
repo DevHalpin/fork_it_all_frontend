@@ -11,7 +11,7 @@ const MyTwists = (props) => {
     axios
       .get(`/api/myTwists`, {
         headers: {
-          authorization: `Token token=${user.access_token}`,
+          authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
       })
       .then((response) => {
