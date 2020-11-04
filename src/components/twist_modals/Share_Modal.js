@@ -5,13 +5,13 @@ import copy from "copy-to-clipboard";
 const TwistShareModal = (props) => {
   const {show, onHide, url} = props;
 
-  const message = `Your share link is: fork-it-all.herokuapp.com${url}`;
+  const message = `Your share link is: https://fork-it-all.herokuapp.com${url}`;
   const handleSubmit = (event) => {
     event.preventDefault();
   };
 
   function copyToClipboard() {
-    copy(url);
+    copy(`https://fork-it-all.herokuapp.com${url}`);
     onHide();
   }
   return (
