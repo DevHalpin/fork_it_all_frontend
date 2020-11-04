@@ -57,4 +57,4 @@ npm i
 * Be sure to run the [backend](https://github.com/kelsi2/fork_it_all_backend) install as well.
 
 ### Running the server
-* The server must be run from the backend using Foreman. Run bin/rails start to run both front and back end servers.
+Run ```npm start``` in a termainal to start front end
