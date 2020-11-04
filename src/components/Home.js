@@ -28,7 +28,8 @@ export default function Home(props) {
   //gets a recipe and sets recipe
   useEffect(() => {
     const fetchLiked = () => {
-      axios.get("https://stark-shelf-20245.herokuapp.com/api/recipes/4", {
+      axios
+      .get("/api/recipes/4", {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
@@ -42,7 +43,8 @@ export default function Home(props) {
       });
     };
     const fetchRandom = () => {
-      axios.get("https://stark-shelf-20245.herokuapp.com/api/twists?random=1", {
+      axios
+      .get("/api/twists?random=1", {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
@@ -56,7 +58,8 @@ export default function Home(props) {
       });
     };
     const fetchThreeRecent = () => {
-      axios.get("/api/recipes?three=1", {
+      axios
+      .get("/api/recipes?three=1", {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },

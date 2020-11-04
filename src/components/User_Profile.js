@@ -25,7 +25,8 @@ function User_Profile(props) {
         password_confirmation: "1234",
       },
     };
-    axios.patch(`https://stark-shelf-20245.herokuapp.com/api/users/${props.user.id}`, patchObj, {
+    axios
+    .patch(`/api/users/${props.user.id}`, patchObj, {
       headers: {
         authorization: `Token token=${localStorage.getItem('access_token')}`,
       },
@@ -42,7 +43,8 @@ function User_Profile(props) {
   };
 
   useEffect(() => {
-    axios.get(`https://stark-shelf-20245.herokuapp.com/api/users/${id}`, {
+    axios
+    .get(`/api/users/${id}`, {
       headers: {
         authorization: `Token token=${localStorage.getItem('access_token')}`,
       },

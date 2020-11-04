@@ -37,7 +37,7 @@ function NavbarNav(props) {
 
   const handleSubmit = (event) => {
     axios
-      .get(`https://stark-shelf-20245.herokuapp.com/api/recipes?search=${state.search}`, {
+      .get(`/api/recipes?search=${state.search}`, {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },
@@ -54,7 +54,7 @@ function NavbarNav(props) {
 
   const handleLogOutClick = () => {
     axios
-      .delete("https://stark-shelf-20245.herokuapp.com/api/logout", {
+      .delete("/api/logout", {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         }, withCredentials: true})

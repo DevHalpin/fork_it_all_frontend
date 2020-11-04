@@ -22,8 +22,7 @@ const RegisterModal = (props) => {
 
   const handleSubmit = (event) => {
     axios
-      .post(
-        "https://stark-shelf-20245.herokuapp.com/api/registrations",
+      .post("/api/registrations",
         {
           email: state.email,
           password: state.password,

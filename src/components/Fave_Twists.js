@@ -7,7 +7,7 @@ const FaveTwists = (props) => {
   const [twists, setTwists] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://stark-shelf-20245.herokuapp.com/api/faveTwists`, {
+      .get("//api/faveTwists", {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },

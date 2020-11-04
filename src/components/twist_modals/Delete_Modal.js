@@ -7,7 +7,7 @@ const TwistDeleteModal = (props) => {
 
   const handleDeleteSubmit = (event) => {
     axios
-      .delete(`https://stark-shelf-20245.herokuapp.com/api/twists/${twist.id}`, {}, {
+      .delete(`/api/twists/${twist.id}`, {}, {
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         },

@@ -23,7 +23,7 @@ const TwistCreateModal = (props) => {
 
   const handleSubmit = (event) => {
     axios
-      .post("https://stark-shelf-20245.herokuapp.com/api/twists", {
+      .post("/api/twists", {
         content: state.content,
         recipe_id: recipe,
         user_id: user.id,

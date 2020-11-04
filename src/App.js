@@ -23,7 +23,7 @@ export default function App() {
   });
   const checkLoginStatus = () => {
     axios
-      .get("https://stark-shelf-20245.herokuapp.com/api/logged_in",{
+      .get("/api/logged_in",{
         headers: {
           authorization: `Token token=${localStorage.getItem('access_token')}`,
         }, withCredentials: true})
