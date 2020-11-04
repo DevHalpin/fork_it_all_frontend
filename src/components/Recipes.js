@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import {
   Card,
   CardDeck,
@@ -342,8 +342,8 @@ const Recipes = (props) => {
                       the following twist:
                     </p>
                   ) : (
-                    "No twists exist for this recipe"
-                  )}
+                      "No twists exist for this recipe"
+                    )}
                 </Card.Title>
                 <Card.Text>{twist !== null ? twist.content : null}</Card.Text>
                 {/* Twist randomize and social options */}
@@ -372,19 +372,19 @@ const Recipes = (props) => {
                   </Button>
                 ) : null}
                 {userHandle &&
-                twist !== null &&
-                userHandle !== twist.handle &&
-                favorited === false ? (
-                  <Button
-                    className="login-buttons gen-button"
-                    bsPrefix
-                    onClick={() => {
-                      handleFavorite();
-                    }}
-                  >
-                    Favorite
-                  </Button>
-                ) : null}
+                  twist !== null &&
+                  userHandle !== twist.handle &&
+                  favorited === false ? (
+                    <Button
+                      className="login-buttons gen-button"
+                      bsPrefix
+                      onClick={() => {
+                        handleFavorite();
+                      }}
+                    >
+                      Favorite
+                    </Button>
+                  ) : null}
                 {twist !== null && userHandle === twist.handle ? (
                   <Button
                     className="login-buttons gen-button"
@@ -414,27 +414,6 @@ const Recipes = (props) => {
                 ) : null}
               </Card.Body>
               <Form className="twist-form">
-                <Form.Group as={Col}>
-                  <Form.Label>Find Twists by User</Form.Label>
-                  <Form.Control
-                    size="md"
-                    type="text"
-                    placeholder="Enter a user handle"
-                  />
-                </Form.Group>
-
-                <Form.Group as={Col}>
-                  <Form.Label>Search by Twist Type</Form.Label>
-                  <Form.Control as="select" id="inlineFormCustomSelect" custom>
-                    <option value="0">Select an option</option>
-                    <option value="1">Ingredient Replacement</option>
-                    <option value="2">Cooking Time</option>
-                    <option value="3">Healthy Options</option>
-                    <option value="4">Add Something Extra</option>
-                    <option value="5">Take Something Out</option>
-                  </Form.Control>
-                </Form.Group>
-
                 <Form.Group controlId="formBasicCheckbox">
                   <Form.Check
                     onClick={() => setShowTwists(false)}
