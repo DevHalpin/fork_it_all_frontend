@@ -61,6 +61,7 @@ export default function App() {
     });
   };
   const handleLogout = () => {
+    localStorage.removeItem('access_token')
     setState({
       loggedInStatus: "NOT_LOGGED_IN",
       user: {},
