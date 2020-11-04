@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Container, Card, Row } from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Container, Card, Row} from "react-bootstrap";
 import "../styles/App.scss";
 import axios from "axios";
 
-const My_Twists = (props) => {
+const MyTwists = (props) => {
   const [twists, setTwists] = useState([]);
   const user = props.user;
   // Make a request for a recipe, random twist, and user given a recipe id
@@ -17,10 +17,10 @@ const My_Twists = (props) => {
       .then((response) => {
         setTwists(response.data);
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log(error);
       });
-  }, []);
+  }, [user.access_token]);
 
   const twistsCard = twists.map((twist) => (
     <Card key={twist.twist_id} className="user-saved">
@@ -45,4 +45,4 @@ const My_Twists = (props) => {
   );
 };
 
-export default My_Twists;
+export default MyTwists;
