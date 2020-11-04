@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Container, Card, CardDeck, Row } from "react-bootstrap";
+import React from "react";
+import {Container, Card, CardDeck, Row} from "react-bootstrap";
 import "../styles/App.scss";
-import axios from "axios";
 
 const Fave_Users = (props) => {
-  const id = props.match.params.user;
   const fakeUser1 = {
     id: 101,
     email: "charla@oconnell.com",
@@ -101,7 +99,7 @@ const Fave_Users = (props) => {
 
   return (
     <Container>
-      <Row style={{ flex: 1 }}>
+      <Row style={{flex: 1}}>
         <CardDeck className="mt-3">
           <Card>
             <Card.Img variant="top" src={`${fakeUser1.profile_picture}`} />

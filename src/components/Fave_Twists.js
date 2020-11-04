@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Card, Row, Container } from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Card, Row, Container} from "react-bootstrap";
 import "../styles/App.scss";
 import axios from "axios";
 
-const Fave_Twists = (props) => {
+const FaveTwists = (props) => {
   const [twists, setTwists] = useState([]);
   const user = props.user;
   useEffect(() => {
@@ -16,7 +16,7 @@ const Fave_Twists = (props) => {
       .then((response) => {
         setTwists(response.data);
       });
-  }, []);
+  }, [user.access_token]);
 
   const twistsCard = twists.map((twist) => {
     return (
@@ -42,4 +42,4 @@ const Fave_Twists = (props) => {
     </Container>
   );
 };
-export default Fave_Twists;
+export default FaveTwists;

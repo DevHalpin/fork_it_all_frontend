@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import "./styles/App.scss";
 import "./styles/Button.scss";
 import "./styles/Card.scss";
@@ -10,8 +10,8 @@ import Home from "./components/Home";
 import Error from "./components/Error";
 import UserProfile from "./components/User_Profile";
 import Recipes from "./components/Recipes";
-import My_Twists from "./components/My_Twists";
-import Fave_Twists from "./components/Fave_Twists";
+import MyTwists from "./components/My_Twists";
+import FaveTwists from "./components/Fave_Twists";
 import Fave_Users from "./components/Fave_Users";
 import Slug from "./components/Slug";
 
@@ -22,7 +22,7 @@ export default function App() {
   });
   const checkLoginStatus = () => {
     axios
-      .get("/api/logged_in", { withCredentials: true })
+      .get("/api/logged_in", {withCredentials: true})
       .then((response) => {
         if (
           response.data.logged_in &&
@@ -88,11 +88,11 @@ export default function App() {
         />
         <Route
           path="/my_twists/"
-          render={(props) => <My_Twists {...props} user={state.user} />}
+          render={(props) => <MyTwists {...props} user={state.user} />}
         />
         <Route
           path="/fave_twists/"
-          render={(props) => <Fave_Twists {...props} user={state.user} />}
+          render={(props) => <FaveTwists {...props} user={state.user} />}
         />
         <Route path="/fave_users/" component={Fave_Users} />
         <Route path="/twists/:slug" component={Slug} />

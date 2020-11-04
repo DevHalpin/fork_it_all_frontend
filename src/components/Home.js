@@ -108,7 +108,7 @@ export default function Home(props) {
                 </Container>
               </Jumbotron>
               <Card>
-                <Card.Img variant="top" src={recipe.meal_image} />
+                <Card.Img className="front-image" variant="top" src={recipe.meal_image} />
                 <Card.Body>
                   <Card.Title>{recipe.name}</Card.Title>
                   <Card.Link href={`/recipes/${recipe.id}`} className="card-link">
@@ -126,7 +126,7 @@ export default function Home(props) {
                 </Container>
               </Jumbotron>
               <Card>
-                <Card.Img variant="top" src={random.meal_image} />
+                <Card.Img className="front-image" variant="top" src={random.meal_image} />
                 <Card.Body>
                   <Card.Title>{random.name}</Card.Title>
                   <Card.Text>{random.content}</Card.Text>
