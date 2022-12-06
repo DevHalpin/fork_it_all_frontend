@@ -1,7 +1,5 @@
 # Fork It All
 
-<b>[This website is live on Heroku!](https://fork-it-all.herokuapp.com/)</b>
-
 Have you ever followed a recipe and thought this could do with another pinch of \_\_\_\_? Have you ever found the perfect recipe… almost? Fork It All allows you to create your own twist on recipes. You will be able to see a list of user shared twists to recipes too. Twist cuts out the life stories so you can get straight to business in your kitchen! <br/>
 [Find the backend repository here](https://github.com/kelsi2/fork_it_all_backend)
 
